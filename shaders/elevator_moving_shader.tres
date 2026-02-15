@@ -1,0 +1,30 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cppgej3kuy0mn"]
+
+[ext_resource type="Shader" uid="uid://dcasitpb7q8vj" path="res://scenes/elevator_shader.gdshader" id="1_k5map"]
+
+[sub_resource type="Gradient" id="Gradient_k5map"]
+offsets = PackedFloat32Array(0.6167247, 0.8432056)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k5map"]
+noise_type = 5
+frequency = 0.0676
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_txnge"]
+width = 256
+height = 128
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_k5map")
+color_ramp = SubResource("Gradient_k5map")
+seamless = true
+in_3d_space = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_k5map")
+shader_parameter/moving = 0.0
+shader_parameter/move_max_speed = 1.8
+shader_parameter/normal_color = Color(0, 0, 0, 1)
+shader_parameter/speedy_color = Color(0.21, 0.14952, 0.1428, 1)
+shader_parameter/moving_texture = SubResource("NoiseTexture2D_txnge")
+shader_parameter/tex_tiling = Vector2(6, 0.25)
