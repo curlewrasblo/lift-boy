@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dhpmaegonireh"]
+
+[ext_resource type="Material" uid="uid://dfbijl1mrklee" path="res://materials/dude.tres" id="1_hiu3e"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vd2jk"]
+radius = 0.1
+height = 0.9
+radial_segments = 32
+
+[sub_resource type="SphereMesh" id="SphereMesh_hiu3e"]
+radius = 0.16
+height = 0.32
+
+[node name="liftboy" type="Node3D" unique_id=832314600]
+
+[node name="PlaceholderLiftBoy" type="MeshInstance3D" parent="." unique_id=1493278636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4472338, 0)
+material_override = ExtResource("1_hiu3e")
+mesh = SubResource("CapsuleMesh_vd2jk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlaceholderLiftBoy" unique_id=1216621711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6107763, 0)
+material_override = ExtResource("1_hiu3e")
+mesh = SubResource("SphereMesh_hiu3e")

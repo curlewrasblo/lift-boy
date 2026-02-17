@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://dd0uy2x2vu4vo"]
+
+[ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_w0ydv"]
+[ext_resource type="Material" uid="uid://d2srqqm7of6ub" path="res://materials/elevator_walls.tres" id="2_4et86"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_507rt"]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]
+size = Vector2(20, 40)
+
+[node name="room_2" type="Node3D" unique_id=1813439493]
+script = ExtResource("1_w0ydv")
+metadata/_custom_type_script = "uid://dd0en0wyj5nxi"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=230635786]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -0.7645359, 1.6, -18.353931)
+layers = 2
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="." unique_id=1262230194]
+transform = Transform3D(3.5355334, 2.7939677e-08, -3.5355341, 0.1899651, 4.9927773, 0.18996514, 3.530427, -0.26865125, 3.5304265, 0.8641453, 8.510162, -34.2492)
+layers = 2
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=762592114]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 4.21443, 1.6, -17.821411)
+layers = 2
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1524003635]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 1.6053696, 1.6, -14.819618)
+layers = 2
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=1722681467]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -4.481558, 1.6, -19.618353)
+layers = 2
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=1471688113]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -4.481558, 4.5799475, -18.662514)
+layers = 2
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="." unique_id=1702741003]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -4.481558, 7.5598917, -19.393448)
+layers = 2
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="." unique_id=363603768]
+transform = Transform3D(0.32284394, 0, -0.9464522, 0, 1, 0, 0.9464522, 0, 0.32284394, -0.15221214, 4.692397, -18.268944)
+layers = 2
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="." unique_id=384532205]
+transform = Transform3D(0.8637828, 0, -0.50386447, 0, 1, 0, 0.50386447, 0, 0.8637828, 3.1088505, 4.692397, -16.469732)
+layers = 2
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=629739209]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.8)
+layers = 2
+material_override = ExtResource("2_4et86")
+mesh = SubResource("PlaneMesh_6tfno")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1594981417]
+transform = Transform3D(0.17363253, -0.9189244, -0.35416043, 0.065755785, -0.34800255, 0.93518466, -0.9826128, -0.18566659, 2.9305278e-08, 0, 1.1710849, 0)
+light_color = Color(0.81, 0.06749999, 0, 1)
+light_cull_mask = 4294967294
+shadow_enabled = true
+shadow_caster_mask = 4294967294
+sky_mode = 1

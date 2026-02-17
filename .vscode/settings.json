@@ -3,5 +3,6 @@
         "editor.insertSpaces": false,
         "editor.tabSize": 4,
         "editor.detectIndentation": true
-    }
+    },
+    "godotTools.editorPath.godot4": "/Applications/Godot 4.6.app"
 }

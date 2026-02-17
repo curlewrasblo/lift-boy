@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bqln5jtayrqik"]
+
+[ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_vu5en"]
+[ext_resource type="Material" uid="uid://d2srqqm7of6ub" path="res://materials/elevator_walls.tres" id="2_8oql1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6tfno"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]
+size = Vector2(20, 40)
+
+[node name="room_1" type="Node3D" unique_id=1563608849]
+script = ExtResource("1_vu5en")
+metadata/_custom_type_script = "uid://dd0en0wyj5nxi"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1895406522]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -0.7645359, 1.0117203, -29.295582)
+layers = 2
+mesh = SubResource("BoxMesh_6tfno")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="." unique_id=1992246613]
+transform = Transform3D(4.2426405, 3.3527613e-08, -4.242641, 0.22795813, 5.991333, 0.22795817, 4.236512, -0.3223815, 4.236512, -1.1135798, 5.836913, -41.34036)
+layers = 2
+mesh = SubResource("BoxMesh_6tfno")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1455908138]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 4.21443, 1.0117203, -28.763062)
+layers = 2
+mesh = SubResource("BoxMesh_6tfno")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=427671182]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 1.6053696, 1.0117203, -25.761269)
+layers = 2
+mesh = SubResource("BoxMesh_6tfno")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=955145435]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -4.481558, 1.0117203, -30.560005)
+layers = 2
+mesh = SubResource("BoxMesh_6tfno")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=2076723328]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -4.481558, 3.0430288, -29.604164)
+layers = 2
+mesh = SubResource("BoxMesh_6tfno")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="." unique_id=260781749]
+transform = Transform3D(-0.071514815, 0, -0.9974395, 0, 1, 0, 0.9974395, 0, -0.071514815, -4.481558, 5.074333, -30.282148)
+layers = 2
+mesh = SubResource("BoxMesh_6tfno")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="." unique_id=362760165]
+transform = Transform3D(0.32284394, 0, -0.9464522, 0, 1, 0, 0.9464522, 0, 0.32284394, -0.15221214, 3.1554785, -29.210594)
+layers = 2
+mesh = SubResource("BoxMesh_6tfno")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="." unique_id=150825677]
+transform = Transform3D(0.8637828, 0, -0.50386447, 0, 1, 0, 0.50386447, 0, 0.8637828, 3.1088505, 3.1554785, -27.411385)
+layers = 2
+mesh = SubResource("BoxMesh_6tfno")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2073767923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.8)
+layers = 2
+material_override = ExtResource("2_8oql1")
+mesh = SubResource("PlaneMesh_6tfno")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=130536017]
+transform = Transform3D(-0.0134109855, 0.91706336, -0.3985159, -0.71615624, 0.26932946, 0.64388037, 0.69781125, 0.29403472, 0.65314865, 0, 0.9578903, 0)
+layers = 2
+light_color = Color(0.08799998, 0.33, 0.066, 1)
+light_cull_mask = 4294967294
+shadow_enabled = true
+shadow_caster_mask = 4294967294
+sky_mode = 1

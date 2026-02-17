@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://bs2a47kmhrx02"]
+
+[ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_trojg"]
+[ext_resource type="Material" uid="uid://d2srqqm7of6ub" path="res://materials/elevator_walls.tres" id="2_f3fnj"]
+[ext_resource type="Material" uid="uid://cibd081vwceno" path="res://materials/elevator_door.tres" id="3_aqsf0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]
+size = Vector2(20, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dfdjg"]
+size = Vector3(3.2, 0.1, 1.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6l77a"]
+size = Vector3(1.6, 2.84, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bb4h2"]
+size = Vector3(1.589, 2.84, 0.18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bi0ey"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_color = Color(0.06, 0.05375, 0.044999998, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_rwlja"]
+size = Vector2(6.4, 4)
+
+[node name="room_entrance" type="Node3D" unique_id=1813439493]
+script = ExtResource("1_trojg")
+metadata/_custom_type_script = "uid://dd0en0wyj5nxi"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1594981417]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1, 17.171085, 0)
+layers = 2
+light_color = Color(0.81, 0.79596, 0.74520004, 1)
+light_angular_distance = 5.28
+light_cull_mask = 4294967294
+shadow_enabled = true
+shadow_opacity = 0.2
+shadow_caster_mask = 4294967294
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=629739209]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.8)
+layers = 2
+mesh = SubResource("PlaneMesh_6tfno")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1851685625]
+transform = Transform3D(-3.3940037e-08, -4.222196e-08, -1, -2.8977776, 0.25881916, 0, 0.77645755, 0.9659258, -4.371139e-08, -6, 16, -55.8)
+layers = 2
+material_override = ExtResource("2_f3fnj")
+mesh = SubResource("PlaneMesh_6tfno")
+
+[node name="ElevatorVisuals" type="Node3D" parent="." unique_id=1449862566]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -17)
+
+[node name="floor" type="MeshInstance3D" parent="ElevatorVisuals" unique_id=626090458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+material_override = ExtResource("2_f3fnj")
+mesh = SubResource("BoxMesh_dfdjg")
+
+[node name="ceiling" type="MeshInstance3D" parent="ElevatorVisuals" unique_id=47567709]
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 2.84, 0)
+material_override = ExtResource("2_f3fnj")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_dfdjg")
+
+[node name="Wall" type="MeshInstance3D" parent="ElevatorVisuals" unique_id=982793452]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -1.62, 1.394, 0)
+material_override = ExtResource("2_f3fnj")
+mesh = SubResource("BoxMesh_dfdjg")
+
+[node name="Wall2" type="MeshInstance3D" parent="ElevatorVisuals" unique_id=112042037]
+transform = Transform3D(4.371139e-08, -1, 8.742278e-08, -1, -4.371139e-08, 0, 3.821371e-15, -8.742278e-08, -1, 1.62, 1.394, 0)
+material_override = ExtResource("2_f3fnj")
+mesh = SubResource("BoxMesh_dfdjg")
+
+[node name="wall_door_left" type="MeshInstance3D" parent="ElevatorVisuals" unique_id=1996423716]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52, 1.4, -0.9)
+material_override = ExtResource("2_f3fnj")
+mesh = SubResource("BoxMesh_6l77a")
+
+[node name="wall_door_right" type="MeshInstance3D" parent="ElevatorVisuals" unique_id=729321298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.285, 1.4, -0.9)
+material_override = ExtResource("2_f3fnj")
+mesh = SubResource("BoxMesh_6l77a")
+
+[node name="wall_door_top" type="MeshInstance3D" parent="ElevatorVisuals" unique_id=878606581]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.425, 3.225, -0.9)
+material_override = ExtResource("2_f3fnj")
+mesh = SubResource("BoxMesh_6l77a")
+
+[node name="Door" type="Node3D" parent="ElevatorVisuals" unique_id=1668924697]
+
+[node name="DoorLeft" type="MeshInstance3D" parent="ElevatorVisuals/Door" unique_id=1672667808]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -0.4, 1.4, -0.87)
+material_override = ExtResource("3_aqsf0")
+mesh = SubResource("BoxMesh_bb4h2")
+
+[node name="DoorRight" type="MeshInstance3D" parent="ElevatorVisuals/Door" unique_id=1826965452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 1.4, -0.87)
+material_override = ExtResource("3_aqsf0")
+mesh = SubResource("BoxMesh_bb4h2")
+
+[node name="Quad" type="MeshInstance3D" parent="ElevatorVisuals/Door" unique_id=1337599811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.348, -0.7821667)
+material_override = SubResource("StandardMaterial3D_bi0ey")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_rwlja")

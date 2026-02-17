@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://vnuqyvijwdkt"]
+
+[ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_wkqbs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gxgn"]
+diffuse_mode = 1
+albedo_color = Color(0.08736, 0.09, 0.08280001, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]
+size = Vector2(20, 40)
+
+[node name="room_3" type="Node3D" unique_id=1813439493]
+script = ExtResource("1_wkqbs")
+metadata/_custom_type_script = "uid://dd0en0wyj5nxi"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=629739209]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.8)
+layers = 2
+material_override = SubResource("StandardMaterial3D_3gxgn")
+mesh = SubResource("PlaneMesh_6tfno")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1851685625]
+transform = Transform3D(-3.3940037e-08, -4.222196e-08, -1, -2.8977776, 0.25881916, 0, 0.77645755, 0.9659258, -4.371139e-08, -6, 16, -55.8)
+layers = 2
+material_override = SubResource("StandardMaterial3D_3gxgn")
+mesh = SubResource("PlaneMesh_6tfno")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1594981417]
+transform = Transform3D(0.17363253, -0.91892445, -0.35416043, 0.3178341, -0.28809065, 0.903319, -0.9321122, -0.26940984, 0.24204363, 0, 27.171085, 0)
+light_color = Color(0.45, 0.45, 0.45, 1)
+light_cull_mask = 4294967294
+shadow_caster_mask = 4294967294
+sky_mode = 1

@@ -1,0 +1,59 @@
+extends Node3D
+class_name LiftButton
+
+signal button_pressed(floor: int)
+
+@export var button_body: StaticBody3D
+@export var movement: float = 0.1
+@export var my_floor: int = 0
+@export var outline_node: Node3D
+@export var current_floor_node: Node3D
+@export var pressed_button_node: Node3D
+@export var visual_node: Node3D
+
+var was_pressed: bool = false
+
+var is_selected: bool = false
+
+var original_z: float
+
+func _ready() -> void:
+	button_body.mouse_entered.connect(_on_mouse_entered)
+	button_body.mouse_exited.connect(_on_mouse_exited)
+	set_current_floor(false)
+	outline_node.visible = false
+
+	original_z = visual_node.position.z
+
+
+func _process(_delta: float) -> void:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !was_pressed and is_selected:
+		_button_was_pressed()
+	elif was_pressed:
+		_reset_button()
+
+func set_pressed(active: bool) -> void:
+	pressed_button_node.visible = active
+
+func set_current_floor(active: bool) -> void:
+	current_floor_node.visible = active
+	set_pressed(false)
+
+func _on_mouse_entered() -> void:
+	outline_node.visible = true
+	is_selected = true
+
+func _on_mouse_exited() -> void:
+	outline_node.visible = false
+	is_selected = false
+
+func _button_was_pressed() -> void:
+	if was_pressed:
+		return
+	visual_node.position.z = original_z + movement
+	was_pressed = true
+	button_pressed.emit(my_floor)
+
+func _reset_button() -> void:
+	visual_node.position.z = original_z
+	was_pressed = false

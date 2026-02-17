@@ -1,20 +1,26 @@
 [gd_scene format=3 uid="uid://c07gk7y6ydu1v"]
 
 [ext_resource type="Material" uid="uid://d2srqqm7of6ub" path="res://materials/elevator_walls.tres" id="1_0gm50"]
-[ext_resource type="Material" uid="uid://dfbijl1mrklee" path="res://materials/dude.tres" id="1_biusa"]
+[ext_resource type="Environment" uid="uid://hkjmpt7k1oa8" path="res://default_environment.tres" id="1_ok3pb"]
 [ext_resource type="Material" uid="uid://cibd081vwceno" path="res://materials/elevator_door.tres" id="3_r2n18"]
 [ext_resource type="Material" uid="uid://dy7mnuivkmjns" path="res://materials/elevator_moving_mat.tres" id="4_r2n18"]
 [ext_resource type="Script" uid="uid://dftoeuggt3dhi" path="res://scenes/LiftController.gd" id="5_5djdf"]
+[ext_resource type="PackedScene" uid="uid://dquyd4j8v6iv6" path="res://prefabs/lift_button.tscn" id="5_6v0m2"]
 [ext_resource type="Script" uid="uid://d2hm1elr1s86b" path="res://scenes/LiftPlayer.gd" id="6_lsh4v"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_vd2jk"]
-radius = 0.2
-height = 1.2
-radial_segments = 32
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_0gm50"]
-radius = 0.4
-radial_segments = 32
+[ext_resource type="Script" uid="uid://c1o8smjuxcnum" path="res://scenes/LiftMark.gd" id="6_pan36"]
+[ext_resource type="Script" uid="uid://d2gjextgphvai" path="res://scenes/GameManager.gd" id="8_qhcon"]
+[ext_resource type="Script" uid="uid://bc150812egh8j" path="res://scenes/RoomManager.gd" id="9_6v0m2"]
+[ext_resource type="Texture2D" uid="uid://b61jj1gwydbql" path="res://icon.svg" id="10_507rt"]
+[ext_resource type="Script" uid="uid://cy5b2yb4a5a1t" path="res://scenes/GuestSpawner.gd" id="11_drltt"]
+[ext_resource type="PackedScene" uid="uid://bqln5jtayrqik" path="res://prefabs/room_1.tscn" id="11_ohcas"]
+[ext_resource type="PackedScene" uid="uid://c2t8bxbohlvi" path="res://prefabs/guest.tscn" id="11_rw2bm"]
+[ext_resource type="PackedScene" uid="uid://dd0uy2x2vu4vo" path="res://prefabs/room_2.tscn" id="12_ok3pb"]
+[ext_resource type="PackedScene" uid="uid://vnuqyvijwdkt" path="res://prefabs/room_3.tscn" id="14_h1faf"]
+[ext_resource type="PackedScene" uid="uid://dhpmaegonireh" path="res://scenes/liftboy.tscn" id="14_rw2bm"]
+[ext_resource type="PackedScene" uid="uid://dir452doe4vju" path="res://prefabs/room_4.tscn" id="15_qa08c"]
+[ext_resource type="PackedScene" uid="uid://c031ae14yixt5" path="res://prefabs/room_5.tscn" id="16_wgmnt"]
+[ext_resource type="PackedScene" uid="uid://bs2a47kmhrx02" path="res://prefabs/room_entrance.tscn" id="17_4dv34"]
+[ext_resource type="Script" uid="uid://dkwn76vc85k38" path="res://scenes/LiftPath.gd" id="20_eixtg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_r2n18"]
 size = Vector3(3.2, 0.1, 1.6)
@@ -37,18 +43,6 @@ albedo_color = Color(0.06, 0.05375, 0.044999998, 1)
 [sub_resource type="QuadMesh" id="QuadMesh_1fyo0"]
 size = Vector2(6.4, 4)
 
-[sub_resource type="BoxMesh" id="BoxMesh_0gm50"]
-size = Vector3(0.1, 0.1, 0.04)
-
-[sub_resource type="Environment" id="Environment_vd2jk"]
-background_mode = 1
-background_color = Color(0.03137255, 0.03137255, 0.02745098, 1)
-ambient_light_source = 2
-ambient_light_color = Color(0.7, 0.68, 0.8, 1)
-ssao_enabled = true
-ssao_radius = 0.82
-ssao_intensity = 0.89
-
 [sub_resource type="Animation" id="Animation_5djdf"]
 resource_name = "LiftDoorOpen"
 length = 3.1
@@ -62,7 +56,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.03, 1.7, 3.05),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.4, 1.4, -0.9), Vector3(-0.4, 1.4, -0.9), Vector3(-0.5323321, 1.4, -0.9), Vector3(-1.539059, 1.4, -0.9)]
+"values": [Vector3(-0.4, 1.4, -0.87), Vector3(-0.4, 1.4, -0.87), Vector3(-0.532, 1.4, -0.87), Vector3(-1.539, 1.4, -0.87)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -74,7 +68,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1.03, 1.7, 3.05),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(1.2, 1.4, -0.9), Vector3(1.2, 1.4, -0.9), Vector3(1.3076559, 1.4, -0.9), Vector3(2.2970946, 1.4, -0.9)]
+"values": [Vector3(1.2, 1.4, -0.87), Vector3(1.2, 1.4, -0.87), Vector3(1.308, 1.4, -0.87), Vector3(2.297, 1.4, -0.87)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -83,10 +77,10 @@ tracks/2/path = NodePath("ElevatorOrigin/ElevatorVisuals/Door/Quad:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.01),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(-0.033333335, 0, 0.9266666),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 1.348, -1.177), Vector3(0, -2.0238373, -1.177)]
+"values": [Vector3(0, 1.348, -0.89040565), Vector3(0, 1.348, -0.7821667), Vector3(0, -2.064324, -0.7821667)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -125,7 +119,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.4, 1.4, -0.9)]
+"values": [Vector3(-0.4, 1.4, -0.87)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -137,7 +131,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(1.2, 1.4, -0.9)]
+"values": [Vector3(1.2, 1.4, -0.87)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -149,7 +143,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 1.348, -1.177)]
+"values": [Vector3(0, 1.348, -0.7821667)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -182,29 +176,47 @@ _data = {
 &"RESET": SubResource("Animation_lsh4v")
 }
 
-[node name="LiftScene" type="Node3D" unique_id=1793653158]
+[sub_resource type="Curve3D" id="Curve3D_4dv34"]
+bake_interval = 2.0
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.4098972, 0, -0.5690233, 0, 0, 0, 0, 0, 0, 0.4650935, 0, -1.329826, 0, 0, 0, 0, 0, 0, 1.0811211, 0, -1.6921449, 0, 0, 0, 0, 0, 0, 2.7905836, 0, -1.729933),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Curve3D" id="Curve3D_pan36"]
+bake_interval = 3.0
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.4098972, 0, -0.5690233, 0, 0, 0, 0, 0, 0, 0.34873337, 0, -1.3699309, 0, 0, 0, 0, 0, 0, -0.1983822, 0, -1.9070995, 0, 0, 0, 0, 0, 0, -2.9332566, 0, -2.0885406),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Curve3D" id="Curve3D_drltt"]
+bake_interval = 10.0
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.4098972, 0, -0.5690233, 0, 0, 0, 0, 0, 0, 0.37591803, 0, -1.3653623, 0, 0, 0, 0, 0, 0, 1.1642363, 0, -4.003984, 0, 0, 0, 0, 0, 0, 3.8178806, -9.536743e-07, -5.6331644),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[node name="Game" type="Node3D" unique_id=1793653158]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=727908119]
+environment = ExtResource("1_ok3pb")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1710955341]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 5.5)
 fov = 36.0
 size = 2.869
+far = 100.0
 
 [node name="ElevatorOrigin" type="Node3D" parent="." unique_id=2108071073]
-
-[node name="PlaceholderLiftBoy" type="MeshInstance3D" parent="ElevatorOrigin" unique_id=1481967234]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1405351, 0.6, 0.042993426)
-material_override = ExtResource("1_biusa")
-mesh = SubResource("CapsuleMesh_vd2jk")
-
-[node name="PlaceholderAlien" type="MeshInstance3D" parent="ElevatorOrigin" unique_id=1861451028]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8145601, 1.029136, 0)
-material_override = ExtResource("1_biusa")
-mesh = SubResource("CapsuleMesh_0gm50")
 
 [node name="ElevatorVisuals" type="Node3D" parent="ElevatorOrigin" unique_id=2024409345]
 
 [node name="floor" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1803129365]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+transform = Transform3D(0.9999996, 0.0005967464, -0.00072948425, -0.0005967486, 0.9999998, -3.0763483e-06, 0.0007294824, 3.4852999e-06, 0.99999976, 0, -0.05, 0)
 material_override = ExtResource("1_0gm50")
 mesh = SubResource("BoxMesh_r2n18")
 
@@ -242,57 +254,77 @@ mesh = SubResource("BoxMesh_vd2jk")
 [node name="Door" type="Node3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=526448821]
 
 [node name="DoorLeft" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/Door" unique_id=745628879]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -0.4, 1.4, -0.9)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -0.4, 1.4, -0.87)
 material_override = ExtResource("3_r2n18")
 mesh = SubResource("BoxMesh_1fyo0")
 
 [node name="DoorRight" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/Door" unique_id=1172223211]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 1.4, -0.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 1.4, -0.87)
 material_override = ExtResource("3_r2n18")
 mesh = SubResource("BoxMesh_1fyo0")
 
 [node name="Quad" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/Door" unique_id=1837153849]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.348, -1.177)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.348, -0.7821667)
 material_override = SubResource("StandardMaterial3D_0gm50")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_1fyo0")
 
 [node name="Buttons" type="Node3D" parent="ElevatorOrigin" unique_id=1793679986]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.86, 1.42, -0.675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.86, 1.42, -0.7416849)
 
-[node name="Button1" type="MeshInstance3D" parent="ElevatorOrigin/Buttons" unique_id=809890569]
-mesh = SubResource("BoxMesh_0gm50")
+[node name="Button5" parent="ElevatorOrigin/Buttons" unique_id=1368189836 instance=ExtResource("5_6v0m2")]
+my_floor = 4
 
-[node name="Button2" type="MeshInstance3D" parent="ElevatorOrigin/Buttons" unique_id=1630545513]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
-mesh = SubResource("BoxMesh_0gm50")
+[node name="Button4" parent="ElevatorOrigin/Buttons" unique_id=1714293738 instance=ExtResource("5_6v0m2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14999998, 0)
+my_floor = 3
 
-[node name="Button3" type="MeshInstance3D" parent="ElevatorOrigin/Buttons" unique_id=438051781]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
-mesh = SubResource("BoxMesh_0gm50")
+[node name="Button3" parent="ElevatorOrigin/Buttons" unique_id=2104775052 instance=ExtResource("5_6v0m2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.30000007, 0)
+my_floor = 2
 
-[node name="Button4" type="MeshInstance3D" parent="ElevatorOrigin/Buttons" unique_id=492499297]
+[node name="Button2" parent="ElevatorOrigin/Buttons" unique_id=1073964776 instance=ExtResource("5_6v0m2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
-mesh = SubResource("BoxMesh_0gm50")
+my_floor = 1
 
-[node name="Button5" type="MeshInstance3D" parent="ElevatorOrigin/Buttons" unique_id=1802993324]
+[node name="Button1" parent="ElevatorOrigin/Buttons" unique_id=935814618 instance=ExtResource("5_6v0m2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
-mesh = SubResource("BoxMesh_0gm50")
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="." unique_id=231506468]
+[node name="marks" type="Node3D" parent="ElevatorOrigin" unique_id=1430355615]
+
+[node name="guest_mark1" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=176184212]
+transform = Transform3D(-0.9659258, 0, -0.25881913, 0, 1, 0, 0.25881913, 0, -0.9659258, 0.94752556, 0, -0.24071068)
+script = ExtResource("6_pan36")
+metadata/_custom_type_script = "uid://c1o8smjuxcnum"
+
+[node name="guest_mark2" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=618958572]
+transform = Transform3D(-1, 0, 5.9604645e-08, 0, 1, 0, -5.9604645e-08, 0, -1, 0.51, 0, 0.34)
+script = ExtResource("6_pan36")
+metadata/_custom_type_script = "uid://c1o8smjuxcnum"
+
+[node name="guest_mark3" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=567207253]
+transform = Transform3D(-0.9659258, 0, 0.2588191, 0, 1, 0, -0.2588191, 0, -0.9659258, -0.16176383, 0, 0.04318516)
+script = ExtResource("6_pan36")
+metadata/_custom_type_script = "uid://c1o8smjuxcnum"
+
+[node name="Lights" type="Node3D" parent="." unique_id=216758286]
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lights" unique_id=231506468]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.055, 2.09, -0.225)
 light_color = Color(0.84000003, 0.90933335, 1, 1)
 light_energy = 0.7
+light_cull_mask = 4294967293
+omni_range = 4.0
 omni_attenuation = 0.1
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="." unique_id=668887617]
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights" unique_id=668887617]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, 1.99, 0.5)
 light_color = Color(0.9915, 1, 0.83, 1)
 light_energy = 0.7
 omni_range = 3.0
 omni_attenuation = 0.5
 
-[node name="OmniLight3D4" type="OmniLight3D" parent="." unique_id=1918523181]
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights" unique_id=1918523181]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.865, 1.08, -0.345)
 light_color = Color(0.89, 1, 0.8, 1)
 light_energy = 0.42
@@ -300,62 +332,167 @@ light_specular = 0.0
 omni_range = 0.67
 omni_attenuation = 0.42
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=727908119]
-environment = SubResource("Environment_vd2jk")
-
-[node name="Quad" type="MeshInstance3D" parent="." unique_id=2145156352]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.0696075, 0.823)
-material_override = ExtResource("4_r2n18")
-cast_shadow = 0
-mesh = SubResource("QuadMesh_1fyo0")
-
-[node name="Quad4" type="MeshInstance3D" parent="." unique_id=44463397]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.854184, 0.823)
-material_override = ExtResource("4_r2n18")
-cast_shadow = 0
-mesh = SubResource("QuadMesh_1fyo0")
-
-[node name="Quad2" type="MeshInstance3D" parent="." unique_id=382198572]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 3.65, 1.435, 0.823)
-material_override = ExtResource("4_r2n18")
-cast_shadow = 0
-mesh = SubResource("QuadMesh_1fyo0")
-
-[node name="Quad3" type="MeshInstance3D" parent="." unique_id=1391194555]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -3.65, 1.435, 0.823)
-material_override = ExtResource("4_r2n18")
-cast_shadow = 0
-mesh = SubResource("QuadMesh_1fyo0")
-
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=29543142]
-transform = Transform3D(0.949417, -0.061658088, 0.30790532, -0.0067613088, 0.9762923, 0.216351, -0.31394535, -0.20748916, 0.92649156, 0, 1.2575202, 1.4822742)
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Lights" unique_id=29543142]
+transform = Transform3D(0.949417, -0.061658088, 0.30790532, -0.0067613088, 0.9762923, 0.216351, -0.31394535, -0.20748916, 0.92649156, -0.123316176, 3.210105, 1.0672958)
 light_color = Color(0.80099994, 0.8366, 0.89, 1)
+light_cull_mask = 4294967293
 shadow_opacity = 0.36
 shadow_blur = 2.808
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 10.0
 
-[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="." unique_id=849691389]
-transform = Transform3D(0.999512, -4.8157023e-10, 0.03123631, -0.031195756, -0.050941586, 0.99821424, 0.0015912261, -0.99870163, -0.05091667, 0, 3, 1.6544328)
+[node name="DirectionWShadow" type="DirectionalLight3D" parent="Lights" unique_id=849691389]
+transform = Transform3D(0.9995121, -1.1797213e-09, 0.031236311, -0.031195758, -0.050941586, 0.9982143, 0.0015912262, -0.99870163, -0.05091673, 0, 3, 1.6544328)
 light_color = Color(0.998, 1, 0.88, 1)
 light_energy = 0.06
+light_cull_mask = 4294967293
 shadow_enabled = true
-shadow_opacity = 0.2
+shadow_opacity = 0.42
+shadow_caster_mask = 4294967293
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 10.0
 
-[node name="LiftController" type="Node" parent="." unique_id=1164335176 node_paths=PackedStringArray("lift_player", "background_quad", "camera")]
+[node name="Croppers" type="Node3D" parent="." unique_id=15878648]
+
+[node name="Quad" type="MeshInstance3D" parent="Croppers" unique_id=2145156352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0009236336, -2.0747666, 0.8208218)
+material_override = ExtResource("4_r2n18")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_1fyo0")
+
+[node name="Quad4" type="MeshInstance3D" parent="Croppers" unique_id=44463397]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.854184, 0.823)
+material_override = ExtResource("4_r2n18")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_1fyo0")
+
+[node name="Quad2" type="MeshInstance3D" parent="Croppers" unique_id=382198572]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 3.65, 1.435, 0.823)
+material_override = ExtResource("4_r2n18")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_1fyo0")
+
+[node name="Quad3" type="MeshInstance3D" parent="Croppers" unique_id=1391194555]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -3.65, 1.435, 0.823)
+material_override = ExtResource("4_r2n18")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_1fyo0")
+
+[node name="LiftController" type="Node" parent="." unique_id=1114785045 node_paths=PackedStringArray("lift_player", "lift_button_parent", "background_quad", "camera")]
 script = ExtResource("5_5djdf")
-time_to_reach_full_speed = 1.4
-time_between_floors = 1.5
+time_to_reach_full_speed = 2.0
+time_between_floors = 1.8
 lift_player = NodePath("../LiftPlayer")
-background_quad = NodePath("../Quad")
+lift_button_parent = NodePath("../ElevatorOrigin/Buttons")
+background_quad = NodePath("../Croppers/Quad")
 shader_move_max_speed = 2.0
 camera = NodePath("../Camera3D")
 camera_shake_intensity = Vector2(0.007, 0.018)
 camera_shake_interval = 0.042
+metadata/_custom_type_script = "uid://dftoeuggt3dhi"
 
-[node name="LiftPlayer" type="AnimationPlayer" parent="." unique_id=1110192708]
+[node name="LiftPlayer" type="AnimationPlayer" parent="." unique_id=1824682290]
 libraries/ = SubResource("AnimationLibrary_50d5g")
 script = ExtResource("6_lsh4v")
 open_door_anim = &"LiftDoorOpen"
+metadata/_custom_type_script = "uid://d2hm1elr1s86b"
+
+[node name="GameManager" type="Node" parent="." unique_id=335729790 node_paths=PackedStringArray("lift_controller", "room_manager", "guest_spawner")]
+script = ExtResource("8_qhcon")
+time_before_start = 0.36
+lift_controller = NodePath("../LiftController")
+room_manager = NodePath("../RoomManager")
+guest_spawner = NodePath("../GuestSpawner")
+metadata/_custom_type_script = "uid://d2gjextgphvai"
+
+[node name="GuestSpawner" type="Node" parent="." unique_id=2101118342 node_paths=PackedStringArray("room_manager", "lift_controller", "lift_mark_parent", "path_parent", "guest_parent")]
+script = ExtResource("11_drltt")
+guest_scene = ExtResource("11_rw2bm")
+guest_move_time_on_lift_path = 2.6
+guest_move_time_on_mark = 0.67
+room_manager = NodePath("../RoomManager")
+lift_controller = NodePath("../LiftController")
+lift_mark_parent = NodePath("../ElevatorOrigin/marks")
+path_parent = NodePath("../paths")
+guest_parent = NodePath("../guests")
+metadata/_custom_type_script = "uid://cy5b2yb4a5a1t"
+
+[node name="RoomManager" type="Node" parent="." unique_id=446105328 node_paths=PackedStringArray("all_rooms")]
+script = ExtResource("9_6v0m2")
+all_rooms = [NodePath("../rooms/room_entrance"), NodePath("../rooms/room_1"), NodePath("../rooms/room_2"), NodePath("../rooms/room_3"), NodePath("../rooms/room_4"), NodePath("../rooms/room_5")]
+icons_per_room = Array[Texture2D]([ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt")])
+icons_per_floor = Array[Texture2D]([ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt")])
+metadata/_custom_type_script = "uid://bc150812egh8j"
+
+[node name="guests" type="Node3D" parent="." unique_id=794785956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+
+[node name="liftboy" parent="." unique_id=832314600 instance=ExtResource("14_rw2bm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.161, 0, -0.247)
+
+[node name="rooms" type="Node3D" parent="." unique_id=1331285265]
+
+[node name="room_1" parent="rooms" unique_id=1563608849 instance=ExtResource("11_ohcas")]
+
+[node name="room_2" parent="rooms" unique_id=1813439493 instance=ExtResource("12_ok3pb")]
+
+[node name="room_3" parent="rooms" unique_id=1690334209 instance=ExtResource("14_h1faf")]
+
+[node name="room_4" parent="rooms" unique_id=323456603 instance=ExtResource("15_qa08c")]
+
+[node name="room_5" parent="rooms" unique_id=60564637 instance=ExtResource("16_wgmnt")]
+
+[node name="room_entrance" parent="rooms" unique_id=752513694 instance=ExtResource("17_4dv34")]
+
+[node name="paths" type="Node3D" parent="." unique_id=1019826404]
+
+[node name="LiftPath1" type="Path3D" parent="paths" unique_id=1645939383 node_paths=PackedStringArray("remote_transform", "follower")]
+curve = SubResource("Curve3D_4dv34")
+debug_custom_color = Color(1, 0, 0, 1)
+script = ExtResource("20_eixtg")
+remote_transform = NodePath("PathFollow3D/RemoteTransform3D")
+follower = NodePath("PathFollow3D")
+metadata/_custom_type_script = "uid://dkwn76vc85k38"
+
+[node name="PathFollow3D" type="PathFollow3D" parent="paths/LiftPath1" unique_id=1095490300]
+transform = Transform3D(-0.99736726, 0, 0.07235906, 0, 0.9999985, 0, -0.07235906, 0, -0.99736726, 0.4098972, 0, -0.5690233)
+use_model_front = true
+loop = false
+tilt_enabled = false
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="paths/LiftPath1/PathFollow3D" unique_id=225033721]
+update_scale = false
+
+[node name="LiftPath2" type="Path3D" parent="paths" unique_id=853677772 node_paths=PackedStringArray("remote_transform", "follower")]
+curve = SubResource("Curve3D_pan36")
+debug_custom_color = Color(1, 0, 0, 1)
+script = ExtResource("20_eixtg")
+remote_transform = NodePath("PathFollow3D/RemoteTransform3D")
+follower = NodePath("PathFollow3D")
+metadata/_custom_type_script = "uid://dkwn76vc85k38"
+
+[node name="PathFollow3D" type="PathFollow3D" parent="paths/LiftPath2" unique_id=719742283]
+transform = Transform3D(-0.9970864, 0, -0.076145664, 0, 1, 0, 0.076145664, 0, -0.9970864, 0.4098972, 0, -0.5690233)
+use_model_front = true
+loop = false
+tilt_enabled = false
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="paths/LiftPath2/PathFollow3D" unique_id=685836434]
+update_scale = false
+
+[node name="LiftPath3" type="Path3D" parent="paths" unique_id=1190102707 node_paths=PackedStringArray("remote_transform", "follower")]
+curve = SubResource("Curve3D_drltt")
+debug_custom_color = Color(1, 0, 0, 1)
+script = ExtResource("20_eixtg")
+remote_transform = NodePath("PathFollow3D/RemoteTransform3D")
+follower = NodePath("PathFollow3D")
+metadata/_custom_type_script = "uid://dkwn76vc85k38"
+
+[node name="PathFollow3D" type="PathFollow3D" parent="paths/LiftPath3" unique_id=80885901]
+transform = Transform3D(-0.99908507, 0, -0.042630196, 0, 1, 0, 0.042630196, 0, -0.99908507, 0.4098972, 0, -0.5690233)
+use_model_front = true
+loop = false
+tilt_enabled = false
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="paths/LiftPath3/PathFollow3D" unique_id=1161016611]
+update_scale = false

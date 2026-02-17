@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="StrangePlaces"
+config/name="LiftBoy"
 run/main_scene="uid://c07gk7y6ydu1v"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -22,6 +22,11 @@ window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 
+[layer_names]
+
+3d_render/layer_1="Lift"
+3d_render/layer_2="Room"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
@@ -31,3 +36,4 @@ window/stretch/aspect="keep_height"
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_environment="uid://hkjmpt7k1oa8"
