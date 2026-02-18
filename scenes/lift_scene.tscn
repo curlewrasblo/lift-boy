@@ -15,12 +15,29 @@
 [ext_resource type="PackedScene" uid="uid://bqln5jtayrqik" path="res://prefabs/room_1.tscn" id="11_ohcas"]
 [ext_resource type="PackedScene" uid="uid://c2t8bxbohlvi" path="res://prefabs/guest.tscn" id="11_rw2bm"]
 [ext_resource type="PackedScene" uid="uid://dd0uy2x2vu4vo" path="res://prefabs/room_2.tscn" id="12_ok3pb"]
+[ext_resource type="Texture2D" uid="uid://e4q55nmflknc" path="res://textures/first_floor.png" id="13_cge54"]
+[ext_resource type="Texture2D" uid="uid://cmykbr0bndgq1" path="res://textures/pink_donut.png" id="13_jybhw"]
 [ext_resource type="PackedScene" uid="uid://vnuqyvijwdkt" path="res://prefabs/room_3.tscn" id="14_h1faf"]
+[ext_resource type="Texture2D" uid="uid://n8jtjfutp8a6" path="res://textures/green_cube.png" id="14_qyj5y"]
 [ext_resource type="PackedScene" uid="uid://dhpmaegonireh" path="res://scenes/liftboy.tscn" id="14_rw2bm"]
+[ext_resource type="Texture2D" uid="uid://d1lgtbtefwbd6" path="res://textures/red_sphere.png" id="15_0jfjd"]
 [ext_resource type="PackedScene" uid="uid://dir452doe4vju" path="res://prefabs/room_4.tscn" id="15_qa08c"]
+[ext_resource type="Texture2D" uid="uid://c5hwxpb4dolyy" path="res://textures/black_empty.png" id="16_n6p47"]
 [ext_resource type="PackedScene" uid="uid://c031ae14yixt5" path="res://prefabs/room_5.tscn" id="16_wgmnt"]
 [ext_resource type="PackedScene" uid="uid://bs2a47kmhrx02" path="res://prefabs/room_entrance.tscn" id="17_4dv34"]
+[ext_resource type="Texture2D" uid="uid://dg32chjnn4w1d" path="res://textures/yellow_car.png" id="17_5mvw7"]
 [ext_resource type="Script" uid="uid://dkwn76vc85k38" path="res://scenes/LiftPath.gd" id="20_eixtg"]
+[ext_resource type="Texture2D" uid="uid://d3xtrf8frl66t" path="res://textures/number_1.png" id="20_w4elo"]
+[ext_resource type="Texture2D" uid="uid://beto4be7pbkgq" path="res://textures/number_2.png" id="21_u6h0e"]
+[ext_resource type="Texture2D" uid="uid://de1dheylm1x7n" path="res://textures/number_3.png" id="22_eoqc6"]
+[ext_resource type="Texture2D" uid="uid://ci0hqsw24tmvu" path="res://textures/number_4.png" id="23_e203u"]
+[ext_resource type="Texture2D" uid="uid://d2e3uddhybd1o" path="res://textures/number_5.png" id="24_chv4t"]
+[ext_resource type="Texture2D" uid="uid://qdqy0jfv6o5p" path="res://textures/number_6.png" id="25_g0xgo"]
+[ext_resource type="Texture2D" uid="uid://b1ayomem0q161" path="res://textures/number_7.png" id="26_66li0"]
+[ext_resource type="Shader" uid="uid://ddwluv8bs8rso" path="res://scenes/ui_outline_shader.gdshader" id="35_qyj5y"]
+[ext_resource type="Texture2D" uid="uid://1chs3ipfjwbs" path="res://textures/listboy_sad.png" id="36_n6p47"]
+[ext_resource type="Texture2D" uid="uid://3017a1s7gt7" path="res://textures/listboy_happy.png" id="37_5mvw7"]
+[ext_resource type="Script" uid="uid://m3ree1qxpbd2" path="res://scenes/VibeManager.gd" id="38_5mvw7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_r2n18"]
 size = Vector3(3.2, 0.1, 1.6)
@@ -200,13 +217,27 @@ _data = {
 }
 point_count = 4
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0jfjd"]
+shader = ExtResource("35_qyj5y")
+shader_parameter/color = Color(0.30080003, 0.64, 0.54389334, 1)
+shader_parameter/width = 8.50000040375
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n6p47"]
+bg_color = Color(0.1944, 0.19819999, 0.24, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyj5y"]
+bg_color = Color(0.14080001, 0.64, 0.49856, 1)
+
 [node name="Game" type="Node3D" unique_id=1793653158]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=727908119]
 environment = ExtResource("1_ok3pb")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1710955341]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 5.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.175, 6)
 fov = 36.0
 size = 2.869
 far = 100.0
@@ -386,14 +417,15 @@ material_override = ExtResource("4_r2n18")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_1fyo0")
 
-[node name="LiftController" type="Node" parent="." unique_id=1114785045 node_paths=PackedStringArray("lift_player", "lift_button_parent", "background_quad", "camera")]
+[node name="LiftController" type="Node" parent="." unique_id=1114785045 node_paths=PackedStringArray("room_manager", "lift_player", "lift_button_parent", "background_quad", "camera")]
 script = ExtResource("5_5djdf")
-time_to_reach_full_speed = 2.1
-time_between_floors = 2.3
+time_to_reach_full_speed = 1.9
+time_between_floors = 1.7
+room_manager = NodePath("../RoomManager")
 lift_player = NodePath("../LiftPlayer")
 lift_button_parent = NodePath("../ElevatorOrigin/Buttons")
 background_quad = NodePath("../Croppers/Quad")
-shader_move_max_speed = 2.6
+shader_move_max_speed = 2.4
 camera = NodePath("../Camera3D")
 camera_shake_intensity = Vector2(0.007, 0.02)
 camera_shake_interval = 0.036
@@ -406,14 +438,16 @@ script = ExtResource("6_lsh4v")
 open_door_anim = &"LiftDoorOpen"
 metadata/_custom_type_script = "uid://d2hm1elr1s86b"
 
-[node name="GameManager" type="Node" parent="." unique_id=335729790 node_paths=PackedStringArray("lift_controller", "room_manager", "guest_spawner")]
+[node name="GameManager" type="Node" parent="." unique_id=335729790 node_paths=PackedStringArray("lift_controller", "room_manager", "guest_spawner", "vibe_manager")]
 script = ExtResource("8_qhcon")
-time_before_start = 0.12
-time_between_guest_spawns = 0.69
+time_before_start = 0.1
+time_between_guest_spawns = 0.75
 lift_controller = NodePath("../LiftController")
 room_manager = NodePath("../RoomManager")
 guest_spawner = NodePath("../GuestSpawner")
-chance_to_spawn_two_guests = 0.15
+vibe_manager = NodePath("../VibeManager")
+chance_to_spawn_one_guest = 0.33
+chance_to_spawn_two_guests = 0.33
 show_complicated_icons_threshold = 4
 two_guest_spawn_threshold = 8
 buttons_five_to_seven = 13
@@ -433,10 +467,19 @@ metadata/_custom_type_script = "uid://cy5b2yb4a5a1t"
 
 [node name="RoomManager" type="Node" parent="." unique_id=446105328 node_paths=PackedStringArray("all_rooms")]
 script = ExtResource("9_6v0m2")
-all_rooms = [NodePath("../rooms/room_entrance"), NodePath("../rooms/room_1"), NodePath("../rooms/room_2"), NodePath("../rooms/room_3"), NodePath("../rooms/room_4"), NodePath("../rooms/room_5")]
-icons_per_room = Array[Texture2D]([ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt")])
-icons_per_floor = Array[Texture2D]([ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt"), ExtResource("10_507rt")])
+all_rooms = [NodePath("../rooms/room_entrance"), NodePath("../rooms/room_1"), NodePath("../rooms/room_2"), NodePath("../rooms/room_3"), NodePath("../rooms/room_4"), NodePath("../rooms/room_5"), NodePath("../rooms/room_4")]
+icons_per_room = Array[Texture2D]([ExtResource("13_cge54"), ExtResource("14_qyj5y"), ExtResource("15_0jfjd"), ExtResource("16_n6p47"), ExtResource("17_5mvw7"), ExtResource("13_jybhw"), ExtResource("10_507rt")])
+icons_per_floor = Array[Texture2D]([ExtResource("20_w4elo"), ExtResource("21_u6h0e"), ExtResource("22_eoqc6"), ExtResource("23_e203u"), ExtResource("24_chv4t"), ExtResource("25_g0xgo"), ExtResource("26_66li0")])
 metadata/_custom_type_script = "uid://bc150812egh8j"
+
+[node name="VibeManager" type="Node" parent="." unique_id=1974107062 node_paths=PackedStringArray("progress_group", "vibe_progress_bar", "guest_spawner")]
+script = ExtResource("38_5mvw7")
+start_value = 5.0
+progress_group = NodePath("../UI/CanvasGroup/group")
+vibe_progress_bar = NodePath("../UI/CanvasGroup/group/MarginContainer/ProgressBar")
+bar_move_speed = 2.8
+guest_spawner = NodePath("../GuestSpawner")
+metadata/_custom_type_script = "uid://m3ree1qxpbd2"
 
 [node name="guests" type="Node3D" parent="." unique_id=794785956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
@@ -510,3 +553,67 @@ tilt_enabled = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="paths/LiftPath3/PathFollow3D" unique_id=1161016611]
 update_scale = false
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=256539412]
+
+[node name="CanvasGroup" type="CanvasGroup" parent="UI" unique_id=1590669272]
+material = SubResource("ShaderMaterial_0jfjd")
+
+[node name="group" type="Control" parent="UI/CanvasGroup" unique_id=279023383]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/CanvasGroup/group" unique_id=1077149448]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 360
+theme_override_constants/margin_right = 360
+theme_override_constants/margin_bottom = 42
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/CanvasGroup/group/MarginContainer" unique_id=838431391]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_n6p47")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qyj5y")
+step = 0.1
+value = 50.0
+show_percentage = false
+
+[node name="TextureRect" type="TextureRect" parent="UI/CanvasGroup/group" unique_id=419510238]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 0
+offset_left = 230.00002
+offset_top = 893.00006
+offset_right = 410.0
+offset_bottom = 1073.0
+rotation = -0.1095018
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("36_n6p47")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="UI/CanvasGroup/group" unique_id=237091991]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 0
+offset_left = 1502.0001
+offset_top = 873.00006
+offset_right = 1682.0001
+offset_bottom = 1053.0
+rotation = 0.10995574
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("37_5mvw7")
+expand_mode = 4
+stretch_mode = 4

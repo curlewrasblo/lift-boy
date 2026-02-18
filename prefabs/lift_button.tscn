@@ -16,6 +16,22 @@ shader_parameter/intensity = 0.999999977648
 [sub_resource type="BoxMesh" id="BoxMesh_p0ww4"]
 size = Vector3(0.1, 0.1, 0.04)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0ww4"]
+diffuse_mode = 1
+albedo_color = Color(0.23, 0.23, 0.23, 1)
+metallic = 0.53
+roughness = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_chady"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_p0ww4")
+shader_parameter/icon_opacity = 1.0
+shader_parameter/billboard = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dc3an"]
+size = Vector2(0.08, 0.08)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0us76"]
 render_priority = 0
 shader = ExtResource("2_p0ww4")
@@ -42,6 +58,7 @@ render_priority = 0
 shader = ExtResource("3_p0ww4")
 shader_parameter/icon_opacity = 1.0
 shader_parameter/icon_texture = SubResource("GradientTexture2D_dc3an")
+shader_parameter/billboard = true
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p0ww4"]
 particle_flag_disable_z = true
@@ -53,7 +70,7 @@ color = Color(0.2975, 0.6474168, 0.85, 1)
 [sub_resource type="QuadMesh" id="QuadMesh_p0ww4"]
 size = Vector2(0.07, 0.07)
 
-[node name="Button" type="Node3D" unique_id=1368189836 node_paths=PackedStringArray("button_body", "outline_node", "current_floor_node", "pressed_button_node", "visual_node", "vfx")]
+[node name="Button" type="Node3D" unique_id=1368189836 node_paths=PackedStringArray("button_body", "outline_node", "current_floor_node", "pressed_button_node", "visual_node", "vfx", "symbol_mesh")]
 script = ExtResource("1_0us76")
 button_body = NodePath("StaticBody3D")
 movement = -0.03
@@ -62,6 +79,7 @@ current_floor_node = NodePath("CurrentFloorBox")
 pressed_button_node = NodePath("PressedFloorBox")
 visual_node = NodePath("Buttonbox")
 vfx = NodePath("GPUParticles3D")
+symbol_mesh = NodePath("Buttonbox/SymbolMesh")
 metadata/_custom_type_script = "uid://c2k1o5mnrxw05"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=577583764]
@@ -77,7 +95,14 @@ mesh = SubResource("BoxMesh_p0ww4")
 
 [node name="Buttonbox" type="MeshInstance3D" parent="." unique_id=1429131886]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.03)
+material_override = SubResource("StandardMaterial3D_p0ww4")
 mesh = SubResource("BoxMesh_p0ww4")
+
+[node name="SymbolMesh" type="MeshInstance3D" parent="Buttonbox" unique_id=404405924]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.02013013)
+material_override = SubResource("ShaderMaterial_chady")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_dc3an")
 
 [node name="CurrentFloorBox" type="MeshInstance3D" parent="." unique_id=827931266]
 transform = Transform3D(0.35355338, -0.35355338, 0, 0.35355338, 0.35355338, 0, 0, 0, 0.5, 0, 0, 0.043)

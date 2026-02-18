@@ -16,7 +16,7 @@ enum LiftState {
 
 @export var time_to_reach_full_speed: float = 0.42
 @export var time_between_floors: float = 1.0
-
+@export var room_manager: RoomManager
 @export_subgroup("Elevator")
 @export var lift_player: LiftPlayer
 @export var lift_button_parent: Node3D
@@ -29,6 +29,7 @@ enum LiftState {
 @export var camera: Camera3D
 @export var camera_shake_intensity: Vector2 = Vector2(0.05, 0.05)
 @export var camera_shake_interval: float = 0.1
+
 
 var movement_material: ShaderMaterial
 var shake_timer: float = 0.0
@@ -47,6 +48,13 @@ var shader_moving: float = 0.0 # Goes from -1 to 0 to 1, where -1 is lift moving
 
 var buttons: Dictionary[int, LiftButton] = {}
 
+func _on_room_manager_ready() -> void:
+	room_manager.ready.disconnect(_on_room_manager_ready)
+
+	for button in lift_buttons:
+		var icon = room_manager.get_icon_for_floor(button.my_floor, true)
+		button.set_symbol(icon)
+
 func _ready() -> void:
 	movement_material = background_quad.material_override as ShaderMaterial
 	assert(movement_material != null, "Movement material is not a ShaderMaterial")
@@ -55,13 +63,21 @@ func _ready() -> void:
 	movement_material.set_shader_parameter("moving_factor", moving_factor)
 	original_camera_position = camera.position
 	
+	var is_room_manager_ready: bool = room_manager.is_node_ready()
+	if !is_room_manager_ready:
+		room_manager.ready.connect(_on_room_manager_ready)
+
 	for button in lift_button_parent.get_children():
 		if button is LiftButton:
 			lift_buttons.append(button)
 			button.button_pressed.connect(_on_button_pressed)
 			button.set_current_floor(false)
-			buttons[button.my_floor] = button
 
+			if is_room_manager_ready:
+				var icon = room_manager.get_icon_for_floor(button.my_floor, true)
+				button.set_symbol(icon)
+
+			buttons[button.my_floor] = button
 			button.set_activated(button.my_floor <= 3)
 
 	buttons[current_floor].set_current_floor(true)
@@ -93,6 +109,9 @@ func make_ready() -> void:
 	print(name, ": Lift is ready at floor ", current_floor)
 	lift_state = LiftState.Ready
 	doors_closed = false
+
+func make_not_ready() -> void:
+	lift_state = LiftState.OpeningDoors
 	
 func _process(delta: float) -> void:
 	if lift_state == LiftState.Moving:

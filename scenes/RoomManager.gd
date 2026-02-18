@@ -42,5 +42,5 @@ func get_icon_for_floor(wanted_floor: int, first_time: bool) -> Texture2D:
 	assert(icons_per_floor.size() > index, "Not enough icons set up. Index %s is out of bounds" % wanted_floor)
 
 	if first_time:
-		return icons_per_floor[index]
+		return icons_per_floor[wanted_floor]
 	return icons_per_room[index]

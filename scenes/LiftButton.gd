@@ -11,6 +11,7 @@ signal button_pressed(floor: int)
 @export var pressed_button_node: Node3D
 @export var visual_node: Node3D
 @export var vfx: GPUParticles3D
+@export var symbol_mesh: MeshInstance3D
 
 var was_pressed: bool = false
 
@@ -20,11 +21,16 @@ var original_z: float
 
 var is_activated: bool = false
 
+
+var symbol_material: ShaderMaterial
+
 func _ready() -> void:
 	button_body.mouse_entered.connect(_on_mouse_entered)
 	button_body.mouse_exited.connect(_on_mouse_exited)
 	set_current_floor(false)
 	outline_node.visible = false
+	symbol_material = symbol_mesh.material_override as ShaderMaterial
+	assert(symbol_material != null, "Symbol material is not a ShaderMaterial")
 
 	original_z = visual_node.position.z
 
@@ -48,6 +54,10 @@ func set_pressed(active: bool) -> void:
 func set_current_floor(active: bool) -> void:
 	current_floor_node.visible = active
 	set_pressed(false)
+
+func set_symbol(symbol: Texture2D) -> void:
+	symbol_material.set_shader_parameter("icon_texture", symbol)
+	symbol_material.set_shader_parameter("icon_opacity", 1.0)
 
 func _on_mouse_entered() -> void:
 	if !is_activated:
