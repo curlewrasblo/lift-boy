@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c2k1o5mnrxw05" path="res://scenes/LiftButton.gd" id="1_0us76"]
 [ext_resource type="Shader" uid="uid://bgmdkd14l7buv" path="res://scenes/OutlineShaderFake.gdshader" id="2_p0ww4"]
+[ext_resource type="Shader" uid="uid://c57yfj2tx5gal" path="res://prefabs/IconShader.gdshader" id="3_p0ww4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6tfno"]
 size = Vector3(0.1, 0.1, 0.04)
@@ -27,7 +28,32 @@ shader = ExtResource("2_p0ww4")
 shader_parameter/color = Color(0.06999999, 1, 0.0855, 1)
 shader_parameter/intensity = 6.999999843536
 
-[node name="Button" type="Node3D" unique_id=1368189836 node_paths=PackedStringArray("button_body", "outline_node", "current_floor_node", "pressed_button_node", "visual_node")]
+[sub_resource type="Gradient" id="Gradient_chady"]
+offsets = PackedFloat32Array(0.60546285, 0.64036417)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dc3an"]
+gradient = SubResource("Gradient_chady")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_47143"]
+render_priority = 0
+shader = ExtResource("3_p0ww4")
+shader_parameter/icon_opacity = 1.0
+shader_parameter/icon_texture = SubResource("GradientTexture2D_dc3an")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p0ww4"]
+particle_flag_disable_z = true
+radial_velocity_min = 0.5199776
+radial_velocity_max = 0.5999776
+gravity = Vector3(0, 0, 0)
+color = Color(0.2975, 0.6474168, 0.85, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_p0ww4"]
+size = Vector2(0.07, 0.07)
+
+[node name="Button" type="Node3D" unique_id=1368189836 node_paths=PackedStringArray("button_body", "outline_node", "current_floor_node", "pressed_button_node", "visual_node", "vfx")]
 script = ExtResource("1_0us76")
 button_body = NodePath("StaticBody3D")
 movement = -0.03
@@ -35,6 +61,7 @@ outline_node = NodePath("OutlineBox")
 current_floor_node = NodePath("CurrentFloorBox")
 pressed_button_node = NodePath("PressedFloorBox")
 visual_node = NodePath("Buttonbox")
+vfx = NodePath("GPUParticles3D")
 metadata/_custom_type_script = "uid://c2k1o5mnrxw05"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=577583764]
@@ -63,3 +90,19 @@ transform = Transform3D(0.35355338, -0.35355338, 0, 0.35355338, 0.35355338, 0, 0
 material_override = SubResource("ShaderMaterial_p0ww4")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_p0ww4")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=641346387]
+material_override = SubResource("ShaderMaterial_47143")
+cast_shadow = 0
+emitting = false
+amount = 2
+lifetime = 0.27
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 123123
+fixed_fps = 24
+local_coords = true
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_p0ww4")
+draw_pass_1 = SubResource("QuadMesh_p0ww4")

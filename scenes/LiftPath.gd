@@ -19,6 +19,7 @@ func is_available() -> bool:
 func take_path_into_elevator(duration: float, node_to_follow: Guest) -> void:
 	assert(is_available(), "Path is not available")
 	guest = node_to_follow
+	guest.set_layer_new_floor()
 	remote_transform.remote_path = remote_transform.get_path_to(node_to_follow)
 
 	follower.use_model_front = false
@@ -31,8 +32,8 @@ func take_path_out_of_elevator(duration: float, node_to_follow: Guest) -> void:
 	follower.use_model_front = true
 	follower.progress_ratio = 0.0
 
-	await _handle_guest_getting_to_path(duration * 0.5)
-
+	await _handle_guest_getting_to_path(duration * 0.2)
+	guest.set_layer_new_floor()
 	remote_transform.remote_path = remote_transform.get_path_to(node_to_follow)
 	_handle_path_follower(0.0, 1.0, duration)
 
@@ -64,6 +65,7 @@ func _handle_path_follower(from: float, to: float, duration: float) -> void:
 	move_tween.finished.connect(_on_move_tween_finished)
 
 func _on_move_tween_finished() -> void:
+	guest.set_layer_elevator()
 	remote_transform.remote_path = NodePath("")
 	on_path_finished.emit(self, guest)
 	guest = null

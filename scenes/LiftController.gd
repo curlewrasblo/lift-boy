@@ -54,7 +54,7 @@ func _ready() -> void:
 	movement_material.set_shader_parameter("uv_offset", uv_offset)
 	movement_material.set_shader_parameter("moving_factor", moving_factor)
 	original_camera_position = camera.position
-
+	
 	for button in lift_button_parent.get_children():
 		if button is LiftButton:
 			lift_buttons.append(button)
@@ -62,10 +62,31 @@ func _ready() -> void:
 			button.set_current_floor(false)
 			buttons[button.my_floor] = button
 
+			button.set_activated(button.my_floor <= 3)
+
 	buttons[current_floor].set_current_floor(true)
+
+
+var is_activating_buttons: bool = false
+func activate_buttons_up_to_floor(to_floor: int) -> void:
+	if is_activating_buttons:
+		return
+	is_activating_buttons = true
+	for button in lift_buttons:
+		if button.my_floor <= to_floor and !button.is_activated:
+			button.set_activated(true)
+			var tween = create_tween().set_ease(Tween.EASE_IN_OUT)
+			tween.tween_property(button.visual_node, "scale", Vector3.ONE * 1.5, 0.16).from(Vector3.ONE)
+			tween.tween_property(button.visual_node, "scale", Vector3(1.0, 1.0, 1.0), 0.16)
+			tween.play()
+			await get_tree().create_timer(0.25).timeout
+	is_activating_buttons = false
 
 func get_floor_amount() -> int:
 	return lift_buttons.size()
+
+func get_activated_floor_amount() -> int:
+	return lift_buttons.filter(func(button: LiftButton) -> bool: return button.is_activated).size()
 
 func make_ready() -> void:
 	assert(lift_state == LiftState.OpeningDoors, "Lift should be opening doors right now")

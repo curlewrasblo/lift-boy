@@ -17,6 +17,6 @@ void vertex() {
 void fragment() {
 	vec4 icon_color = texture(icon_texture, UV);
 	icon_color.a *= icon_opacity;
-	ALBEDO = icon_color.rgb;
-	ALPHA = icon_color.a;
+	ALBEDO = icon_color.rgb * COLOR.rgb;
+	ALPHA = icon_color.a * COLOR.a;
 }

@@ -6,6 +6,11 @@ class_name Guest
 @export var icon_movement: Vector3 = Vector3.UP * 0.2
 @export var icon_tween_duration: float = 2.2
 
+@export var elevator_mesh: MeshInstance3D
+@export var floor_mesh: MeshInstance3D
+
+@export var fade_duration: float = 0.5
+
 @export var area_3d: Area3D
 
 var wanted_floor: int = -1
@@ -19,12 +24,22 @@ var origincal_icon_pos: Vector3 = Vector3.ZERO
 
 var is_selected: bool = false
 
+var fade_tween: Tween = null
+
+var elevator_material: ShaderMaterial
+var floor_material: ShaderMaterial
 
 func _ready() -> void:
 	assert(icon_display != null, "Icon display is not set")
 	icon_material = icon_display.material_override as ShaderMaterial
 	assert(icon_material != null, "Icon material is not a ShaderMaterial")
 	origincal_icon_pos = icon_display.position
+
+	elevator_material = elevator_mesh.material_override as ShaderMaterial
+	assert(elevator_material != null, "Elevator material is not a ShaderMaterial")
+
+	floor_material = floor_mesh.material_override as ShaderMaterial
+	assert(floor_material != null, "Floor material is not a ShaderMaterial")
 
 	icon_display.visible = false
 
@@ -79,3 +94,22 @@ func _on_icon_tween_finished() -> void:
 	icon_display.visible = false
 	icon_material.set_shader_parameter("icon_opacity", 0.0)
 	icon_display.position = origincal_icon_pos
+
+
+func set_layer_new_floor() -> void:
+	if fade_tween != null:
+		fade_tween.kill()
+		fade_tween = null
+
+	fade_tween = create_tween().set_ease(Tween.EASE_IN_OUT)
+	fade_tween.tween_property(floor_material, "shader_parameter/opacity", 1.0, fade_duration / 2.0).from(0.0)
+	fade_tween.tween_property(elevator_material, "shader_parameter/opacity", 0.0, fade_duration / 2.0).from(1.0)
+
+func set_layer_elevator() -> void:
+	if fade_tween != null:
+		fade_tween.kill()
+		fade_tween = null
+
+	fade_tween = create_tween().set_ease(Tween.EASE_IN_OUT)
+	fade_tween.tween_property(elevator_material, "shader_parameter/opacity", 1.0, fade_duration / 2.0).from(0.0)
+	fade_tween.tween_property(floor_material, "shader_parameter/opacity", 0.0, fade_duration / 2.0).from(1.0)

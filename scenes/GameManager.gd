@@ -13,9 +13,17 @@ class_name GameManager
 @export var chance_to_spawn_one_guest: float = 0.5
 @export var chance_to_spawn_two_guests: float = 0.1
 
+@export_subgroup("Progression Thresholds")
+@export var show_complicated_icons_threshold: int = 3
+@export var two_guest_spawn_threshold: int = 6
+@export var buttons_five_to_seven: int = 12
+
+
 var floors_visited: Dictionary[int, int] = {}
 
 var guest_spawn_timer: Timer
+
+var progression: int = 0
 
 func _ready() -> void:
 	guest_spawn_timer = Timer.new()
@@ -32,10 +40,17 @@ func _ready() -> void:
 	for i in range(lift_controller.get_floor_amount()):
 		floors_visited[i] = 0
 
+func _process(_delta: float) -> void:
+	if Input.is_key_pressed(KEY_P):
+		increase_progression(1)
+
 func _on_floor_visited(visited_floor: int) -> void:
 	print("Floor ", visited_floor, " visited")
-	floors_visited[visited_floor] = floors_visited.get(visited_floor, 0) + 1
+	floors_visited[visited_floor] += 1
 	room_manager.arrive_at_floor(visited_floor)
+
+	if floors_visited[visited_floor] <= 2:
+		increase_progression(1)
 
 func _on_floor_left(left_floor: int) -> void:
 	print("Floor ", left_floor, " left")
@@ -46,23 +61,34 @@ func _on_doors_opened(opened_floor: int) -> void:
 	_handle_guests_in_elevator(opened_floor)
 
 func _handle_guests_in_elevator(new_floor: int) -> void:
-	await guest_spawner.handle_guests_in_elevator_when_arriving_to_floor(new_floor)
+	var good_floor_for_a_guest: bool = await guest_spawner.handle_guests_in_elevator_when_arriving_to_floor(new_floor)
+	if good_floor_for_a_guest:
+		increase_progression(1)
 	await _handle_guest_spawning()
+
+
+func increase_progression(by_amount: int) -> void:
+	progression += by_amount
+	print("Progression: ", progression)
+	if progression >= buttons_five_to_seven:
+		lift_controller.activate_buttons_up_to_floor(999)
 
 
 func _handle_guest_spawning() -> void:
 	var chance = randf()
 
 	var amount: int = 0
-	if chance <= chance_to_spawn_two_guests:
+	if chance <= chance_to_spawn_two_guests and progression >= two_guest_spawn_threshold:
 		amount = 2
 	elif chance - chance_to_spawn_two_guests <= chance_to_spawn_one_guest or guest_spawner.current_guest_count == 0:
 		amount = 1
 
 	print("Spawning ", amount, " guests")
 	for i in range(amount):
+		if !guest_spawner.has_available_lift_mark():
+			break
 		var guest = guest_spawner.spawn_guest()
-		var first_time: bool = floors_visited[guest.wanted_floor] == 0
+		var first_time: bool = floors_visited[guest.wanted_floor] == 0 or progression < show_complicated_icons_threshold
 		var icon = room_manager.get_icon_for_floor(guest.wanted_floor, first_time)
 		guest.set_icon(icon)
 

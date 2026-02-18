@@ -19,13 +19,27 @@ color_ramp = SubResource("Gradient_k5map")
 seamless = true
 in_3d_space = true
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f5lui"]
+noise_type = 2
+frequency = 0.0338
+fractal_type = 0
+cellular_distance_function = 2
+cellular_return_type = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_43hg5"]
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_f5lui")
+in_3d_space = true
+
 [resource]
 render_priority = 0
 shader = ExtResource("1_f5lui")
 shader_parameter/uv_offset = -1.07
-shader_parameter/moving_factor = 1.0
-shader_parameter/still_color = Color(0.03137255, 0.03137255, 0.02745098, 1)
+shader_parameter/moving_factor = 0.0
+shader_parameter/still_color_1 = Color(0.03137255, 0.03137255, 0.02745098, 1)
+shader_parameter/still_color_2 = Color(0.17, 0.151725, 0.1445, 1)
 shader_parameter/moving_slow_color = Color(0.03137255, 0.03137255, 0.02745098, 1)
-shader_parameter/moving_fast_color = Color(0.14, 0.13542667, 0.120400004, 1)
+shader_parameter/moving_fast_color = Color(0.14, 0.13738666, 0.1288, 1)
+shader_parameter/still_texture = SubResource("NoiseTexture2D_43hg5")
 shader_parameter/moving_texture = SubResource("NoiseTexture2D_txnge")
 shader_parameter/tex_tiling = Vector2(6, 0.36)

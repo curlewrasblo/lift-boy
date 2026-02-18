@@ -270,9 +270,17 @@ cast_shadow = 0
 mesh = SubResource("QuadMesh_1fyo0")
 
 [node name="Buttons" type="Node3D" parent="ElevatorOrigin" unique_id=1793679986]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.86, 1.42, -0.7416849)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.86, 1.36, -0.742)
 
-[node name="Button5" parent="ElevatorOrigin/Buttons" unique_id=1368189836 instance=ExtResource("5_6v0m2")]
+[node name="Button7" parent="ElevatorOrigin/Buttons" unique_id=1368189836 instance=ExtResource("5_6v0m2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+my_floor = 6
+
+[node name="Button6" parent="ElevatorOrigin/Buttons" unique_id=2001615374 instance=ExtResource("5_6v0m2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+my_floor = 5
+
+[node name="Button5" parent="ElevatorOrigin/Buttons" unique_id=1393037278 instance=ExtResource("5_6v0m2")]
 my_floor = 4
 
 [node name="Button4" parent="ElevatorOrigin/Buttons" unique_id=1714293738 instance=ExtResource("5_6v0m2")]
@@ -292,18 +300,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
 
 [node name="marks" type="Node3D" parent="ElevatorOrigin" unique_id=1430355615]
 
-[node name="guest_mark1" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=176184212]
-transform = Transform3D(-0.9659258, 0, -0.25881913, 0, 1, 0, 0.25881913, 0, -0.9659258, 0.94752556, 0, -0.24071068)
+[node name="guest_mark1" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=618958572]
+transform = Transform3D(-1, 0, 5.9604645e-08, 0, 1, 0, -5.9604645e-08, 0, -1, 0.5469879, 0, 0.24000001)
 script = ExtResource("6_pan36")
 metadata/_custom_type_script = "uid://c1o8smjuxcnum"
 
-[node name="guest_mark2" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=618958572]
-transform = Transform3D(-1, 0, 5.9604645e-08, 0, 1, 0, -5.9604645e-08, 0, -1, 0.51, 0, 0.34)
+[node name="guest_mark2" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=176184212]
+transform = Transform3D(-0.9659258, 0, -0.25881913, 0, 1, 0, 0.25881913, 0, -0.9659258, 1.1924745, 0, -0.099289335)
 script = ExtResource("6_pan36")
 metadata/_custom_type_script = "uid://c1o8smjuxcnum"
 
 [node name="guest_mark3" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=567207253]
-transform = Transform3D(-0.9659258, 0, 0.2588191, 0, 1, 0, -0.2588191, 0, -0.9659258, -0.16176383, 0, 0.04318516)
+transform = Transform3D(-0.9848077, 0, 0.17364825, 0, 1, 0, -0.17364825, 0, -0.9848077, -0.14751408, 0, -0.24277578)
 script = ExtResource("6_pan36")
 metadata/_custom_type_script = "uid://c1o8smjuxcnum"
 
@@ -380,36 +388,42 @@ mesh = SubResource("QuadMesh_1fyo0")
 
 [node name="LiftController" type="Node" parent="." unique_id=1114785045 node_paths=PackedStringArray("lift_player", "lift_button_parent", "background_quad", "camera")]
 script = ExtResource("5_5djdf")
-time_to_reach_full_speed = 2.0
-time_between_floors = 1.8
+time_to_reach_full_speed = 2.1
+time_between_floors = 2.3
 lift_player = NodePath("../LiftPlayer")
 lift_button_parent = NodePath("../ElevatorOrigin/Buttons")
 background_quad = NodePath("../Croppers/Quad")
-shader_move_max_speed = 2.0
+shader_move_max_speed = 2.6
 camera = NodePath("../Camera3D")
-camera_shake_intensity = Vector2(0.007, 0.018)
-camera_shake_interval = 0.042
+camera_shake_intensity = Vector2(0.007, 0.02)
+camera_shake_interval = 0.036
 metadata/_custom_type_script = "uid://dftoeuggt3dhi"
 
 [node name="LiftPlayer" type="AnimationPlayer" parent="." unique_id=1824682290]
 libraries/ = SubResource("AnimationLibrary_50d5g")
+speed_scale = 1.3
 script = ExtResource("6_lsh4v")
 open_door_anim = &"LiftDoorOpen"
 metadata/_custom_type_script = "uid://d2hm1elr1s86b"
 
 [node name="GameManager" type="Node" parent="." unique_id=335729790 node_paths=PackedStringArray("lift_controller", "room_manager", "guest_spawner")]
 script = ExtResource("8_qhcon")
-time_before_start = 0.36
+time_before_start = 0.12
+time_between_guest_spawns = 0.69
 lift_controller = NodePath("../LiftController")
 room_manager = NodePath("../RoomManager")
 guest_spawner = NodePath("../GuestSpawner")
+chance_to_spawn_two_guests = 0.15
+show_complicated_icons_threshold = 4
+two_guest_spawn_threshold = 8
+buttons_five_to_seven = 13
 metadata/_custom_type_script = "uid://d2gjextgphvai"
 
 [node name="GuestSpawner" type="Node" parent="." unique_id=2101118342 node_paths=PackedStringArray("room_manager", "lift_controller", "lift_mark_parent", "path_parent", "guest_parent")]
 script = ExtResource("11_drltt")
 guest_scene = ExtResource("11_rw2bm")
-guest_move_time_on_lift_path = 2.6
-guest_move_time_on_mark = 0.67
+guest_move_time_on_lift_path = 2.8
+guest_move_time_on_mark = 0.6
 room_manager = NodePath("../RoomManager")
 lift_controller = NodePath("../LiftController")
 lift_mark_parent = NodePath("../ElevatorOrigin/marks")
@@ -428,7 +442,7 @@ metadata/_custom_type_script = "uid://bc150812egh8j"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
 [node name="liftboy" parent="." unique_id=832314600 instance=ExtResource("14_rw2bm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.161, 0, -0.247)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.261, 0, 0.053000018)
 
 [node name="rooms" type="Node3D" parent="." unique_id=1331285265]
 

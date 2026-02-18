@@ -1,13 +1,27 @@
 [gd_scene format=3 uid="uid://c2t8bxbohlvi"]
 
-[ext_resource type="Material" uid="uid://dfbijl1mrklee" path="res://materials/dude.tres" id="1_cngsf"]
 [ext_resource type="Script" uid="uid://b2it233ffywls" path="res://prefabs/Guest.gd" id="1_pw4ws"]
+[ext_resource type="Shader" uid="uid://b7tftvlh8xwht" path="res://prefabs/CharacterShader.gdshader" id="2_htqr3"]
 [ext_resource type="Shader" uid="uid://c57yfj2tx5gal" path="res://prefabs/IconShader.gdshader" id="3_htqr3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18ekq"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_htqr3")
+shader_parameter/albedo = Color(0.47058824, 0.3019608, 0.09411765, 1)
+shader_parameter/opacity = 1.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wv8vg"]
 radius = 0.4
 height = 1.8
 radial_segments = 32
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_htqr3"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_htqr3")
+shader_parameter/albedo = Color(0.47058824, 0.3019608, 0.09411765, 1)
+shader_parameter/opacity = 1.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_cngsf"]
 radius = 0.3
@@ -22,28 +36,44 @@ shader = ExtResource("3_htqr3")
 shader_parameter/icon_opacity = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_pw4ws"]
-size = Vector2(0.5, 0.5)
+size = Vector2(0.36, 0.36)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_htqr3"]
 radius = 0.4
 height = 1.8
 
-[node name="guest" type="Node3D" unique_id=1991815137 node_paths=PackedStringArray("icon_display", "area_3d")]
+[node name="guest" type="Node3D" unique_id=1991815137 node_paths=PackedStringArray("icon_display", "elevator_mesh", "floor_mesh", "area_3d")]
 script = ExtResource("1_pw4ws")
 icon_display = NodePath("IconDisplay")
-icon_movement = Vector3(0, 0.12, 0)
-icon_tween_duration = 4.2
+icon_movement = Vector3(0, 0.08, 0)
+icon_tween_duration = 3.2
+elevator_mesh = NodePath("ElevatorMesh")
+floor_mesh = NodePath("OutdoorMesh")
+fade_duration = 0.36
 area_3d = NodePath("Area3D")
 metadata/_custom_type_script = "uid://b2it233ffywls"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=504155598]
+[node name="OutdoorMesh" type="MeshInstance3D" parent="." unique_id=504155598]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-material_override = ExtResource("1_cngsf")
+layers = 2
+material_override = SubResource("ShaderMaterial_18ekq")
 mesh = SubResource("CapsuleMesh_wv8vg")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=354378590]
+[node name="ElevatorMesh" type="MeshInstance3D" parent="." unique_id=1382459009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+material_override = SubResource("ShaderMaterial_htqr3")
+mesh = SubResource("CapsuleMesh_wv8vg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ElevatorMesh" unique_id=2090699964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44232416, 0.6178752)
+cast_shadow = 0
 mesh = SubResource("SphereMesh_cngsf")
+
+[node name="ShadowMesh" type="MeshInstance3D" parent="." unique_id=404407781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+layers = 3
+cast_shadow = 3
+mesh = SubResource("CapsuleMesh_wv8vg")
 
 [node name="IconDisplay" type="MeshInstance3D" parent="." unique_id=704676173]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0115297, 0)

@@ -7,11 +7,11 @@ signal on_mark_left(sender: LiftMark, guest: Guest)
 var move_tween: Tween
 var guest: Guest = null
 
-func walk_to_mark(duration: float, walking_guest: Guest) -> void:
-	assert(is_available(), "Mark is not available")
-	guest = walking_guest
-
+func walk_to_mark(duration: float) -> void:
 	_handle_guest_movement(duration)
+
+func take_mark(owner_guest: Guest) -> void:
+	guest = owner_guest
 
 func is_available() -> bool:
 	return guest == null
