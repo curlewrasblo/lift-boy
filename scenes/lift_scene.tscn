@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://c07gk7y6ydu1v"]
 
-[ext_resource type="Material" uid="uid://d2srqqm7of6ub" path="res://materials/elevator_walls.tres" id="1_0gm50"]
 [ext_resource type="Environment" uid="uid://hkjmpt7k1oa8" path="res://default_environment.tres" id="1_ok3pb"]
-[ext_resource type="Material" uid="uid://cibd081vwceno" path="res://materials/elevator_door.tres" id="3_r2n18"]
+[ext_resource type="Shader" uid="uid://b7puwvw3kt1pk" path="res://scenes/SobelOutlineShader.gdshader" id="2_w4elo"]
+[ext_resource type="Material" uid="uid://dpum6i1rmauai" path="res://materials/elevator.mat.tres" id="3_w4elo"]
 [ext_resource type="Material" uid="uid://dy7mnuivkmjns" path="res://materials/elevator_moving_mat.tres" id="4_r2n18"]
+[ext_resource type="Material" uid="uid://ccnt2fbcclisv" path="res://materials/doors_mat.tres" id="4_w4elo"]
 [ext_resource type="Script" uid="uid://dftoeuggt3dhi" path="res://scenes/LiftController.gd" id="5_5djdf"]
 [ext_resource type="PackedScene" uid="uid://dquyd4j8v6iv6" path="res://prefabs/lift_button.tscn" id="5_6v0m2"]
 [ext_resource type="Script" uid="uid://d2hm1elr1s86b" path="res://scenes/LiftPlayer.gd" id="6_lsh4v"]
@@ -38,6 +39,20 @@
 [ext_resource type="Texture2D" uid="uid://1chs3ipfjwbs" path="res://textures/listboy_sad.png" id="36_n6p47"]
 [ext_resource type="Texture2D" uid="uid://3017a1s7gt7" path="res://textures/listboy_happy.png" id="37_5mvw7"]
 [ext_resource type="Script" uid="uid://m3ree1qxpbd2" path="res://scenes/VibeManager.gd" id="38_5mvw7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u6h0e"]
+render_priority = -5
+shader = ExtResource("2_w4elo")
+shader_parameter/jitter_amount = 0.0
+shader_parameter/jitter_speed = 0.0
+shader_parameter/depth_threshold = 0.0010000000475
+shader_parameter/color_threshold = 0.1
+shader_parameter/edge_color = Color(0.04, 0.04, 0.04, 1)
+shader_parameter/edge_width = 0.59200002486012
+
+[sub_resource type="QuadMesh" id="QuadMesh_5mvw7"]
+flip_faces = true
+size = Vector2(2, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_r2n18"]
 size = Vector3(3.2, 0.1, 1.6)
@@ -219,14 +234,14 @@ point_count = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0jfjd"]
 shader = ExtResource("35_qyj5y")
-shader_parameter/color = Color(0.30080003, 0.64, 0.54389334, 1)
-shader_parameter/width = 8.50000040375
+shader_parameter/color = Color(0.050980393, 0.050980393, 0.050980393, 1)
+shader_parameter/width = 6.000000285
 shader_parameter/pattern = 1
 shader_parameter/inside = false
-shader_parameter/add_margins = true
+shader_parameter/add_margins = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n6p47"]
-bg_color = Color(0.1944, 0.19819999, 0.24, 1)
+bg_color = Color(0.6399, 0.81, 0.73629, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyj5y"]
 bg_color = Color(0.14080001, 0.64, 0.49856, 1)
@@ -237,10 +252,17 @@ bg_color = Color(0.14080001, 0.64, 0.49856, 1)
 environment = ExtResource("1_ok3pb")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1710955341]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.175, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 6.5)
 fov = 36.0
 size = 2.869
 far = 100.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D" unique_id=1088611126]
+layers = 3
+material_override = SubResource("ShaderMaterial_u6h0e")
+cast_shadow = 0
+extra_cull_margin = 11646.46
+mesh = SubResource("QuadMesh_5mvw7")
 
 [node name="ElevatorOrigin" type="Node3D" parent="." unique_id=2108071073]
 
@@ -248,50 +270,50 @@ far = 100.0
 
 [node name="floor" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1803129365]
 transform = Transform3D(0.9999996, 0.0005967464, -0.00072948425, -0.0005967486, 0.9999998, -3.0763483e-06, 0.0007294824, 3.4852999e-06, 0.99999976, 0, -0.05, 0)
-material_override = ExtResource("1_0gm50")
+material_override = ExtResource("3_w4elo")
 mesh = SubResource("BoxMesh_r2n18")
 
 [node name="ceiling" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=328127996]
 transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 2.84, 0)
-material_override = ExtResource("1_0gm50")
+material_override = ExtResource("3_w4elo")
 cast_shadow = 0
 mesh = SubResource("BoxMesh_r2n18")
 
 [node name="Wall" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1776640702]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -1.62, 1.394, 0)
-material_override = ExtResource("1_0gm50")
+material_override = ExtResource("3_w4elo")
 mesh = SubResource("BoxMesh_r2n18")
 
 [node name="Wall2" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=349330501]
 transform = Transform3D(4.371139e-08, -1, 8.742278e-08, -1, -4.371139e-08, 0, 3.821371e-15, -8.742278e-08, -1, 1.62, 1.394, 0)
-material_override = ExtResource("1_0gm50")
+material_override = ExtResource("3_w4elo")
 mesh = SubResource("BoxMesh_r2n18")
 
 [node name="wall_door_left" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1238298823]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52, 1.4, -0.9)
-material_override = ExtResource("1_0gm50")
+material_override = ExtResource("3_w4elo")
 mesh = SubResource("BoxMesh_vd2jk")
 
 [node name="wall_door_right" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=319295556]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.285, 1.4, -0.9)
-material_override = ExtResource("1_0gm50")
+material_override = ExtResource("3_w4elo")
 mesh = SubResource("BoxMesh_vd2jk")
 
 [node name="wall_door_top" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1184461502]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.425, 3.225, -0.9)
-material_override = ExtResource("1_0gm50")
+material_override = ExtResource("3_w4elo")
 mesh = SubResource("BoxMesh_vd2jk")
 
 [node name="Door" type="Node3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=526448821]
 
 [node name="DoorLeft" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/Door" unique_id=745628879]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -0.4, 1.4, -0.87)
-material_override = ExtResource("3_r2n18")
+material_override = ExtResource("4_w4elo")
 mesh = SubResource("BoxMesh_1fyo0")
 
 [node name="DoorRight" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/Door" unique_id=1172223211]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 1.4, -0.87)
-material_override = ExtResource("3_r2n18")
+material_override = ExtResource("4_w4elo")
 mesh = SubResource("BoxMesh_1fyo0")
 
 [node name="Quad" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/Door" unique_id=1837153849]
@@ -417,11 +439,12 @@ material_override = ExtResource("4_r2n18")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_1fyo0")
 
-[node name="LiftController" type="Node" parent="." unique_id=1114785045 node_paths=PackedStringArray("room_manager", "lift_player", "lift_button_parent", "background_quad", "camera")]
+[node name="LiftController" type="Node" parent="." unique_id=1114785045 node_paths=PackedStringArray("room_manager", "liftboy", "lift_player", "lift_button_parent", "background_quad", "camera")]
 script = ExtResource("5_5djdf")
 time_to_reach_full_speed = 1.9
 time_between_floors = 1.7
 room_manager = NodePath("../RoomManager")
+liftboy = NodePath("../liftboy")
 lift_player = NodePath("../LiftPlayer")
 lift_button_parent = NodePath("../ElevatorOrigin/Buttons")
 background_quad = NodePath("../Croppers/Quad")
@@ -484,8 +507,8 @@ metadata/_custom_type_script = "uid://m3ree1qxpbd2"
 [node name="guests" type="Node3D" parent="." unique_id=794785956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
-[node name="liftboy" parent="." unique_id=832314600 instance=ExtResource("14_rw2bm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.261, 0, 0.053000018)
+[node name="liftboy" parent="." unique_id=1727757550 instance=ExtResource("14_rw2bm")]
+transform = Transform3D(0.40779936, -0.06465614, 0.91077936, 0.035112996, 0.99786234, 0.055116374, -0.9123961, 0.009503777, 0.4091979, -1.2291896, 0.016151369, -0.22991446)
 
 [node name="rooms" type="Node3D" parent="." unique_id=1331285265]
 
@@ -565,6 +588,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/CanvasGroup/group" unique_id=1077149448]
@@ -575,12 +600,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 360
-theme_override_constants/margin_right = 360
-theme_override_constants/margin_bottom = 42
+theme_override_constants/margin_left = 670
+theme_override_constants/margin_right = 670
+theme_override_constants/margin_bottom = 72
 
 [node name="ProgressBar" type="ProgressBar" parent="UI/CanvasGroup/group/MarginContainer" unique_id=838431391]
-custom_minimum_size = Vector2(0, 72)
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
@@ -591,13 +616,14 @@ value = 50.0
 show_percentage = false
 
 [node name="TextureRect" type="TextureRect" parent="UI/CanvasGroup/group" unique_id=419510238]
-custom_minimum_size = Vector2(180, 180)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 0
-offset_left = 230.00002
-offset_top = 893.00006
-offset_right = 410.0
-offset_bottom = 1073.0
+offset_left = 571.00006
+offset_top = 923.00006
+offset_right = 691.00006
+offset_bottom = 1063.0
 rotation = -0.1095018
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 0
 size_flags_vertical = 8
 texture = ExtResource("36_n6p47")
@@ -605,13 +631,14 @@ expand_mode = 4
 stretch_mode = 4
 
 [node name="TextureRect2" type="TextureRect" parent="UI/CanvasGroup/group" unique_id=237091991]
-custom_minimum_size = Vector2(180, 180)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 0
-offset_left = 1502.0001
-offset_top = 873.00006
-offset_right = 1682.0001
-offset_bottom = 1053.0
+offset_left = 1227.0
+offset_top = 927.0
+offset_right = 1347.0
+offset_bottom = 1067.0
 rotation = 0.10995574
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 0
 size_flags_vertical = 8
 texture = ExtResource("37_5mvw7")

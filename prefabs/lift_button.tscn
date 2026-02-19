@@ -65,7 +65,7 @@ particle_flag_disable_z = true
 radial_velocity_min = 0.5199776
 radial_velocity_max = 0.5999776
 gravity = Vector3(0, 0, 0)
-color = Color(0.2975, 0.6474168, 0.85, 1)
+color = Color(0.22620001, 0.78, 0.57693994, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_p0ww4"]
 size = Vector2(0.07, 0.07)
@@ -124,9 +124,6 @@ amount = 2
 lifetime = 0.27
 one_shot = true
 explosiveness = 1.0
-use_fixed_seed = true
-seed = 123123
-fixed_fps = 24
 local_coords = true
 transform_align = 1
 process_material = SubResource("ParticleProcessMaterial_p0ww4")

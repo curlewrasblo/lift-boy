@@ -68,10 +68,9 @@ func _fade_out_progress_group() -> void:
 		game_over_tween.kill()
 		game_over_tween = null
 
-	game_over_tween = create_tween().set_ease(Tween.EASE_IN)
-	game_over_tween.tween_interval(0.6)
-	game_over_tween.tween_property(progress_group, "modulate:a", 0.0, 2.0)
+	game_over_tween = create_tween()
+	game_over_tween.tween_interval(1.5)
 	game_over_tween.tween_callback(_on_game_over_tween_finished)
 
 func _on_game_over_tween_finished() -> void:
-	progress_group.modulate.a = 0.0
+	progress_group.visible = false

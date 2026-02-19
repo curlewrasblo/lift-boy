@@ -17,6 +17,7 @@ enum LiftState {
 @export var time_to_reach_full_speed: float = 0.42
 @export var time_between_floors: float = 1.0
 @export var room_manager: RoomManager
+@export var liftboy: Liftboy
 @export_subgroup("Elevator")
 @export var lift_player: LiftPlayer
 @export var lift_button_parent: Node3D
@@ -145,6 +146,7 @@ func open_doors_on_start(time_before_start: float) -> void:
 
 func _on_button_pressed(button_floor: int) -> void:
 	press_button(button_floor)
+	liftboy.press_button(buttons[button_floor].global_position)
 
 func press_button(elevator_floor: int) -> void:
 	if lift_state != LiftState.Ready:

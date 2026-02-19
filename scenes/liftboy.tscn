@@ -1,24 +1,53 @@
 [gd_scene format=3 uid="uid://dhpmaegonireh"]
 
-[ext_resource type="Material" uid="uid://dfbijl1mrklee" path="res://materials/dude.tres" id="1_hiu3e"]
+[ext_resource type="Script" uid="uid://h2tbxgyebb7k" path="res://scenes/Liftboy.gd" id="1_6jf23"]
+[ext_resource type="PackedScene" uid="uid://dfk076khkyyak" path="res://liftboy.glb" id="2_6jf23"]
+[ext_resource type="Material" uid="uid://b02up2rx6whn3" path="res://materials/liftboy_mat.tres" id="3_twpp3"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_vd2jk"]
-radius = 0.1
-height = 0.9
-radial_segments = 32
+[node name="liftboy" type="Node3D" unique_id=1727757550 node_paths=PackedStringArray("left_arm_IK_target", "left_arm_IK_modifier")]
+script = ExtResource("1_6jf23")
+left_arm_IK_target = NodePath("LeftArmIK")
+left_arm_IK_modifier = NodePath("liftboy/Root/Skeleton3D/FABRIK3D")
+max_y_offset = 1.15
+metadata/_custom_type_script = "uid://h2tbxgyebb7k"
 
-[sub_resource type="SphereMesh" id="SphereMesh_hiu3e"]
-radius = 0.16
-height = 0.32
+[node name="liftboy" parent="." unique_id=264529041 instance=ExtResource("2_6jf23")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 
-[node name="liftboy" type="Node3D" unique_id=832314600]
+[node name="Skeleton3D" parent="liftboy/Root" parent_id_path=PackedInt32Array(264529041, 1941001386) index="0" unique_id=476931504]
+bones/1/position = Vector3(-2.5820583e-09, -0.7985116, 0.017100204)
+bones/3/rotation = Quaternion(-0.02455229, -5.95873e-08, -1.4634529e-09, 0.9996985)
+bones/4/rotation = Quaternion(0.062989324, -3.793761e-13, 2.4041438e-14, 0.9980142)
+bones/5/rotation = Quaternion(-0.00075089396, 0.014519517, 0.98880845, 0.14848077)
+bones/7/rotation = Quaternion(-0.0008839894, -0.014479298, -0.98539764, 0.16964991)
+bones/10/rotation = Quaternion(0.03671653, 0.05134824, 0.7996573, 0.5971294)
+bones/11/rotation = Quaternion(-0.23399587, -0.015316043, 0.040078107, 0.9712904)
+bones/13/rotation = Quaternion(0.018313838, -0.023639712, -0.80430454, 0.59346455)
+bones/14/rotation = Quaternion(-0.081413895, 0.0010706009, -0.038632426, 0.9959308)
 
-[node name="PlaceholderLiftBoy" type="MeshInstance3D" parent="." unique_id=1493278636]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4472338, 0)
-material_override = ExtResource("1_hiu3e")
-mesh = SubResource("CapsuleMesh_vd2jk")
+[node name="Cube" parent="liftboy/Root/Skeleton3D" index="0" unique_id=579055579]
+material_override = ExtResource("3_twpp3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlaceholderLiftBoy" unique_id=1216621711]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6107763, 0)
-material_override = ExtResource("1_hiu3e")
-mesh = SubResource("SphereMesh_hiu3e")
+[node name="FABRIK3D" type="FABRIK3D" parent="liftboy/Root/Skeleton3D" index="1" unique_id=1023439473]
+mutable_bone_axes = false
+max_iterations = 6
+min_distance = 0.082
+setting_count = 1
+settings/0/target_node = NodePath("../../../../LeftArmIK")
+settings/0/root_bone_name = "Arm.Upper.L"
+settings/0/root_bone = 7
+settings/0/end_bone_name = "Arm.Lower.L"
+settings/0/end_bone = 8
+settings/0/extend_end_bone = true
+settings/0/end_bone/direction = 6
+settings/0/end_bone/length = 0.0
+settings/0/joint_count = 2
+settings/0/joints/0/rotation_axis = 3
+settings/0/joints/0/limitation = null
+settings/0/joints/1/rotation_axis = 3
+settings/0/joints/1/limitation = null
+
+[node name="LeftArmIK" type="Marker3D" parent="." unique_id=1104113012]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22569203, 0.6528286, -0.0076293945)
+
+[editable path="liftboy"]

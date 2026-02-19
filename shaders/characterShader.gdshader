@@ -1,12 +1,10 @@
 shader_type spatial;
-render_mode specular_schlick_ggx, diffuse_lambert, depth_prepass_alpha, depth_draw_always;
+render_mode specular_schlick_ggx, diffuse_lambert;
 
 uniform vec4 r_color : source_color;
 uniform vec4 g_color : source_color;
 uniform vec4 b_color : source_color;
 uniform sampler2D rgb_uv_texture_separator: hint_default_black, repeat_disable;
-
-uniform float opacity = 1.0;
 
 uniform sampler2D normal_map_texture: hint_normal, repeat_enable;
 uniform bool use_normal_map = false;
@@ -26,7 +24,6 @@ void fragment() {
 	if (use_normal_map) {
 		NORMAL_MAP = texture(normal_map_texture, UV).rgb;
 	}
-	ALPHA = opacity;
 }
 
 void light() {

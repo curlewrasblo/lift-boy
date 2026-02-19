@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bqln5jtayrqik"]
 
 [ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_vu5en"]
-[ext_resource type="Material" uid="uid://d2srqqm7of6ub" path="res://materials/elevator_walls.tres" id="2_8oql1"]
+[ext_resource type="Material" uid="uid://ccnt2fbcclisv" path="res://materials/doors_mat.tres" id="2_8oql1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6tfno"]
 size = Vector3(2, 2, 2)
