@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bs2a47kmhrx02"]
 
 [ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_trojg"]
-[ext_resource type="Material" uid="uid://dpum6i1rmauai" path="res://materials/elevator.mat.tres" id="2_f3fnj"]
+[ext_resource type="Material" uid="uid://dpum6i1rmauai" path="res://materials/elevator_mat.tres" id="2_f3fnj"]
 [ext_resource type="Material" uid="uid://ccnt2fbcclisv" path="res://materials/doors_mat.tres" id="3_aqsf0"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]

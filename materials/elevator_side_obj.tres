@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bm10j1w0h1lpv"]
+
+[ext_resource type="Shader" uid="uid://d2meko0xxqqvy" path="res://shaders/characterShader.gdshader" id="1_p85le"]
+
+[sub_resource type="Gradient" id="Gradient_38ntv"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3ugg3"]
+gradient = SubResource("Gradient_38ntv")
+width = 1
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_p85le")
+shader_parameter/r_color = Color(0.42, 0.37589997, 0.33179998, 1)
+shader_parameter/g_color = Color(0, 0, 0, 1)
+shader_parameter/b_color = Color(0, 0, 0, 1)
+shader_parameter/rgb_uv_texture_separator = SubResource("GradientTexture1D_3ugg3")
+shader_parameter/use_normal_map = false
+shader_parameter/shade_steps = 2.6130000291175
+shader_parameter/diffuse_strength = 0.4590000218025
+shader_parameter/specular_strength = 0.0090000004275

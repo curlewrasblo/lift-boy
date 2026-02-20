@@ -2,8 +2,9 @@ extends Node3D
 class_name Liftboy
 
 @export var left_arm_IK_target : Marker3D
-@export var left_arm_IK_modifier : IterateIK3D
+@export var left_arm_IK_modifier : SkeletonModifier3D
 @export var max_y_offset : float = 0.5
+@export var middle_pos : Vector3 = Vector3.ZERO
 
 var press_tween : Tween
 
@@ -24,9 +25,10 @@ func press_button(global_pos : Vector3) -> void:
 
 	left_arm_IK_modifier.active = true
 	press_tween = create_tween().set_ease(Tween.EASE_OUT)
-	press_tween.tween_property(left_arm_IK_target, "global_position", global_pos, 0.16).from(left_arm_IK_target.global_position)
+	press_tween.tween_property(left_arm_IK_target, "position", middle_pos, 0.08).from(left_arm_IK_target.position)
+	press_tween.tween_property(left_arm_IK_target, "global_position", global_pos, 0.08)
 	if should_move_up:
-		press_tween.parallel().tween_property(self, "position:y", original_y_position + y_distance, 0.1).from(original_y_position)
+		press_tween.parallel().tween_property(self, "position:y", original_y_position + y_distance, 0.082).from(original_y_position)
 	press_tween.tween_interval(0.21)
 	press_tween.tween_property(left_arm_IK_target, "global_position", original_left_arm_position, 0.25)
 	if should_move_up:

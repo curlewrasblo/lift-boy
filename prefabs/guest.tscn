@@ -8,7 +8,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vyouj"]
 resource_local_to_scene = true
-render_priority = 0
+render_priority = 1
 shader = ExtResource("3_htqr3")
 shader_parameter/icon_opacity = 0.0
 shader_parameter/billboard = true
@@ -40,14 +40,14 @@ bump_strength = 2.3
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_18ekq")
-shader_parameter/r_color = Color(0.66, 0.44627002, 0.21779999, 1)
-shader_parameter/g_color = Color(0.68, 0.6052, 0.64135337, 1)
-shader_parameter/b_color = Color(0.019500004, 0, 0.09, 1)
+shader_parameter/r_color = Color(0.65882355, 0.44705883, 0.21960784, 1)
+shader_parameter/g_color = Color(0.6784314, 0.6039216, 0.6431373, 1)
+shader_parameter/b_color = Color(0.019607844, 0, 0.09019608, 1)
 shader_parameter/rgb_uv_texture_separator = ExtResource("5_6c7mj")
 shader_parameter/opacity = 1.0
 shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
 shader_parameter/use_normal_map = true
-shader_parameter/shade_steps = 8.0
+shader_parameter/shade_steps = 2.0
 shader_parameter/diffuse_strength = 1.0000000475
 shader_parameter/specular_strength = 0.006000000285
 
@@ -55,14 +55,14 @@ shader_parameter/specular_strength = 0.006000000285
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_18ekq")
-shader_parameter/r_color = Color(0.66, 0.44627002, 0.21779999, 1)
-shader_parameter/g_color = Color(0.68, 0.6052, 0.64135337, 1)
-shader_parameter/b_color = Color(0.019500004, 0, 0.09, 1)
+shader_parameter/r_color = Color(0.65882355, 0.44705883, 0.21960784, 1)
+shader_parameter/g_color = Color(0.6784314, 0.6039216, 0.6431373, 1)
+shader_parameter/b_color = Color(0.019607844, 0, 0.09019608, 1)
 shader_parameter/rgb_uv_texture_separator = ExtResource("5_6c7mj")
 shader_parameter/opacity = 1.0
 shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
 shader_parameter/use_normal_map = true
-shader_parameter/shade_steps = 8.0
+shader_parameter/shade_steps = 2.0
 shader_parameter/diffuse_strength = 1.0000000475
 shader_parameter/specular_strength = 0.006000000285
 
@@ -91,25 +91,25 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_htqr3")
 
-[node name="alien_guest_elevator" parent="." unique_id=259763744 instance=ExtResource("4_vyouj")]
+[node name="alien_guest_elevator" parent="." unique_id=790028358 instance=ExtResource("4_vyouj")]
 transform = Transform3D(0.67, 0, 0, 0, 0.67, 0, 0, 0, 0.67, 0, 0, 0)
 
-[node name="Guest" parent="alien_guest_elevator/Armature/Skeleton3D" parent_id_path=PackedInt32Array(259763744, 1178836160) index="0" unique_id=1716725380]
-material_override = SubResource("ShaderMaterial_bujyp")
+[node name="Guest" parent="alien_guest_elevator/Armature/Skeleton3D" parent_id_path=PackedInt32Array(790028358, 510546264) index="0" unique_id=1112751782]
 cast_shadow = 0
+surface_material_override/0 = SubResource("ShaderMaterial_bujyp")
 
-[node name="alien_guest_floor" parent="." unique_id=1784538766 instance=ExtResource("4_vyouj")]
+[node name="alien_guest_floor" parent="." unique_id=1262111672 instance=ExtResource("4_vyouj")]
 transform = Transform3D(0.67, 0, 0, 0, 0.67, 0, 0, 0, 0.67, 0, 0, 0)
 
-[node name="Guest" parent="alien_guest_floor/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1784538766, 1178836160) index="0" unique_id=1716725380]
+[node name="Guest" parent="alien_guest_floor/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1262111672, 510546264) index="0" unique_id=1112751782]
 layers = 2
-material_override = SubResource("ShaderMaterial_43r8k")
 cast_shadow = 0
+surface_material_override/0 = SubResource("ShaderMaterial_43r8k")
 
-[node name="alien_guest_shadow" parent="." unique_id=260496513 instance=ExtResource("4_vyouj")]
+[node name="alien_guest_shadow" parent="." unique_id=10982391 instance=ExtResource("4_vyouj")]
 transform = Transform3D(0.67, 0, 0, 0, 0.67, 0, 0, 0, 0.67, 0, 0, 0)
 
-[node name="Guest" parent="alien_guest_shadow/Armature/Skeleton3D" parent_id_path=PackedInt32Array(260496513, 1178836160) index="0" unique_id=1716725380]
+[node name="Guest" parent="alien_guest_shadow/Armature/Skeleton3D" parent_id_path=PackedInt32Array(10982391, 510546264) index="0" unique_id=1112751782]
 layers = 3
 cast_shadow = 3
 

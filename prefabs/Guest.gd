@@ -35,10 +35,10 @@ func _ready() -> void:
 	assert(icon_material != null, "Icon material is not a ShaderMaterial")
 	origincal_icon_pos = icon_display.position
 
-	elevator_material = elevator_mesh.material_override as ShaderMaterial
+	elevator_material = elevator_mesh.get_active_material(0) as ShaderMaterial
 	assert(elevator_material != null, "Elevator material is not a ShaderMaterial")
 
-	floor_material = floor_mesh.material_override as ShaderMaterial
+	floor_material = floor_mesh.get_active_material(0) as ShaderMaterial
 	assert(floor_material != null, "Floor material is not a ShaderMaterial")
 
 	icon_display.visible = false

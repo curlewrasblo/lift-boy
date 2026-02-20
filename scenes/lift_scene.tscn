@@ -2,13 +2,17 @@
 
 [ext_resource type="Environment" uid="uid://hkjmpt7k1oa8" path="res://default_environment.tres" id="1_ok3pb"]
 [ext_resource type="Shader" uid="uid://b7puwvw3kt1pk" path="res://scenes/SobelOutlineShader.gdshader" id="2_w4elo"]
-[ext_resource type="Material" uid="uid://dpum6i1rmauai" path="res://materials/elevator.mat.tres" id="3_w4elo"]
+[ext_resource type="PackedScene" uid="uid://cu3v4ku0cbgh7" path="res://lift.glb" id="3_eoqc6"]
+[ext_resource type="Material" uid="uid://dpum6i1rmauai" path="res://materials/elevator_mat.tres" id="3_w4elo"]
 [ext_resource type="Material" uid="uid://dy7mnuivkmjns" path="res://materials/elevator_moving_mat.tres" id="4_r2n18"]
 [ext_resource type="Material" uid="uid://ccnt2fbcclisv" path="res://materials/doors_mat.tres" id="4_w4elo"]
 [ext_resource type="Script" uid="uid://dftoeuggt3dhi" path="res://scenes/LiftController.gd" id="5_5djdf"]
 [ext_resource type="PackedScene" uid="uid://dquyd4j8v6iv6" path="res://prefabs/lift_button.tscn" id="5_6v0m2"]
+[ext_resource type="Material" uid="uid://b5l3p5b82l4ys" path="res://materials/elevator_dark_mat.tres" id="5_u6h0e"]
 [ext_resource type="Script" uid="uid://d2hm1elr1s86b" path="res://scenes/LiftPlayer.gd" id="6_lsh4v"]
 [ext_resource type="Script" uid="uid://c1o8smjuxcnum" path="res://scenes/LiftMark.gd" id="6_pan36"]
+[ext_resource type="Material" uid="uid://bm10j1w0h1lpv" path="res://materials/elevator_side_obj.tres" id="7_chv4t"]
+[ext_resource type="ArrayMesh" uid="uid://cd4mcdkox1w0j" path="res://button_mesh.tres" id="7_e203u"]
 [ext_resource type="Script" uid="uid://d2gjextgphvai" path="res://scenes/GameManager.gd" id="8_qhcon"]
 [ext_resource type="Script" uid="uid://bc150812egh8j" path="res://scenes/RoomManager.gd" id="9_6v0m2"]
 [ext_resource type="Texture2D" uid="uid://b61jj1gwydbql" path="res://icon.svg" id="10_507rt"]
@@ -54,15 +58,6 @@ shader_parameter/edge_width = 0.59200002486012
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_r2n18"]
-size = Vector3(3.2, 0.1, 1.6)
-
-[sub_resource type="BoxMesh" id="BoxMesh_vd2jk"]
-size = Vector3(1.6, 2.84, 0.3)
-
-[sub_resource type="BoxMesh" id="BoxMesh_1fyo0"]
-size = Vector3(1.589, 2.84, 0.18)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0gm50"]
 shading_mode = 0
 diffuse_mode = 3
@@ -75,68 +70,51 @@ albedo_color = Color(0.06, 0.05375, 0.044999998, 1)
 [sub_resource type="QuadMesh" id="QuadMesh_1fyo0"]
 size = Vector2(6.4, 4)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_w4elo"]
+top_radius = 0.2
+bottom_radius = 0.2
+radial_segments = 12
+rings = 1
+cap_bottom = false
+
 [sub_resource type="Animation" id="Animation_5djdf"]
 resource_name = "LiftDoorOpen"
 length = 3.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ElevatorOrigin/ElevatorVisuals/Door/DoorLeft:position")
+tracks/0/path = NodePath("ElevatorOrigin/ElevatorVisuals/BehindDoorBlockerQuad:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.03, 1.7, 3.05),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.56666666),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.4, 1.4, -0.87), Vector3(-0.4, 1.4, -0.87), Vector3(-0.532, 1.4, -0.87), Vector3(-1.539, 1.4, -0.87)]
+"values": [Vector3(0.63855314, 1.2599237, -1.1652715), Vector3(0.63855314, -2.0702605, -1.1652715)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ElevatorOrigin/ElevatorVisuals/Door/DoorRight:position")
+tracks/1/path = NodePath("ElevatorOrigin/ElevatorVisuals/lift/LiftDoor:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.03, 1.7, 3.05),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.56666666, 1.3860176, 1.7333335, 3.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(1.2, 1.4, -0.87), Vector3(1.2, 1.4, -0.87), Vector3(1.308, 1.4, -0.87), Vector3(2.297, 1.4, -0.87)]
+"values": [Vector3(0.48249033, 1.0233474, -0.87390137), Vector3(0.48249033, 1.0233474, -0.87390137), Vector3(0.482, 1.207, -0.909), Vector3(0.482, 1.225, -1.563), Vector3(-0.761, 2.594, -2.528)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ElevatorOrigin/ElevatorVisuals/Door/Quad:position")
+tracks/2/path = NodePath("ElevatorOrigin/ElevatorVisuals/lift/LiftDoor:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(-0.033333335, 0, 0.9266666),
+"times": PackedFloat32Array(0, 1.7, 3.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 1.348, -0.89040565), Vector3(0, 1.348, -0.7821667), Vector3(0, -2.064324, -0.7821667)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ElevatorOrigin/ElevatorVisuals/Door/DoorLeft:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1.03, 1.1666666, 1.3053033, 1.4666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, -0.012217305), Vector3(0, 0, 0.008726646), Vector3(0, 0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("ElevatorOrigin/ElevatorVisuals/Door/DoorRight:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 1, 1.1333333, 1.2666667, 1.4333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0.012217305), Vector3(0, 0, -0.008726646), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.58119464, 1.4713125, 0.5427974)]
 }
 
 [sub_resource type="Animation" id="Animation_lsh4v"]
@@ -144,58 +122,34 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ElevatorOrigin/ElevatorVisuals/Door/DoorLeft:position")
+tracks/0/path = NodePath("ElevatorOrigin/ElevatorVisuals/BehindDoorBlockerQuad:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.4, 1.4, -0.87)]
+"values": [Vector3(0.63855314, 1.2599237, -1.1652715)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ElevatorOrigin/ElevatorVisuals/Door/DoorRight:position")
+tracks/1/path = NodePath("ElevatorOrigin/ElevatorVisuals/lift/LiftDoor:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(1.2, 1.4, -0.87)]
+"values": [Vector3(0.48249033, 1.0233474, -0.87390137)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ElevatorOrigin/ElevatorVisuals/Door/Quad:position")
+tracks/2/path = NodePath("ElevatorOrigin/ElevatorVisuals/lift/LiftDoor:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 1.348, -0.7821667)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ElevatorOrigin/ElevatorVisuals/Door/DoorLeft:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("ElevatorOrigin/ElevatorVisuals/Door/DoorRight:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -235,16 +189,22 @@ point_count = 4
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0jfjd"]
 shader = ExtResource("35_qyj5y")
 shader_parameter/color = Color(0.050980393, 0.050980393, 0.050980393, 1)
-shader_parameter/width = 6.000000285
+shader_parameter/width = 0.0
 shader_parameter/pattern = 1
 shader_parameter/inside = false
 shader_parameter/add_margins = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n6p47"]
-bg_color = Color(0.6399, 0.81, 0.73629, 1)
+bg_color = Color(0.49699998, 0.71, 0.6177, 1)
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.06, 0.06, 0.06, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qyj5y"]
-bg_color = Color(0.14080001, 0.64, 0.49856, 1)
+bg_color = Color(0.07058824, 0.50980395, 0.34901962, 1)
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.06, 0.06, 0.06, 1)
 
 [node name="Game" type="Node3D" unique_id=1793653158]
 
@@ -268,103 +228,149 @@ mesh = SubResource("QuadMesh_5mvw7")
 
 [node name="ElevatorVisuals" type="Node3D" parent="ElevatorOrigin" unique_id=2024409345]
 
-[node name="floor" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1803129365]
-transform = Transform3D(0.9999996, 0.0005967464, -0.00072948425, -0.0005967486, 0.9999998, -3.0763483e-06, 0.0007294824, 3.4852999e-06, 0.99999976, 0, -0.05, 0)
-material_override = ExtResource("3_w4elo")
-mesh = SubResource("BoxMesh_r2n18")
+[node name="lift" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1239071263 instance=ExtResource("3_eoqc6")]
 
-[node name="ceiling" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=328127996]
-transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 2.84, 0)
+[node name="BoyDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="0" unique_id=1144416654]
+material_override = ExtResource("4_w4elo")
+
+[node name="Lift" parent="ElevatorOrigin/ElevatorVisuals/lift" index="1" unique_id=129340244]
 material_override = ExtResource("3_w4elo")
+
+[node name="LiftDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="2" unique_id=960699246]
+transform = Transform3D(0.9816611, 0, 0, 0, 0.98166084, 0, 0, 0, 1.6239326, 0.48249033, 1.0233474, -0.87390137)
+material_override = ExtResource("4_w4elo")
+
+[node name="FrontViewQuad" parent="ElevatorOrigin/ElevatorVisuals/lift" index="3" unique_id=717800495]
+material_override = ExtResource("4_r2n18")
 cast_shadow = 0
-mesh = SubResource("BoxMesh_r2n18")
 
-[node name="Wall" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1776640702]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -1.62, 1.394, 0)
-material_override = ExtResource("3_w4elo")
-mesh = SubResource("BoxMesh_r2n18")
+[node name="ButtonBackground" parent="ElevatorOrigin/ElevatorVisuals/lift" index="4" unique_id=642498938]
+material_override = ExtResource("7_chv4t")
 
-[node name="Wall2" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=349330501]
-transform = Transform3D(4.371139e-08, -1, 8.742278e-08, -1, -4.371139e-08, 0, 3.821371e-15, -8.742278e-08, -1, 1.62, 1.394, 0)
-material_override = ExtResource("3_w4elo")
-mesh = SubResource("BoxMesh_r2n18")
+[node name="ButtonVisual" parent="ElevatorOrigin/ElevatorVisuals/lift" index="5" unique_id=742591336]
+visible = false
+mesh = ExtResource("7_e203u")
 
-[node name="wall_door_left" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1238298823]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52, 1.4, -0.9)
-material_override = ExtResource("3_w4elo")
-mesh = SubResource("BoxMesh_vd2jk")
-
-[node name="wall_door_right" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=319295556]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.285, 1.4, -0.9)
-material_override = ExtResource("3_w4elo")
-mesh = SubResource("BoxMesh_vd2jk")
-
-[node name="wall_door_top" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1184461502]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.425, 3.225, -0.9)
-material_override = ExtResource("3_w4elo")
-mesh = SubResource("BoxMesh_vd2jk")
-
-[node name="Door" type="Node3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=526448821]
-
-[node name="DoorLeft" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/Door" unique_id=745628879]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, -0.4, 1.4, -0.87)
-material_override = ExtResource("4_w4elo")
-mesh = SubResource("BoxMesh_1fyo0")
-
-[node name="DoorRight" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/Door" unique_id=1172223211]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 1.4, -0.87)
-material_override = ExtResource("4_w4elo")
-mesh = SubResource("BoxMesh_1fyo0")
-
-[node name="Quad" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/Door" unique_id=1837153849]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.348, -0.7821667)
+[node name="BehindDoorBlockerQuad" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1837153849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63855314, 1.2599237, -1.1652715)
 material_override = SubResource("StandardMaterial3D_0gm50")
 cast_shadow = 0
 mesh = SubResource("QuadMesh_1fyo0")
 
-[node name="Buttons" type="Node3D" parent="ElevatorOrigin" unique_id=1793679986]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.86, 1.36, -0.742)
+[node name="toppipes" type="Node3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1008635438]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 2.835, 0)
 
-[node name="Button7" parent="ElevatorOrigin/Buttons" unique_id=1368189836 instance=ExtResource("5_6v0m2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+[node name="pipe5" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/toppipes" unique_id=102960708]
+transform = Transform3D(2, 0, 0, 0, 0.99604106, 0.062314898, 0, -0.08889429, 0.6982248, 0, -1.077, 0.86)
+material_override = ExtResource("5_u6h0e")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_w4elo")
+
+[node name="pipe7" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/toppipes" unique_id=1007943036]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.5, -1.3028063, -1.0800002, 0.771)
+material_override = ExtResource("5_u6h0e")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_w4elo")
+
+[node name="pipe8" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/toppipes" unique_id=2090457777]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -1.0178062, -1.0800002, 0.772)
+material_override = ExtResource("5_u6h0e")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_w4elo")
+
+[node name="pipe9" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/toppipes" unique_id=487657436]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.5, 1.2509933, -1.0799999, 0.766)
+material_override = ExtResource("5_u6h0e")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_w4elo")
+
+[node name="pipe10" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/toppipes" unique_id=776872081]
+transform = Transform3D(0.6, 0, 0, 0, 1, 0, 0, 0, 0.5, 0.99099326, -1.0799999, 0.736)
+material_override = ExtResource("5_u6h0e")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_w4elo")
+
+[node name="bottompipes" type="Node3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1388301039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.043, 0)
+
+[node name="pipe2" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/bottompipes" unique_id=548871696]
+transform = Transform3D(2, 0, 0, 0, 0.99604106, 0.12578543, 0, -0.08889429, 1.4093981, 0, -1.089, 0.766)
+material_override = ExtResource("5_u6h0e")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_w4elo")
+
+[node name="pipe7" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/bottompipes" unique_id=1962246999]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.5, -1.2999415, -1.08, 0.771)
+material_override = ExtResource("5_u6h0e")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_w4elo")
+
+[node name="pipe8" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/bottompipes" unique_id=499973735]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -1.0149415, -1.08, 0.772)
+material_override = ExtResource("5_u6h0e")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_w4elo")
+
+[node name="pipe9" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/bottompipes" unique_id=1920738963]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.5, 1.2742813, -1.08, 0.766)
+material_override = ExtResource("5_u6h0e")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_w4elo")
+
+[node name="pipe10" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/bottompipes" unique_id=172838764]
+transform = Transform3D(0.6, 0, 0, 0, 1, 0, 0, 0, 0.5, 1.0142813, -1.08, 0.736)
+material_override = ExtResource("5_u6h0e")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_w4elo")
+
+[node name="Buttons" type="Node3D" parent="ElevatorOrigin" unique_id=1793679986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.76, 1.36, -0.742)
+
+[node name="WinButton" parent="ElevatorOrigin/Buttons" unique_id=1368189836 instance=ExtResource("5_6v0m2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61, 0)
+my_floor = 7
+
+[node name="Button7" parent="ElevatorOrigin/Buttons" unique_id=919882734 instance=ExtResource("5_6v0m2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43, 0)
 my_floor = 6
 
 [node name="Button6" parent="ElevatorOrigin/Buttons" unique_id=2001615374 instance=ExtResource("5_6v0m2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 my_floor = 5
 
 [node name="Button5" parent="ElevatorOrigin/Buttons" unique_id=1393037278 instance=ExtResource("5_6v0m2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07, 0)
 my_floor = 4
 
 [node name="Button4" parent="ElevatorOrigin/Buttons" unique_id=1714293738 instance=ExtResource("5_6v0m2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14999998, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11, 0)
 my_floor = 3
 
 [node name="Button3" parent="ElevatorOrigin/Buttons" unique_id=2104775052 instance=ExtResource("5_6v0m2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.30000007, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29, 0)
 my_floor = 2
 
 [node name="Button2" parent="ElevatorOrigin/Buttons" unique_id=1073964776 instance=ExtResource("5_6v0m2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.47, 0)
 my_floor = 1
 
 [node name="Button1" parent="ElevatorOrigin/Buttons" unique_id=935814618 instance=ExtResource("5_6v0m2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0)
 
 [node name="marks" type="Node3D" parent="ElevatorOrigin" unique_id=1430355615]
 
 [node name="guest_mark1" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=618958572]
-transform = Transform3D(-1, 0, 5.9604645e-08, 0, 1, 0, -5.9604645e-08, 0, -1, 0.5469879, 0, 0.24000001)
+transform = Transform3D(-0.994271, 0, -0.10688875, 0, 1, 0, 0.10688875, 0, -0.994271, 0.62622046, 0, 0.21590614)
 script = ExtResource("6_pan36")
 metadata/_custom_type_script = "uid://c1o8smjuxcnum"
 
 [node name="guest_mark2" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=176184212]
-transform = Transform3D(-0.9659258, 0, -0.25881913, 0, 1, 0, 0.25881913, 0, -0.9659258, 1.1924745, 0, -0.099289335)
+transform = Transform3D(-0.13004154, 0, -0.9915086, 0, 1, 0, 0.9915086, 0, -0.13004154, 1.340641, 0, -0.16417158)
 script = ExtResource("6_pan36")
 metadata/_custom_type_script = "uid://c1o8smjuxcnum"
 
 [node name="guest_mark3" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=567207253]
-transform = Transform3D(-0.9848077, 0, 0.17364825, 0, 1, 0, -0.17364825, 0, -0.9848077, -0.14751408, 0, -0.24277578)
+transform = Transform3D(-0.911274, 0, 0.4118008, 0, 1, 0, -0.4118008, 0, -0.911274, -0.14253017, 0, -0.24277578)
 script = ExtResource("6_pan36")
 metadata/_custom_type_script = "uid://c1o8smjuxcnum"
 
@@ -386,7 +392,7 @@ omni_range = 3.0
 omni_attenuation = 0.5
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Lights" unique_id=1918523181]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.865, 1.08, -0.345)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.765, 1.08, -0.345)
 light_color = Color(0.89, 1, 0.8, 1)
 light_energy = 0.42
 light_specular = 0.0
@@ -397,6 +403,18 @@ omni_attenuation = 0.42
 transform = Transform3D(0.949417, -0.061658088, 0.30790532, -0.0067613088, 0.9762923, 0.216351, -0.31394535, -0.20748916, 0.92649156, -0.123316176, 3.210105, 1.0672958)
 light_color = Color(0.80099994, 0.8366, 0.89, 1)
 light_cull_mask = 4294967293
+shadow_opacity = 0.36
+shadow_blur = 2.808
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 10.0
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="Lights" unique_id=1650152383]
+transform = Transform3D(0.949417, -0.061658088, 0.30790532, -0.0067613088, 0.9762923, 0.216351, -0.31394535, -0.20748916, 0.92649156, -0.123316176, 3.210105, 1.0672958)
+layers = 4
+light_color = Color(0.9, 0.94, 1, 1)
+light_energy = 8.396
+light_negative = true
+light_cull_mask = 4294967292
 shadow_opacity = 0.36
 shadow_blur = 2.808
 directional_shadow_blend_splits = true
@@ -413,32 +431,6 @@ shadow_caster_mask = 4294967293
 directional_shadow_blend_splits = true
 directional_shadow_max_distance = 10.0
 
-[node name="Croppers" type="Node3D" parent="." unique_id=15878648]
-
-[node name="Quad" type="MeshInstance3D" parent="Croppers" unique_id=2145156352]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0009236336, -2.0747666, 0.8208218)
-material_override = ExtResource("4_r2n18")
-cast_shadow = 0
-mesh = SubResource("QuadMesh_1fyo0")
-
-[node name="Quad4" type="MeshInstance3D" parent="Croppers" unique_id=44463397]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.854184, 0.823)
-material_override = ExtResource("4_r2n18")
-cast_shadow = 0
-mesh = SubResource("QuadMesh_1fyo0")
-
-[node name="Quad2" type="MeshInstance3D" parent="Croppers" unique_id=382198572]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 3.65, 1.435, 0.823)
-material_override = ExtResource("4_r2n18")
-cast_shadow = 0
-mesh = SubResource("QuadMesh_1fyo0")
-
-[node name="Quad3" type="MeshInstance3D" parent="Croppers" unique_id=1391194555]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -3.65, 1.435, 0.823)
-material_override = ExtResource("4_r2n18")
-cast_shadow = 0
-mesh = SubResource("QuadMesh_1fyo0")
-
 [node name="LiftController" type="Node" parent="." unique_id=1114785045 node_paths=PackedStringArray("room_manager", "liftboy", "lift_player", "lift_button_parent", "background_quad", "camera")]
 script = ExtResource("5_5djdf")
 time_to_reach_full_speed = 1.9
@@ -447,7 +439,7 @@ room_manager = NodePath("../RoomManager")
 liftboy = NodePath("../liftboy")
 lift_player = NodePath("../LiftPlayer")
 lift_button_parent = NodePath("../ElevatorOrigin/Buttons")
-background_quad = NodePath("../Croppers/Quad")
+background_quad = NodePath("../ElevatorOrigin/ElevatorVisuals/lift/FrontViewQuad")
 shader_move_max_speed = 2.4
 camera = NodePath("../Camera3D")
 camera_shake_intensity = Vector2(0.007, 0.02)
@@ -456,7 +448,7 @@ metadata/_custom_type_script = "uid://dftoeuggt3dhi"
 
 [node name="LiftPlayer" type="AnimationPlayer" parent="." unique_id=1824682290]
 libraries/ = SubResource("AnimationLibrary_50d5g")
-speed_scale = 1.3
+speed_scale = 1.15
 script = ExtResource("6_lsh4v")
 open_door_anim = &"LiftDoorOpen"
 metadata/_custom_type_script = "uid://d2hm1elr1s86b"
@@ -469,10 +461,10 @@ lift_controller = NodePath("../LiftController")
 room_manager = NodePath("../RoomManager")
 guest_spawner = NodePath("../GuestSpawner")
 vibe_manager = NodePath("../VibeManager")
-chance_to_spawn_one_guest = 0.33
-chance_to_spawn_two_guests = 0.33
+chance_to_spawn_one_guest = 0.25
+chance_to_spawn_two_guests = 0.5
 show_complicated_icons_threshold = 4
-two_guest_spawn_threshold = 8
+two_guest_spawn_threshold = 7
 buttons_five_to_seven = 13
 metadata/_custom_type_script = "uid://d2gjextgphvai"
 
@@ -490,16 +482,16 @@ metadata/_custom_type_script = "uid://cy5b2yb4a5a1t"
 
 [node name="RoomManager" type="Node" parent="." unique_id=446105328 node_paths=PackedStringArray("all_rooms")]
 script = ExtResource("9_6v0m2")
-all_rooms = [NodePath("../rooms/room_entrance"), NodePath("../rooms/room_1"), NodePath("../rooms/room_2"), NodePath("../rooms/room_3"), NodePath("../rooms/room_4"), NodePath("../rooms/room_5"), NodePath("../rooms/room_4")]
-icons_per_room = Array[Texture2D]([ExtResource("13_cge54"), ExtResource("14_qyj5y"), ExtResource("15_0jfjd"), ExtResource("16_n6p47"), ExtResource("17_5mvw7"), ExtResource("13_jybhw"), ExtResource("10_507rt")])
-icons_per_floor = Array[Texture2D]([ExtResource("20_w4elo"), ExtResource("21_u6h0e"), ExtResource("22_eoqc6"), ExtResource("23_e203u"), ExtResource("24_chv4t"), ExtResource("25_g0xgo"), ExtResource("26_66li0")])
+all_rooms = [NodePath("../rooms/room_entrance"), NodePath("../rooms/room_1"), NodePath("../rooms/room_2"), NodePath("../rooms/room_3"), NodePath("../rooms/room_4"), NodePath("../rooms/room_5"), NodePath("../rooms/room_4"), NodePath("../rooms/room_entrance")]
+icons_per_room = Array[Texture2D]([ExtResource("13_cge54"), ExtResource("14_qyj5y"), ExtResource("15_0jfjd"), ExtResource("16_n6p47"), ExtResource("17_5mvw7"), ExtResource("13_jybhw"), ExtResource("10_507rt"), ExtResource("10_507rt")])
+icons_per_floor = Array[Texture2D]([ExtResource("20_w4elo"), ExtResource("21_u6h0e"), ExtResource("22_eoqc6"), ExtResource("23_e203u"), ExtResource("24_chv4t"), ExtResource("25_g0xgo"), ExtResource("26_66li0"), ExtResource("10_507rt")])
 metadata/_custom_type_script = "uid://bc150812egh8j"
 
 [node name="VibeManager" type="Node" parent="." unique_id=1974107062 node_paths=PackedStringArray("progress_group", "vibe_progress_bar", "guest_spawner")]
 script = ExtResource("38_5mvw7")
 start_value = 5.0
-progress_group = NodePath("../UI/CanvasGroup/group")
-vibe_progress_bar = NodePath("../UI/CanvasGroup/group/MarginContainer/ProgressBar")
+progress_group = NodePath("../UI/group")
+vibe_progress_bar = NodePath("../UI/group/MarginContainer/ProgressBar")
 bar_move_speed = 2.8
 guest_spawner = NodePath("../GuestSpawner")
 metadata/_custom_type_script = "uid://m3ree1qxpbd2"
@@ -508,7 +500,7 @@ metadata/_custom_type_script = "uid://m3ree1qxpbd2"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
 [node name="liftboy" parent="." unique_id=1727757550 instance=ExtResource("14_rw2bm")]
-transform = Transform3D(0.40779936, -0.06465614, 0.91077936, 0.035112996, 0.99786234, 0.055116374, -0.9123961, 0.009503777, 0.4091979, -1.2291896, 0.016151369, -0.22991446)
+transform = Transform3D(0.6274229, -0.06531799, 0.7759341, 0.034845073, 0.99783254, 0.055821497, -0.77789855, -0.00798621, 0.62833905, -1.079, 0.016, -0.15)
 
 [node name="rooms" type="Node3D" parent="." unique_id=1331285265]
 
@@ -580,9 +572,10 @@ update_scale = false
 [node name="UI" type="CanvasLayer" parent="." unique_id=256539412]
 
 [node name="CanvasGroup" type="CanvasGroup" parent="UI" unique_id=1590669272]
+visible = false
 material = SubResource("ShaderMaterial_0jfjd")
 
-[node name="group" type="Control" parent="UI/CanvasGroup" unique_id=279023383]
+[node name="group" type="Control" parent="UI" unique_id=279023383]
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 0
@@ -592,7 +585,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/CanvasGroup/group" unique_id=1077149448]
+[node name="MarginContainer" type="MarginContainer" parent="UI/group" unique_id=1077149448]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -602,10 +595,10 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 670
 theme_override_constants/margin_right = 670
-theme_override_constants/margin_bottom = 72
+theme_override_constants/margin_bottom = 56
 
-[node name="ProgressBar" type="ProgressBar" parent="UI/CanvasGroup/group/MarginContainer" unique_id=838431391]
-custom_minimum_size = Vector2(0, 36)
+[node name="ProgressBar" type="ProgressBar" parent="UI/group/MarginContainer" unique_id=838431391]
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 2
@@ -615,12 +608,12 @@ step = 0.1
 value = 50.0
 show_percentage = false
 
-[node name="TextureRect" type="TextureRect" parent="UI/CanvasGroup/group" unique_id=419510238]
+[node name="TextureRect" type="TextureRect" parent="UI/group" unique_id=419510238]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 0
-offset_left = 571.00006
-offset_top = 923.00006
-offset_right = 691.00006
+offset_left = 583.00006
+offset_top = 923.0
+offset_right = 703.00006
 offset_bottom = 1063.0
 rotation = -0.1095018
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -630,12 +623,12 @@ texture = ExtResource("36_n6p47")
 expand_mode = 4
 stretch_mode = 4
 
-[node name="TextureRect2" type="TextureRect" parent="UI/CanvasGroup/group" unique_id=237091991]
+[node name="TextureRect2" type="TextureRect" parent="UI/group" unique_id=237091991]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 0
-offset_left = 1227.0
-offset_top = 927.0
-offset_right = 1347.0
+offset_left = 1215.0
+offset_top = 927.00006
+offset_right = 1335.0
 offset_bottom = 1067.0
 rotation = 0.10995574
 pivot_offset_ratio = Vector2(0.5, 0.5)
@@ -644,3 +637,5 @@ size_flags_vertical = 8
 texture = ExtResource("37_5mvw7")
 expand_mode = 4
 stretch_mode = 4
+
+[editable path="ElevatorOrigin/ElevatorVisuals/lift"]

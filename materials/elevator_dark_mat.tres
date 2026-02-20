@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://ccnt2fbcclisv"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b5l3p5b82l4ys"]
 
-[ext_resource type="Shader" uid="uid://d2meko0xxqqvy" path="res://shaders/characterShader.gdshader" id="1_v8bdm"]
+[ext_resource type="Shader" uid="uid://d2meko0xxqqvy" path="res://shaders/characterShader.gdshader" id="1_7oerv"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_fqf0x"]
 noise_type = 4
@@ -28,13 +28,13 @@ width = 1
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_v8bdm")
-shader_parameter/r_color = Color(0.72, 0.67032003, 0.5544, 1)
+shader = ExtResource("1_7oerv")
+shader_parameter/r_color = Color(0.0165, 0.01, 0.04, 1)
 shader_parameter/g_color = Color(0, 0, 0, 1)
 shader_parameter/b_color = Color(0, 0, 0, 1)
 shader_parameter/rgb_uv_texture_separator = SubResource("GradientTexture1D_3ugg3")
 shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_qg6mt")
 shader_parameter/use_normal_map = false
-shader_parameter/shade_steps = 8.0
-shader_parameter/diffuse_strength = 0.9670000459325
-shader_parameter/specular_strength = 0.0070000003325
+shader_parameter/shade_steps = 7.546000263435
+shader_parameter/diffuse_strength = 1.2810000608475
+shader_parameter/specular_strength = 0.002000000095
