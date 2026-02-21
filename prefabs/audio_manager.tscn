@@ -6,7 +6,6 @@
 [ext_resource type="AudioStream" uid="uid://taifeekcexmq" path="res://sounds/lift_doors_close.wav" id="4_aymke"]
 [ext_resource type="AudioStream" uid="uid://df11t3lmcxaxf" path="res://sounds/guest_voice_1.wav" id="5_4jimw"]
 [ext_resource type="AudioStream" uid="uid://cev4xfu0vs3ca" path="res://sounds/maybe_elevator_loop.wav" id="5_g7wom"]
-[ext_resource type="AudioStream" uid="uid://q7c0dp7g61a" path="res://sounds/guest_voice_2.wav" id="6_xjk7e"]
 [ext_resource type="AudioStream" uid="uid://bu06qejo4lfp2" path="res://sounds/guest_voice_3.wav" id="7_g7wom"]
 [ext_resource type="AudioStream" uid="uid://cb58am05jypw5" path="res://sounds/guest_kill.wav" id="8_xjk7e"]
 
@@ -19,10 +18,9 @@ stream_0/stream = ExtResource("2_dn1u1")
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xqjjb"]
 random_pitch = 1.0594631
 random_volume_offset_db = 1.0
-streams_count = 3
+streams_count = 2
 stream_0/stream = ExtResource("5_4jimw")
-stream_1/stream = ExtResource("6_xjk7e")
-stream_2/stream = ExtResource("7_g7wom")
+stream_1/stream = ExtResource("7_g7wom")
 
 [node name="audio_manager" type="Node" unique_id=1174426720 node_paths=PackedStringArray("sound_lift_press", "sound_lift_doors_open", "sound_lift_doors_close", "sound_lift_move", "sound_guest_speak", "sound_guest_kill")]
 script = ExtResource("1_hju6s")
@@ -55,7 +53,7 @@ bus = &"Sfx"
 
 [node name="guest_speak" type="AudioStreamPlayer" parent="guest_sounds" unique_id=1106898164]
 stream = SubResource("AudioStreamRandomizer_xqjjb")
-volume_db = -12.0
+volume_db = -15.0
 bus = &"Sfx"
 
 [node name="guest_kill" type="AudioStreamPlayer" parent="guest_sounds" unique_id=556680635]
