@@ -2,7 +2,7 @@ extends Node
 class_name GuestSpawner
 
 signal on_stopped_at_wrong_floor()
-signal on_stopped_at_correct_floor()
+signal on_stopped_at_correct_floor(guest_count: int)
 
 @export var guest_scene: PackedScene
 
@@ -44,23 +44,21 @@ func handle_guests_in_elevator_when_arriving_to_floor(new_floor: int) -> bool:
 		print("No guests, who cares about arriving to floor ", new_floor)
 		return false
 
-	var guest_got_off_here: bool = false
-
-	var first_stop
+	var guest_got_off_here: int = 0
 
 	while spawned_guests_per_wanted_floor[new_floor].size() > 0:
 		var guest = spawned_guests_per_wanted_floor[new_floor].pop_front()
 		assert(guest != null, "Popped null guest from empty list")
 		_move_guest_out_of_elevator(guest)
-		guest_got_off_here = true
+		guest_got_off_here += 1
+		current_guest_count -= 1
 		await get_tree().create_timer(guest_move_time_on_lift_path * 0.8).timeout
 	
-	await get_tree().create_timer(guest_move_time_on_lift_path * 0.05).timeout
+	await get_tree().create_timer(guest_move_time_on_lift_path * 0.5).timeout
 
-	if guest_got_off_here:
+	if guest_got_off_here > 0:
 		print("You did good kid!")
-		current_guest_count -= 1
-		on_stopped_at_correct_floor.emit()
+		on_stopped_at_correct_floor.emit(guest_got_off_here)
 	else:
 		print("Dude wrong floor!")
 		on_stopped_at_wrong_floor.emit()

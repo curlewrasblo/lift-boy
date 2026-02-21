@@ -73,13 +73,13 @@ func _ready() -> void:
 			lift_buttons.append(button)
 			button.button_pressed.connect(_on_button_pressed)
 			button.set_current_floor(false)
+			button.set_activated(false)
 
 			if is_room_manager_ready:
 				var icon = room_manager.get_icon_for_floor(button.my_floor, true)
 				button.set_symbol(icon)
 
 			buttons[button.my_floor] = button
-			button.set_activated(button.my_floor <= 3)
 
 	buttons[current_floor].set_current_floor(true)
 
@@ -89,7 +89,8 @@ func activate_buttons_up_to_floor(to_floor: int) -> void:
 	if is_activating_buttons:
 		return
 	is_activating_buttons = true
-	for button in lift_buttons:
+	for i: int in range(lift_buttons.size()):
+		var button = lift_buttons[lift_buttons.size() - i - 1]
 		if button.my_floor <= to_floor and !button.is_activated:
 			button.set_activated(true)
 			var tween = create_tween().set_ease(Tween.EASE_IN_OUT)

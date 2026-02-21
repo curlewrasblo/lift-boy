@@ -17,8 +17,6 @@ class_name GameManager
 @export_subgroup("Progression Thresholds")
 @export var show_complicated_icons_threshold: int = 3
 @export var two_guest_spawn_threshold: int = 6
-@export var buttons_five_to_seven: int = 12
-
 
 var floors_visited: Dictionary[int, int] = {}
 
@@ -44,8 +42,24 @@ func _ready() -> void:
 	vibe_manager.on_defeated.connect(_on_vibe_defeated)
 	vibe_manager.on_victory.connect(_on_vibe_victory)
 
+	ProgressionSystem.on_level_increased.connect(_on_level_increased)
+
 	for i in range(lift_controller.get_floor_amount()):
 		floors_visited[i] = 0
+	
+	_handle_start_buttons_activation()
+
+
+func _handle_start_buttons_activation() -> void:
+	if ProgressionSystem.current_level == 1:
+		lift_controller.activate_buttons_up_to_floor(3)
+		progression = 0
+	elif ProgressionSystem.current_level == 2:
+		lift_controller.activate_buttons_up_to_floor(6)
+		progression = 10
+
+func _on_level_increased() -> void:
+	_handle_start_buttons_activation()
 
 func _on_vibe_defeated() -> void:
 	is_defeated = true
@@ -98,10 +112,6 @@ func _handle_guests_in_elevator(new_floor: int) -> void:
 
 func increase_progression(by_amount: int) -> void:
 	progression += by_amount
-	print("Progression: ", progression)
-	if progression >= buttons_five_to_seven:
-		lift_controller.activate_buttons_up_to_floor(7)
-
 
 func _handle_guest_spawning() -> void:
 	if guest_spawner.current_guest_count >= 3 or is_victorious:
@@ -122,7 +132,7 @@ func _handle_guest_spawning() -> void:
 
 	print("Spawning ", amount, " guests")
 	for i in range(amount):
-		if !guest_spawner.has_available_lift_mark():
+		if !guest_spawner.has_available_lift_mark() or is_victorious:
 			break
 		var guest = guest_spawner.spawn_guest()
 		var first_time: bool = floors_visited[guest.wanted_floor] == 0 or progression < show_complicated_icons_threshold

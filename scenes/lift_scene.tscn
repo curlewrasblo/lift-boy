@@ -43,6 +43,8 @@
 [ext_resource type="Texture2D" uid="uid://1chs3ipfjwbs" path="res://textures/listboy_sad.png" id="36_n6p47"]
 [ext_resource type="Texture2D" uid="uid://3017a1s7gt7" path="res://textures/listboy_happy.png" id="37_5mvw7"]
 [ext_resource type="Script" uid="uid://m3ree1qxpbd2" path="res://scenes/VibeManager.gd" id="38_5mvw7"]
+[ext_resource type="Script" uid="uid://yd8n6ugdg1bq" path="res://scenes/ProgressBarKnower.gd" id="42_g0xgo"]
+[ext_resource type="Script" uid="uid://dfxjx2idla5q2" path="res://scenes/NewScoreShowing.gd" id="45_66li0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u6h0e"]
 render_priority = -5
@@ -230,24 +232,24 @@ mesh = SubResource("QuadMesh_5mvw7")
 
 [node name="lift" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1239071263 instance=ExtResource("3_eoqc6")]
 
-[node name="BoyDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="0" unique_id=1144416654]
-material_override = ExtResource("4_w4elo")
-
-[node name="Lift" parent="ElevatorOrigin/ElevatorVisuals/lift" index="1" unique_id=129340244]
+[node name="BoyDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="0" unique_id=1924464739]
 material_override = ExtResource("3_w4elo")
 
-[node name="LiftDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="2" unique_id=960699246]
+[node name="Lift" parent="ElevatorOrigin/ElevatorVisuals/lift" index="1" unique_id=2093266992]
+material_override = ExtResource("3_w4elo")
+
+[node name="LiftDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="2" unique_id=227582236]
 transform = Transform3D(0.9816611, 0, 0, 0, 0.98166084, 0, 0, 0, 1.6239326, 0.48249033, 1.0233474, -0.87390137)
 material_override = ExtResource("4_w4elo")
 
-[node name="FrontViewQuad" parent="ElevatorOrigin/ElevatorVisuals/lift" index="3" unique_id=717800495]
+[node name="FrontViewQuad" parent="ElevatorOrigin/ElevatorVisuals/lift" index="3" unique_id=508169859]
 material_override = ExtResource("4_r2n18")
 cast_shadow = 0
 
-[node name="ButtonBackground" parent="ElevatorOrigin/ElevatorVisuals/lift" index="4" unique_id=642498938]
+[node name="ButtonBackground" parent="ElevatorOrigin/ElevatorVisuals/lift" index="4" unique_id=442570002]
 material_override = ExtResource("7_chv4t")
 
-[node name="ButtonVisual" parent="ElevatorOrigin/ElevatorVisuals/lift" index="5" unique_id=742591336]
+[node name="ButtonVisual" parent="ElevatorOrigin/ElevatorVisuals/lift" index="5" unique_id=1378382665]
 visible = false
 mesh = ExtResource("7_e203u")
 
@@ -434,7 +436,7 @@ directional_shadow_max_distance = 10.0
 [node name="LiftController" type="Node" parent="." unique_id=1114785045 node_paths=PackedStringArray("room_manager", "liftboy", "lift_player", "lift_button_parent", "background_quad", "camera")]
 script = ExtResource("5_5djdf")
 time_to_reach_full_speed = 1.9
-time_between_floors = 1.7
+time_between_floors = 1.55
 room_manager = NodePath("../RoomManager")
 liftboy = NodePath("../liftboy")
 lift_player = NodePath("../LiftPlayer")
@@ -465,7 +467,6 @@ chance_to_spawn_one_guest = 0.25
 chance_to_spawn_two_guests = 0.5
 show_complicated_icons_threshold = 4
 two_guest_spawn_threshold = 7
-buttons_five_to_seven = 13
 metadata/_custom_type_script = "uid://d2gjextgphvai"
 
 [node name="GuestSpawner" type="Node" parent="." unique_id=2101118342 node_paths=PackedStringArray("room_manager", "lift_controller", "lift_mark_parent", "path_parent", "guest_parent")]
@@ -487,12 +488,15 @@ icons_per_room = Array[Texture2D]([ExtResource("13_cge54"), ExtResource("14_qyj5
 icons_per_floor = Array[Texture2D]([ExtResource("20_w4elo"), ExtResource("21_u6h0e"), ExtResource("22_eoqc6"), ExtResource("23_e203u"), ExtResource("24_chv4t"), ExtResource("25_g0xgo"), ExtResource("26_66li0"), ExtResource("10_507rt")])
 metadata/_custom_type_script = "uid://bc150812egh8j"
 
-[node name="VibeManager" type="Node" parent="." unique_id=1974107062 node_paths=PackedStringArray("progress_group", "vibe_progress_bar", "guest_spawner")]
+[node name="VibeManager" type="Node" parent="." unique_id=1974107062 node_paths=PackedStringArray("progress_group", "vibe_progress_bar", "new_score_showers", "guest_spawner")]
 script = ExtResource("38_5mvw7")
 start_value = 5.0
 progress_group = NodePath("../UI/group")
 vibe_progress_bar = NodePath("../UI/group/MarginContainer/ProgressBar")
-bar_move_speed = 2.8
+bar_move_speed = 3.2
+new_score_showers = [NodePath("../UI/group/NewScore"), NodePath("../UI/group/NewScore2"), NodePath("../UI/group/NewScore3")]
+level_1_vibe_max_value = 30.0
+level_2_vibe_max_value = 45.0
 guest_spawner = NodePath("../GuestSpawner")
 metadata/_custom_type_script = "uid://m3ree1qxpbd2"
 
@@ -604,9 +608,11 @@ size_flags_vertical = 8
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_n6p47")
 theme_override_styles/fill = SubResource("StyleBoxFlat_qyj5y")
+max_value = 50.0
 step = 0.1
-value = 50.0
+value = 3.0
 show_percentage = false
+script = ExtResource("42_g0xgo")
 
 [node name="TextureRect" type="TextureRect" parent="UI/group" unique_id=419510238]
 custom_minimum_size = Vector2(120, 120)
@@ -614,7 +620,7 @@ layout_mode = 0
 offset_left = 583.00006
 offset_top = 923.0
 offset_right = 703.00006
-offset_bottom = 1063.0
+offset_bottom = 1063.0004
 rotation = -0.1095018
 pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 0
@@ -637,5 +643,86 @@ size_flags_vertical = 8
 texture = ExtResource("37_5mvw7")
 expand_mode = 4
 stretch_mode = 4
+
+[node name="NewScore" type="RichTextLabel" parent="UI/group" unique_id=370391458 node_paths=PackedStringArray("progress_bar_knower")]
+custom_minimum_size = Vector2(150, 72)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = 413.0
+offset_right = 149.0
+offset_bottom = 485.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.07058824, 0.50980395, 0.34901962, 1)
+theme_override_font_sizes/bold_font_size = 42
+bbcode_enabled = true
+text = "[b]+50"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+vertical_alignment = 1
+script = ExtResource("45_66li0")
+progress_bar_knower = NodePath("../MarginContainer/ProgressBar")
+
+[node name="NewScore2" type="RichTextLabel" parent="UI/group" unique_id=103684159 node_paths=PackedStringArray("progress_bar_knower")]
+custom_minimum_size = Vector2(150, 72)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = 413.0
+offset_right = 149.0
+offset_bottom = 485.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.07058824, 0.50980395, 0.34901962, 1)
+theme_override_font_sizes/bold_font_size = 42
+bbcode_enabled = true
+text = "[b]+50"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+vertical_alignment = 1
+script = ExtResource("45_66li0")
+progress_bar_knower = NodePath("../MarginContainer/ProgressBar")
+
+[node name="NewScore3" type="RichTextLabel" parent="UI/group" unique_id=529377022 node_paths=PackedStringArray("progress_bar_knower")]
+custom_minimum_size = Vector2(150, 72)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.0
+offset_top = 413.0
+offset_right = 149.0
+offset_bottom = 485.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.07058824, 0.50980395, 0.34901962, 1)
+theme_override_font_sizes/bold_font_size = 42
+bbcode_enabled = true
+text = "[b]+50"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+vertical_alignment = 1
+script = ExtResource("45_66li0")
+progress_bar_knower = NodePath("../MarginContainer/ProgressBar")
 
 [editable path="ElevatorOrigin/ElevatorVisuals/lift"]
