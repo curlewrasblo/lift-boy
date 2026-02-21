@@ -31,6 +31,7 @@ enum LiftState {
 @export var camera_shake_intensity: Vector2 = Vector2(0.05, 0.05)
 @export var camera_shake_interval: float = 0.1
 
+var is_activated: bool = true
 
 var movement_material: ShaderMaterial
 var shake_timer: float = 0.0
@@ -124,17 +125,23 @@ func _process(delta: float) -> void:
 		if shake_timer >= camera_shake_interval:
 			shake_timer -= camera_shake_interval
 			_camera_shake(moving_factor)
-	elif lift_state == LiftState.Ready:
-		if Input.is_key_pressed(KEY_0):
+	elif lift_state == LiftState.Ready and is_activated:
+		if Input.is_key_pressed(KEY_1):
 			press_button(0)
-		elif Input.is_key_pressed(KEY_1):
-			press_button(1)
 		elif Input.is_key_pressed(KEY_2):
-			press_button(2)
+			press_button(1)
 		elif Input.is_key_pressed(KEY_3):
-			press_button(3)
+			press_button(2)
 		elif Input.is_key_pressed(KEY_4):
+			press_button(3)
+		elif Input.is_key_pressed(KEY_5):
 			press_button(4)
+		elif Input.is_key_pressed(KEY_6):
+			press_button(5)
+		elif Input.is_key_pressed(KEY_7):
+			press_button(6)
+		elif Input.is_key_pressed(KEY_8):
+			press_button(7)
 
 
 func open_doors_on_start(time_before_start: float) -> void:
@@ -149,11 +156,17 @@ func _on_button_pressed(button_floor: int) -> void:
 	press_button(button_floor)
 	liftboy.press_button(buttons[button_floor].global_position)
 
+func deactivate() -> void:
+	is_activated = false
+
 func press_button(elevator_floor: int) -> void:
 	if lift_state != LiftState.Ready:
 		return
 	
 	if current_floor == elevator_floor:
+		return
+	
+	if !is_activated or !buttons[elevator_floor].is_activated:
 		return
 
 	buttons[elevator_floor].set_pressed(true)
@@ -164,6 +177,9 @@ func press_button(elevator_floor: int) -> void:
 		await close_doors()
 		doors_closed = true
 
+	if elevator_floor == 7:
+		deactivate()
+	
 	on_floor_left.emit(current_floor)
 	lift_state = LiftState.Moving
 	print(name, ": Moving to floor ", elevator_floor)

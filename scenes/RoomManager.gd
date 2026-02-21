@@ -15,9 +15,11 @@ func _ready() -> void:
 func _init_rooms() -> void:
 	var available_rooms = all_rooms.duplicate()
 	room_for_floor[0] = available_rooms[0]
+	room_for_floor[7] = available_rooms[available_rooms.size() - 1]
 	available_rooms.remove_at(0)
+	available_rooms.remove_at(available_rooms.size() - 1)
 
-	for i: int in range(1, all_rooms.size()):
+	for i: int in range(1, all_rooms.size() - 1):
 		var random_index = randi() % (available_rooms.size())
 		room_for_floor[i] = available_rooms[random_index]
 		available_rooms.remove_at(random_index)

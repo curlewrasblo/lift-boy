@@ -165,6 +165,42 @@ _data = {
 &"RESET": SubResource("Animation_lsh4v")
 }
 
+[sub_resource type="Animation" id="Animation_5ahvf"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_oomqi"]
+resource_name = "Victory"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.079, 0.016, -0.15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.055850536, 0.890118, 0.03490658)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ahvf"]
+_data = {
+&"RESET": SubResource("Animation_5ahvf"),
+&"Victory": SubResource("Animation_oomqi")
+}
+
 [sub_resource type="Curve3D" id="Curve3D_4dv34"]
 bake_interval = 2.0
 _data = {
@@ -456,10 +492,11 @@ script = ExtResource("6_lsh4v")
 open_door_anim = &"LiftDoorOpen"
 metadata/_custom_type_script = "uid://d2hm1elr1s86b"
 
-[node name="GameManager" type="Node" parent="." unique_id=335729790 node_paths=PackedStringArray("lift_controller", "room_manager", "guest_spawner", "vibe_manager")]
+[node name="GameManager" type="Node" parent="." unique_id=335729790 node_paths=PackedStringArray("liftboy", "lift_controller", "room_manager", "guest_spawner", "vibe_manager")]
 script = ExtResource("8_qhcon")
 time_before_start = 0.1
 time_between_guest_spawns = 0.75
+liftboy = NodePath("../liftboy")
 lift_controller = NodePath("../LiftController")
 room_manager = NodePath("../RoomManager")
 guest_spawner = NodePath("../GuestSpawner")
@@ -470,9 +507,10 @@ show_complicated_icons_threshold = 4
 two_guest_spawn_threshold = 7
 metadata/_custom_type_script = "uid://d2gjextgphvai"
 
-[node name="GuestSpawner" type="Node" parent="." unique_id=2101118342 node_paths=PackedStringArray("kill_mark", "room_manager", "lift_controller", "lift_mark_parent", "path_parent", "guest_parent")]
+[node name="GuestSpawner" type="Node" parent="." unique_id=2101118342 node_paths=PackedStringArray("liftboy", "kill_mark", "room_manager", "lift_controller", "lift_mark_parent", "path_parent", "guest_parent")]
 script = ExtResource("11_drltt")
 guest_scene = ExtResource("11_rw2bm")
+liftboy = NodePath("../liftboy")
 guest_move_time_on_lift_path = 2.8
 guest_move_time_on_mark = 0.6
 kill_mark = NodePath("../ElevatorOrigin/marks/guest_mark1")
@@ -505,8 +543,13 @@ metadata/_custom_type_script = "uid://m3ree1qxpbd2"
 [node name="guests" type="Node3D" parent="." unique_id=794785956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
-[node name="liftboy" parent="." unique_id=1727757550 instance=ExtResource("14_rw2bm")]
-transform = Transform3D(0.6274229, -0.06531799, 0.7759341, 0.034845073, 0.99783254, 0.055821497, -0.77789855, -0.00798621, 0.62833905, -1.079, 0.016, -0.15)
+[node name="liftboy" parent="." unique_id=1727757550 node_paths=PackedStringArray("victory_animator") instance=ExtResource("14_rw2bm")]
+transform = Transform3D(0.30812034, 0, 0.951347, 0, 1, 0, -0.9513473, 0, 0.30812025, -1.1222178, 0.015355182, -0.16674891)
+victory_animator = NodePath("AnimationPlayer")
+victory_anim = &"Victory"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="liftboy" unique_id=744254593]
+libraries/ = SubResource("AnimationLibrary_5ahvf")
 
 [node name="rooms" type="Node3D" parent="." unique_id=1331285265]
 

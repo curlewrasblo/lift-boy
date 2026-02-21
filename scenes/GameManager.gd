@@ -5,7 +5,7 @@ class_name GameManager
 @export var time_before_start: float = 0.2
 @export var time_between_guest_spawns: float = 0.8
 
-
+@export var liftboy: Liftboy
 @export var lift_controller: LiftController
 @export var room_manager: RoomManager
 @export var guest_spawner: GuestSpawner
@@ -67,6 +67,9 @@ func _on_level_increased() -> void:
 	_handle_start_buttons_activation()
 
 func _on_vibe_defeated() -> void:
+	if is_victorious:
+		return
+	
 	is_defeated = true
 	print("Vibe defeated")
 	_face_defeat()
@@ -108,12 +111,24 @@ func _face_defeat() -> void:
 	get_tree().reload_current_scene()
 
 
+func _face_victory() -> void:
+	print(name, ": Victory time!")
+	lift_controller.make_not_ready()
+	await get_tree().create_timer(2.2).timeout
+	await liftboy.play_and_await_victory_animation()
+	await Fader.fade_in()
+	get_tree().quit(0)
+
+
 func _on_doors_opened(opened_floor: int) -> void:
 	print("Doors opened at floor ", opened_floor)
 	if is_defeated:
 		return
 	
-	_handle_guests_in_elevator(opened_floor)
+	if is_victorious and opened_floor == 7:
+		_face_victory()
+	else:
+		_handle_guests_in_elevator(opened_floor)
 
 func _handle_guests_in_elevator(new_floor: int) -> void:
 	var good_floor_for_a_guest: bool = await guest_spawner.handle_guests_in_elevator_when_arriving_to_floor(new_floor)

@@ -6,6 +6,8 @@ signal on_stopped_at_correct_floor(guest_count: int, sick_guest_count: int)
 
 @export var guest_scene: PackedScene
 
+@export var liftboy: Liftboy
+
 @export var guest_move_time_on_lift_path: float = 1.2
 @export var guest_move_time_on_mark: float = 0.72
 @export var kill_mark: LiftMark
@@ -80,6 +82,7 @@ func _move_guest_out_of_elevator(guest: Guest) -> void:
 	assert(lift_path != null, "No available lift path found")
 	assert(lift_path.is_available())
 
+	liftboy.look_at_guest(guest)
 	assert(lift_path.on_path_finished.is_connected(_on_exit_path_finished) == false, "Path already has a connection")
 	lift_path.on_path_finished.connect(_on_exit_path_finished)
 
@@ -103,7 +106,7 @@ func _move_any_guest_into_kill_mark() -> Guest:
 	else:
 		guest = kill_mark.guest
 		assert(guest != null, "Kill mark doesn't have a guest")
-	
+	liftboy.look_at_guest(guest, true)
 	return guest
 	
 
@@ -163,6 +166,7 @@ func _move_guest_to_mark(guest: Guest) -> void:
 	assert(guest_to_mark.has(guest), "Guest doesn't have a mark")
 	var lift_mark = guest_to_mark[guest]
 
+	liftboy.look_at_guest(guest)
 	assert(lift_mark.on_guest_arrived.is_connected(_on_guest_ready_at_mark) == false, "Guest already has a connection")
 	lift_mark.on_guest_arrived.connect(_on_guest_ready_at_mark)
 	lift_mark.walk_to_mark(guest_move_time_on_mark)

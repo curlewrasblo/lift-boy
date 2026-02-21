@@ -20,7 +20,7 @@ var original_z: float
 
 var is_activated: bool = false
 
-var pressed_timer : float =0.0
+var pressed_timer: float = 0.0
 
 
 var symbol_material: ShaderMaterial
