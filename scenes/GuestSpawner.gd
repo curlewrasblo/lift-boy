@@ -2,13 +2,13 @@ extends Node
 class_name GuestSpawner
 
 signal on_stopped_at_wrong_floor()
-signal on_stopped_at_correct_floor(guest_count: int)
+signal on_stopped_at_correct_floor(guest_count: int, sick_guest_count: int)
 
 @export var guest_scene: PackedScene
 
 @export var guest_move_time_on_lift_path: float = 1.2
 @export var guest_move_time_on_mark: float = 0.72
-
+@export var kill_mark: LiftMark
 @export var room_manager: RoomManager
 @export var lift_controller: LiftController
 
@@ -54,14 +54,23 @@ func handle_guests_in_elevator_when_arriving_to_floor(new_floor: int) -> bool:
 		current_guest_count -= 1
 		await get_tree().create_timer(guest_move_time_on_lift_path * 0.8).timeout
 	
+	
 	await get_tree().create_timer(guest_move_time_on_lift_path * 0.5).timeout
 
 	if guest_got_off_here > 0:
 		print("You did good kid!")
-		on_stopped_at_correct_floor.emit(guest_got_off_here)
+		var sick_guests: int = 0
+		for guest in guest_to_mark.keys():
+			assert(guest.wanted_floor != new_floor, "Guest shouldnt exist in elevator list")
+			if (guest.travelled_to_new_wrong_floor()):
+				sick_guests += 1
+
+		on_stopped_at_correct_floor.emit(guest_got_off_here, sick_guests)
 	else:
 		print("Dude wrong floor!")
 		on_stopped_at_wrong_floor.emit()
+		for guest in guest_to_mark.keys():
+			guest.shake_mad()
 	
 	return guest_got_off_here
 
@@ -81,6 +90,22 @@ func _move_guest_out_of_elevator(guest: Guest) -> void:
 	mark.leave_mark()
 	guest_to_mark.erase(guest)
 
+
+func _move_any_guest_into_kill_mark() -> Guest:
+	var guest: Guest = null
+	if kill_mark.is_available():
+		assert(guest_to_mark.size() > 0, "No guests to move into kill mark")
+		guest = guest_to_mark.keys().pick_random()
+		assert(guest != null, "No guest to move into kill mark")
+		kill_mark.take_mark(guest)
+		kill_mark.walk_to_mark(guest_move_time_on_mark)
+		await kill_mark.on_guest_arrived
+	else:
+		guest = kill_mark.guest
+		assert(guest != null, "Kill mark doesn't have a guest")
+	
+	return guest
+	
 
 func _on_exit_path_finished(path: LiftPath, guest: Guest) -> void:
 	path.on_path_finished.disconnect(_on_exit_path_finished)

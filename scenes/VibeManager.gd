@@ -3,6 +3,7 @@ class_name VibeManager
 
 signal on_defeated()
 signal on_victory()
+signal on_prepare_defeat()
 
 @export var start_value: float = 3
 @export var progress_group: CanvasItem
@@ -48,21 +49,21 @@ func _reset_vibe() -> void:
 	_adjust_vibe_to(start_value)
 
 
-func _on_guest_stopped_at_correct_floor(guest_count: int) -> void:
-	var to_value = current_vibe + 5.0 * guest_count
+func _on_guest_stopped_at_correct_floor(guest_count: int, sick_guest_count: int) -> void:
+	var to_value = current_vibe + 5.0 * guest_count - 2.0 * sick_guest_count
 	_adjust_vibe_to(to_value)
 
 func _on_guest_stopped_at_wrong_floor() -> void:
 	var to_value = current_vibe - 15.0
 	_adjust_vibe_to(to_value)
 
-
 func _adjust_vibe_to(to_value: float) -> void:
 	if current_vibe <= 0.0 or current_vibe >= vibe_progress_bar.max_value:
 		return
 
-	if to_value < 0.0:
+	if to_value <= 0.0:
 		to_value = 0.0
+		on_prepare_defeat.emit()
 	elif to_value > vibe_progress_bar.max_value:
 		to_value = vibe_progress_bar.max_value
 

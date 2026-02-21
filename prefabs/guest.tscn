@@ -36,7 +36,7 @@ in_3d_space = true
 as_normal_map = true
 bump_strength = 2.3
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bujyp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18ekq"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_18ekq")
@@ -51,7 +51,7 @@ shader_parameter/shade_steps = 2.0
 shader_parameter/diffuse_strength = 1.0000000475
 shader_parameter/specular_strength = 0.006000000285
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_43r8k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6c7mj"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_18ekq")
@@ -66,13 +66,17 @@ shader_parameter/shade_steps = 2.0
 shader_parameter/diffuse_strength = 1.0000000475
 shader_parameter/specular_strength = 0.006000000285
 
-[node name="guest" type="Node3D" unique_id=1991815137 node_paths=PackedStringArray("icon_display", "elevator_mesh", "floor_mesh", "area_3d")]
+[node name="guest" type="Node3D" unique_id=1991815137 node_paths=PackedStringArray("icon_display", "elevator_mesh", "floor_mesh", "shake_node", "area_3d")]
 script = ExtResource("1_pw4ws")
 icon_display = NodePath("IconDisplay")
 icon_movement = Vector3(0, 0.08, 0)
 icon_tween_duration = 3.2
-elevator_mesh = NodePath("alien_guest_elevator/Armature/Skeleton3D/Guest")
-floor_mesh = NodePath("alien_guest_floor/Armature/Skeleton3D/Guest")
+elevator_mesh = NodePath("shake/alien_guest_elevator/Armature/Skeleton3D/Guest")
+floor_mesh = NodePath("shake/alien_guest_floor/Armature/Skeleton3D/Guest")
+shake_node = NodePath("shake")
+elevator_shake_intensity = Vector2(0.075, 0)
+shake_mad_duration = 1.2
+shake_mad_interval = 0.01
 fade_duration = 0.36
 area_3d = NodePath("Area3D")
 metadata/_custom_type_script = "uid://b2it233ffywls"
@@ -91,28 +95,30 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_htqr3")
 
-[node name="alien_guest_elevator" parent="." unique_id=790028358 instance=ExtResource("4_vyouj")]
+[node name="shake" type="Node3D" parent="." unique_id=1071811708]
+
+[node name="alien_guest_elevator" parent="shake" unique_id=790028358 instance=ExtResource("4_vyouj")]
 transform = Transform3D(0.67, 0, 0, 0, 0.67, 0, 0, 0, 0.67, 0, 0, 0)
 
-[node name="Guest" parent="alien_guest_elevator/Armature/Skeleton3D" parent_id_path=PackedInt32Array(790028358, 510546264) index="0" unique_id=1112751782]
+[node name="Guest" parent="shake/alien_guest_elevator/Armature/Skeleton3D" parent_id_path=PackedInt32Array(790028358, 1549359543) index="0" unique_id=1091880504]
 cast_shadow = 0
-surface_material_override/0 = SubResource("ShaderMaterial_bujyp")
+surface_material_override/0 = SubResource("ShaderMaterial_18ekq")
 
-[node name="alien_guest_floor" parent="." unique_id=1262111672 instance=ExtResource("4_vyouj")]
+[node name="alien_guest_floor" parent="shake" unique_id=1262111672 instance=ExtResource("4_vyouj")]
 transform = Transform3D(0.67, 0, 0, 0, 0.67, 0, 0, 0, 0.67, 0, 0, 0)
 
-[node name="Guest" parent="alien_guest_floor/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1262111672, 510546264) index="0" unique_id=1112751782]
+[node name="Guest" parent="shake/alien_guest_floor/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1262111672, 1549359543) index="0" unique_id=1091880504]
 layers = 2
 cast_shadow = 0
-surface_material_override/0 = SubResource("ShaderMaterial_43r8k")
+surface_material_override/0 = SubResource("ShaderMaterial_6c7mj")
 
-[node name="alien_guest_shadow" parent="." unique_id=10982391 instance=ExtResource("4_vyouj")]
+[node name="alien_guest_shadow" parent="shake" unique_id=10982391 instance=ExtResource("4_vyouj")]
 transform = Transform3D(0.67, 0, 0, 0, 0.67, 0, 0, 0, 0.67, 0, 0, 0)
 
-[node name="Guest" parent="alien_guest_shadow/Armature/Skeleton3D" parent_id_path=PackedInt32Array(10982391, 510546264) index="0" unique_id=1112751782]
+[node name="Guest" parent="shake/alien_guest_shadow/Armature/Skeleton3D" parent_id_path=PackedInt32Array(10982391, 1549359543) index="0" unique_id=1091880504]
 layers = 3
 cast_shadow = 3
 
-[editable path="alien_guest_elevator"]
-[editable path="alien_guest_floor"]
-[editable path="alien_guest_shadow"]
+[editable path="shake/alien_guest_elevator"]
+[editable path="shake/alien_guest_floor"]
+[editable path="shake/alien_guest_shadow"]

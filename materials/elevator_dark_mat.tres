@@ -29,7 +29,7 @@ width = 1
 [resource]
 render_priority = 0
 shader = ExtResource("1_7oerv")
-shader_parameter/r_color = Color(0.0165, 0.01, 0.04, 1)
+shader_parameter/r_color = Color(0.0074999975, 0.005, 0.02, 1)
 shader_parameter/g_color = Color(0, 0, 0, 1)
 shader_parameter/b_color = Color(0, 0, 0, 1)
 shader_parameter/rgb_uv_texture_separator = SubResource("GradientTexture1D_3ugg3")

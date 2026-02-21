@@ -21,7 +21,7 @@ shader_parameter/icon_opacity = 1.0
 shader_parameter/billboard = false
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_dc3an"]
-size = Vector2(0.075, 0.075)
+size = Vector2(0.067, 0.067)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dc3an"]
 render_priority = 0

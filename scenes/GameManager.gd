@@ -28,6 +28,8 @@ var is_defeated: bool = false
 var is_victorious: bool = false
 
 func _ready() -> void:
+	Fader.instant_fade_in()
+
 	guest_spawn_timer = Timer.new()
 	guest_spawn_timer.wait_time = time_between_guest_spawns
 	guest_spawn_timer.one_shot = true
@@ -39,7 +41,7 @@ func _ready() -> void:
 	lift_controller.on_doors_opened.connect(_on_doors_opened)
 	lift_controller.open_doors_on_start(time_before_start)
 
-	vibe_manager.on_defeated.connect(_on_vibe_defeated)
+	vibe_manager.on_prepare_defeat.connect(_on_vibe_defeated)
 	vibe_manager.on_victory.connect(_on_vibe_victory)
 
 	ProgressionSystem.on_level_increased.connect(_on_level_increased)
@@ -47,6 +49,9 @@ func _ready() -> void:
 	for i in range(lift_controller.get_floor_amount()):
 		floors_visited[i] = 0
 	
+	await Fader.fade_out()
+	await get_tree().create_timer(time_before_start).timeout
+
 	_handle_start_buttons_activation()
 
 
@@ -88,7 +93,15 @@ func _face_defeat() -> void:
 	print(name, ": Uh oh defeat time!")
 	lift_controller.make_not_ready()
 	await lift_controller.close_doors()
-	#TODO: Make dude chomp liftboy
+	var guest = await guest_spawner._move_any_guest_into_kill_mark()
+	await get_tree().create_timer(2.2).timeout
+
+	guest.shake_mad()
+	print("CHOMP")
+
+	await get_tree().create_timer(1.5).timeout
+
+	Fader.instant_fade_in()
 
 	await get_tree().create_timer(3.0).timeout
 
@@ -106,6 +119,9 @@ func _handle_guests_in_elevator(new_floor: int) -> void:
 	var good_floor_for_a_guest: bool = await guest_spawner.handle_guests_in_elevator_when_arriving_to_floor(new_floor)
 	if good_floor_for_a_guest:
 		increase_progression(1)
+	
+	if is_defeated:
+		return
 	
 	await _handle_guest_spawning()
 
@@ -132,7 +148,7 @@ func _handle_guest_spawning() -> void:
 
 	print("Spawning ", amount, " guests")
 	for i in range(amount):
-		if !guest_spawner.has_available_lift_mark() or is_victorious:
+		if !guest_spawner.has_available_lift_mark() or is_victorious or is_defeated:
 			break
 		var guest = guest_spawner.spawn_guest()
 		var first_time: bool = floors_visited[guest.wanted_floor] == 0 or progression < show_complicated_icons_threshold

@@ -39,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://d2e3uddhybd1o" path="res://textures/number_5.png" id="24_chv4t"]
 [ext_resource type="Texture2D" uid="uid://qdqy0jfv6o5p" path="res://textures/number_6.png" id="25_g0xgo"]
 [ext_resource type="Texture2D" uid="uid://b1ayomem0q161" path="res://textures/number_7.png" id="26_66li0"]
+[ext_resource type="Texture2D" uid="uid://b4f2toc13c5kg" path="res://textures/number_8.png" id="32_oomqi"]
 [ext_resource type="Shader" uid="uid://ddwluv8bs8rso" path="res://scenes/ui_outline_shader.gdshader" id="35_qyj5y"]
 [ext_resource type="Texture2D" uid="uid://1chs3ipfjwbs" path="res://textures/listboy_sad.png" id="36_n6p47"]
 [ext_resource type="Texture2D" uid="uid://3017a1s7gt7" path="res://textures/listboy_happy.png" id="37_5mvw7"]
@@ -469,11 +470,12 @@ show_complicated_icons_threshold = 4
 two_guest_spawn_threshold = 7
 metadata/_custom_type_script = "uid://d2gjextgphvai"
 
-[node name="GuestSpawner" type="Node" parent="." unique_id=2101118342 node_paths=PackedStringArray("room_manager", "lift_controller", "lift_mark_parent", "path_parent", "guest_parent")]
+[node name="GuestSpawner" type="Node" parent="." unique_id=2101118342 node_paths=PackedStringArray("kill_mark", "room_manager", "lift_controller", "lift_mark_parent", "path_parent", "guest_parent")]
 script = ExtResource("11_drltt")
 guest_scene = ExtResource("11_rw2bm")
 guest_move_time_on_lift_path = 2.8
 guest_move_time_on_mark = 0.6
+kill_mark = NodePath("../ElevatorOrigin/marks/guest_mark1")
 room_manager = NodePath("../RoomManager")
 lift_controller = NodePath("../LiftController")
 lift_mark_parent = NodePath("../ElevatorOrigin/marks")
@@ -485,7 +487,7 @@ metadata/_custom_type_script = "uid://cy5b2yb4a5a1t"
 script = ExtResource("9_6v0m2")
 all_rooms = [NodePath("../rooms/room_entrance"), NodePath("../rooms/room_1"), NodePath("../rooms/room_2"), NodePath("../rooms/room_3"), NodePath("../rooms/room_4"), NodePath("../rooms/room_5"), NodePath("../rooms/room_4"), NodePath("../rooms/room_entrance")]
 icons_per_room = Array[Texture2D]([ExtResource("13_cge54"), ExtResource("14_qyj5y"), ExtResource("15_0jfjd"), ExtResource("16_n6p47"), ExtResource("17_5mvw7"), ExtResource("13_jybhw"), ExtResource("10_507rt"), ExtResource("10_507rt")])
-icons_per_floor = Array[Texture2D]([ExtResource("20_w4elo"), ExtResource("21_u6h0e"), ExtResource("22_eoqc6"), ExtResource("23_e203u"), ExtResource("24_chv4t"), ExtResource("25_g0xgo"), ExtResource("26_66li0"), ExtResource("10_507rt")])
+icons_per_floor = Array[Texture2D]([ExtResource("20_w4elo"), ExtResource("21_u6h0e"), ExtResource("22_eoqc6"), ExtResource("23_e203u"), ExtResource("24_chv4t"), ExtResource("25_g0xgo"), ExtResource("26_66li0"), ExtResource("32_oomqi")])
 metadata/_custom_type_script = "uid://bc150812egh8j"
 
 [node name="VibeManager" type="Node" parent="." unique_id=1974107062 node_paths=PackedStringArray("progress_group", "vibe_progress_bar", "new_score_showers", "guest_spawner")]
