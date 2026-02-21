@@ -165,11 +165,38 @@ _data = {
 &"RESET": SubResource("Animation_lsh4v")
 }
 
+[sub_resource type="Animation" id="Animation_iubam"]
+resource_name = "Die"
+length = 4.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.1, 4.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.1222178, 0.015355182, -0.16674891), Vector3(-1.1222178, 0.015355182, -0.16674891), Vector3(-0.9616184, 0.30681327, -0.16674891)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4.233333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_5ahvf"]
 length = 0.001
-
-[sub_resource type="Animation" id="Animation_oomqi"]
-resource_name = "Victory"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -180,7 +207,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-1.079, 0.016, -0.15)]
+"values": [Vector3(-1.1222178, 0.015355182, -0.16674891)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -192,11 +219,40 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.055850536, 0.890118, 0.03490658)]
+"values": [Vector3(-0.055850536, 0.89011794, 0.034906585)]
+}
+
+[sub_resource type="Animation" id="Animation_oomqi"]
+resource_name = "Victory"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.3666667, 2.5666666, 3.5666666, 5.9666667, 6.208333, 6.308333, 6.4083333, 6.508333, 6.608333, 6.7000003, 6.8, 6.933334, 7.066667, 7.166667, 7.3, 7.433334, 7.566667, 7.7000003, 7.833334, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1e-05, 2.1435473, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 0.3896785, 1),
+"update": 0,
+"values": [Vector3(-1.1222178, 0.015355182, -0.16674891), Vector3(-0.586887, 0.015355182, -0.16674891), Vector3(-0.586887, 0.015355182, -0.16674891), Vector3(0.38265717, 0.015355182, -0.16674891), Vector3(0.38265717, 0.015355182, -0.16674891), Vector3(0.38265717, 0.015355182, -0.21080472), Vector3(0.383, 0.1, -0.344), Vector3(0.383, 0, -0.558), Vector3(0.383, 0.1, -0.847), Vector3(0.383, 0, -1.205), Vector3(0.383, 0.1, -1.626), Vector3(0.383, 0, -2.103), Vector3(0.383, 0.1, -2.822), Vector3(0.383, 0, -3.606), Vector3(0.383, 0.1, -4.217), Vector3(0.383, 0, -5.062), Vector3(0.383, 0.1, -5.902), Vector3(0.383, 0, -6.702), Vector3(0.383, 0.1, -7.417), Vector3(0.383, 0, -7.986), Vector3(0.383, 1, -8.322)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 1.3666667, 1.6666666, 2.5666666, 4.033334, 6.3, 6.4000006, 6.5000005, 6.6000004, 6.7000003, 6.8, 6.933334, 7.066667, 7.166667, 7.3, 7.433334, 7.566667, 7.7000003, 7.833334, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05),
+"update": 0,
+"values": [Vector3(-0.055850536, 0.890118, 0.03490658), Vector3(-0.055850536, 0.890118, 0.03490658), Vector3(-0.01752569, 2.8489046, 0.1630821), Vector3(-0.01752569, 2.8489046, 0.1630821), Vector3(-0.0052359877, 3.1415927, 0.20245819), Vector3(0, 3.1415927, 0), Vector3(0, 3.1415927, 0), Vector3(-6.6248353e-09, -3.1415925, 0.07585201), Vector3(0, 3.1415927, 0), Vector3(8.717728e-09, -3.1415925, -0.099885195), Vector3(0, 3.1415927, 0), Vector3(-1.2539993e-08, -3.1415925, 0.1439373), Vector3(0, 3.1415927, 0), Vector3(8.775418e-09, -3.1415925, -0.10054842), Vector3(0, 3.1415927, 0), Vector3(-9.459806e-09, -3.1415925, 0.10841985), Vector3(0, 3.1415927, 0), Vector3(1.1315654e-08, -3.1415925, -0.12980016), Vector3(0, 3.1415927, 0), Vector3(-5.2578364e-09, -3.1415925, 0.06017895), Vector3(0, 3.1415927, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5ahvf"]
 _data = {
+&"Die": SubResource("Animation_iubam"),
 &"RESET": SubResource("Animation_5ahvf"),
 &"Victory": SubResource("Animation_oomqi")
 }
@@ -269,24 +325,24 @@ mesh = SubResource("QuadMesh_5mvw7")
 
 [node name="lift" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1239071263 instance=ExtResource("3_eoqc6")]
 
-[node name="BoyDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="0" unique_id=1924464739]
+[node name="BoyDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="0" unique_id=1144416654]
 material_override = ExtResource("3_w4elo")
 
-[node name="Lift" parent="ElevatorOrigin/ElevatorVisuals/lift" index="1" unique_id=2093266992]
+[node name="Lift" parent="ElevatorOrigin/ElevatorVisuals/lift" index="1" unique_id=129340244]
 material_override = ExtResource("3_w4elo")
 
-[node name="LiftDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="2" unique_id=227582236]
+[node name="LiftDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="2" unique_id=960699246]
 transform = Transform3D(0.9816611, 0, 0, 0, 0.98166084, 0, 0, 0, 1.6239326, 0.48249033, 1.0233474, -0.87390137)
 material_override = ExtResource("4_w4elo")
 
-[node name="FrontViewQuad" parent="ElevatorOrigin/ElevatorVisuals/lift" index="3" unique_id=508169859]
+[node name="FrontViewQuad" parent="ElevatorOrigin/ElevatorVisuals/lift" index="3" unique_id=717800495]
 material_override = ExtResource("4_r2n18")
 cast_shadow = 0
 
-[node name="ButtonBackground" parent="ElevatorOrigin/ElevatorVisuals/lift" index="4" unique_id=442570002]
+[node name="ButtonBackground" parent="ElevatorOrigin/ElevatorVisuals/lift" index="4" unique_id=642498938]
 material_override = ExtResource("7_chv4t")
 
-[node name="ButtonVisual" parent="ElevatorOrigin/ElevatorVisuals/lift" index="5" unique_id=1378382665]
+[node name="ButtonVisual" parent="ElevatorOrigin/ElevatorVisuals/lift" index="5" unique_id=742591336]
 visible = false
 mesh = ExtResource("7_e203u")
 
@@ -544,7 +600,7 @@ metadata/_custom_type_script = "uid://m3ree1qxpbd2"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
 [node name="liftboy" parent="." unique_id=1727757550 node_paths=PackedStringArray("victory_animator") instance=ExtResource("14_rw2bm")]
-transform = Transform3D(0.30812034, 0, 0.951347, 0, 1, 0, -0.9513473, 0, 0.30812025, -1.1222178, 0.015355182, -0.16674891)
+transform = Transform3D(0.6274228, -0.065317996, 0.7759339, 0.034845065, 0.99783266, 0.055821486, -0.7778984, -0.007986211, 0.6283389, -1.1222178, 0.015355182, -0.16674891)
 victory_animator = NodePath("AnimationPlayer")
 victory_anim = &"Victory"
 

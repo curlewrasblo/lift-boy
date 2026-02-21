@@ -175,6 +175,7 @@ func _move_guest_to_mark(guest: Guest) -> void:
 func _on_guest_ready_at_mark(mark: LiftMark, guest: Guest) -> void:
 	mark.on_guest_arrived.disconnect(_on_guest_ready_at_mark)
 	guest.show_icon()
+	guest.play_idle_animation()
 	
 
 func _on_entry_path_finished(path: LiftPath, guest: Guest) -> void:

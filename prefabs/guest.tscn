@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b2it233ffywls" path="res://prefabs/Guest.gd" id="1_pw4ws"]
 [ext_resource type="Shader" uid="uid://c57yfj2tx5gal" path="res://prefabs/IconShader.gdshader" id="3_htqr3"]
-[ext_resource type="Shader" uid="uid://b7tftvlh8xwht" path="res://prefabs/CharacterShader.gdshader" id="4_18ekq"]
+[ext_resource type="Material" uid="uid://b1bdqamvl4qws" path="res://materials/guest_fadeable_mat.tres" id="4_18ekq"]
 [ext_resource type="PackedScene" uid="uid://bqj2chhebqpy" path="res://alien_guest.glb" id="4_vyouj"]
-[ext_resource type="Texture2D" uid="uid://da4ujy2q3g35p" path="res://textures/guest_uv_rgb_texture.png" id="5_6c7mj"]
+[ext_resource type="Material" uid="uid://bgrdjykeltgyp" path="res://materials/justamat.tres" id="5_6c7mj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vyouj"]
 resource_local_to_scene = true
@@ -20,64 +20,20 @@ size = Vector2(0.36, 0.36)
 radius = 0.4
 height = 1.8
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_fqf0x"]
-noise_type = 4
-frequency = 0.0187
-fractal_type = 2
-fractal_weighted_strength = 0.59
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jw1ud"]
-width = 256
-height = 256
-generate_mipmaps = false
-noise = SubResource("FastNoiseLite_fqf0x")
-seamless = true
-in_3d_space = true
-as_normal_map = true
-bump_strength = 2.3
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_18ekq"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("4_18ekq")
-shader_parameter/r_color = Color(0.65882355, 0.44705883, 0.21960784, 1)
-shader_parameter/g_color = Color(0.6784314, 0.6039216, 0.6431373, 1)
-shader_parameter/b_color = Color(0.019607844, 0, 0.09019608, 1)
-shader_parameter/rgb_uv_texture_separator = ExtResource("5_6c7mj")
-shader_parameter/opacity = 1.0
-shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
-shader_parameter/use_normal_map = true
-shader_parameter/shade_steps = 2.0
-shader_parameter/diffuse_strength = 1.0000000475
-shader_parameter/specular_strength = 0.006000000285
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6c7mj"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("4_18ekq")
-shader_parameter/r_color = Color(0.65882355, 0.44705883, 0.21960784, 1)
-shader_parameter/g_color = Color(0.6784314, 0.6039216, 0.6431373, 1)
-shader_parameter/b_color = Color(0.019607844, 0, 0.09019608, 1)
-shader_parameter/rgb_uv_texture_separator = ExtResource("5_6c7mj")
-shader_parameter/opacity = 1.0
-shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
-shader_parameter/use_normal_map = true
-shader_parameter/shade_steps = 2.0
-shader_parameter/diffuse_strength = 1.0000000475
-shader_parameter/specular_strength = 0.006000000285
-
-[node name="guest" type="Node3D" unique_id=1991815137 node_paths=PackedStringArray("icon_display", "elevator_mesh", "floor_mesh", "shake_node", "area_3d")]
+[node name="guest" type="Node3D" unique_id=1991815137 node_paths=PackedStringArray("icon_display", "elevator_mesh", "floor_mesh", "shake_node", "elevator_anim_player", "floor_anim_player", "area_3d")]
 script = ExtResource("1_pw4ws")
 icon_display = NodePath("IconDisplay")
 icon_movement = Vector3(0, 0.08, 0)
 icon_tween_duration = 3.2
-elevator_mesh = NodePath("shake/alien_guest_elevator/Armature/Skeleton3D/Guest")
-floor_mesh = NodePath("shake/alien_guest_floor/Armature/Skeleton3D/Guest")
+elevator_mesh = NodePath("shake/alien_guest_elevator/Skeleton3D/Guest")
+floor_mesh = NodePath("shake/alien_guest_floor/Skeleton3D/Guest")
 shake_node = NodePath("shake")
 elevator_shake_intensity = Vector2(0.075, 0)
 shake_mad_duration = 1.2
 shake_mad_interval = 0.01
 fade_duration = 0.36
+elevator_anim_player = NodePath("shake/alien_guest_elevator/AnimationPlayer")
+floor_anim_player = NodePath("shake/alien_guest_floor/AnimationPlayer")
 area_3d = NodePath("Area3D")
 metadata/_custom_type_script = "uid://b2it233ffywls"
 
@@ -97,27 +53,29 @@ shape = SubResource("CapsuleShape3D_htqr3")
 
 [node name="shake" type="Node3D" parent="." unique_id=1071811708]
 
-[node name="alien_guest_elevator" parent="shake" unique_id=790028358 instance=ExtResource("4_vyouj")]
+[node name="alien_guest_elevator" parent="shake" unique_id=1472077376 instance=ExtResource("4_vyouj")]
 transform = Transform3D(0.67, 0, 0, 0, 0.67, 0, 0, 0, 0.67, 0, 0, 0)
 
-[node name="Guest" parent="shake/alien_guest_elevator/Armature/Skeleton3D" parent_id_path=PackedInt32Array(790028358, 1549359543) index="0" unique_id=1091880504]
+[node name="Guest" parent="shake/alien_guest_elevator/Skeleton3D" parent_id_path=PackedInt32Array(1472077376, 627549936) index="0" unique_id=713038437]
+material_override = ExtResource("4_18ekq")
 cast_shadow = 0
-surface_material_override/0 = SubResource("ShaderMaterial_18ekq")
 
-[node name="alien_guest_floor" parent="shake" unique_id=1262111672 instance=ExtResource("4_vyouj")]
+[node name="alien_guest_floor" parent="shake" unique_id=14237753 instance=ExtResource("4_vyouj")]
 transform = Transform3D(0.67, 0, 0, 0, 0.67, 0, 0, 0, 0.67, 0, 0, 0)
 
-[node name="Guest" parent="shake/alien_guest_floor/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1262111672, 1549359543) index="0" unique_id=1091880504]
-layers = 2
+[node name="Guest" parent="shake/alien_guest_floor/Skeleton3D" parent_id_path=PackedInt32Array(14237753, 627549936) index="0" unique_id=713038437]
+material_override = ExtResource("4_18ekq")
 cast_shadow = 0
-surface_material_override/0 = SubResource("ShaderMaterial_6c7mj")
 
-[node name="alien_guest_shadow" parent="shake" unique_id=10982391 instance=ExtResource("4_vyouj")]
+[node name="alien_guest_shadow" parent="shake" unique_id=923029240 instance=ExtResource("4_vyouj")]
 transform = Transform3D(0.67, 0, 0, 0, 0.67, 0, 0, 0, 0.67, 0, 0, 0)
 
-[node name="Guest" parent="shake/alien_guest_shadow/Armature/Skeleton3D" parent_id_path=PackedInt32Array(10982391, 1549359543) index="0" unique_id=1091880504]
-layers = 3
+[node name="Guest" parent="shake/alien_guest_shadow/Skeleton3D" parent_id_path=PackedInt32Array(923029240, 627549936) index="0" unique_id=713038437]
+material_override = ExtResource("5_6c7mj")
 cast_shadow = 3
+
+[node name="AnimationPlayer" parent="shake/alien_guest_shadow" index="1" unique_id=1714768740]
+active = false
 
 [editable path="shake/alien_guest_elevator"]
 [editable path="shake/alien_guest_floor"]

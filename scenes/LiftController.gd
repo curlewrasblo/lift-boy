@@ -193,10 +193,14 @@ func press_button(elevator_floor: int) -> void:
 
 func close_doors() -> void:
 	lift_player.close_doors()
+
+	AudioManager.play_lift_doors_close()
 	await lift_player.animation_finished
 
 func open_doors() -> void:
 	lift_player.open_doors()
+
+	AudioManager.play_lift_doors_open()
 	await lift_player.animation_finished
 
 
@@ -209,17 +213,21 @@ func move_to_floor(to_floor: int) -> void:
 	var target = 1.0 if to_floor > current_floor else -1.0
 	var floors_to_move = abs(to_floor - current_floor)
 
+	var travel_time = 0.0
 	move_tween = create_tween()
 	move_tween.tween_method(_on_move_process, 0.0, target, time_to_reach_full_speed).set_ease(Tween.EASE_IN)
-
+	travel_time += time_to_reach_full_speed
 	for i: int in range(floors_to_move):
 		var interval = time_between_floors
 		if i == 0:
 			interval -= time_to_reach_full_speed / 2.0
 		var interval_tween = move_tween.tween_interval(interval)
+		travel_time += interval
 		interval_tween.finished.connect(func(): _set_new_floor(current_floor + 1 * target))
 
 	move_tween.tween_method(_on_move_process, target, 0.0, time_to_reach_full_speed).set_ease(Tween.EASE_OUT)
+	travel_time += time_to_reach_full_speed
+	AudioManager.play_lift_move(time_to_reach_full_speed, travel_time)
 
 	await move_tween.finished
 	_lift_ready_at_new_floor(to_floor)

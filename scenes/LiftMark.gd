@@ -21,6 +21,7 @@ func _handle_guest_movement(duration: float) -> void:
 		move_tween.kill()
 		move_tween = null
 
+	guest.play_walk_animation(1.4)
 	move_tween = create_tween().set_ease(Tween.EASE_OUT)
 	move_tween.tween_property(guest, "global_position", global_position, duration)
 	move_tween.parallel().tween_property(guest, "global_rotation", global_rotation, duration * 0.9)

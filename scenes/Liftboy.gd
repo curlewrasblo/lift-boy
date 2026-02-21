@@ -38,6 +38,8 @@ func press_button(global_pos: Vector3) -> void:
 	var y_distance = global_pos.y - original_y_position - max_y_offset
 	var should_move_up = y_distance > 0.0
 
+	AudioManager.play_lift_press()
+
 	left_arm_IK_modifier.active = true
 	press_tween = create_tween().set_ease(Tween.EASE_OUT)
 	press_tween.tween_property(left_arm_IK_target, "position", middle_pos, 0.08).from(left_arm_IK_target.position)
@@ -61,6 +63,7 @@ func look_at_guest(guest: Node3D, never_stop: bool = false) -> void:
 	looking_timer = randf_range(1.6, 3.0)
 	if never_stop:
 		looking_timer = 1000000.0
+		victory_animator.play("Die")
 
 func play_and_await_victory_animation() -> void:
 	victory_animator.play(victory_anim)

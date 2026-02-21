@@ -16,6 +16,9 @@ class_name Guest
 @export var shake_mad_interval: float = 0.1
 @export var fade_duration: float = 0.5
 
+@export var elevator_anim_player : AnimationPlayer
+@export var floor_anim_player : AnimationPlayer
+
 @export var area_3d: Area3D
 
 var wanted_floor: int = -1
@@ -87,6 +90,7 @@ func show_icon() -> void:
 		icon_tween.kill()
 		icon_tween = null
 
+	AudioManager.play_guest_speak()
 	icon_display.visible = true
 	icon_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	icon_tween.tween_method(_icon_progress, 0.0, 1.0, icon_tween_duration)
@@ -112,19 +116,45 @@ func set_layer_new_floor() -> void:
 		fade_tween.kill()
 		fade_tween = null
 	is_layer_elevator = false
+	floor_mesh.visible = true
 	fade_tween = create_tween().set_ease(Tween.EASE_IN_OUT)
 	fade_tween.tween_property(floor_material, "shader_parameter/opacity", 1.0, fade_duration / 2.0).from(0.0)
 	fade_tween.tween_property(elevator_material, "shader_parameter/opacity", 0.0, fade_duration / 2.0).from(1.0)
+	fade_tween.finished.connect(_on_fade_tween_finished2)
 
 func set_layer_elevator() -> void:
 	if fade_tween != null:
 		fade_tween.kill()
 		fade_tween = null
 	is_layer_elevator = true
+	elevator_mesh.visible = true
 	fade_tween = create_tween().set_ease(Tween.EASE_IN_OUT)
 	fade_tween.tween_property(elevator_material, "shader_parameter/opacity", 1.0, fade_duration / 2.0).from(0.0)
 	fade_tween.tween_property(floor_material, "shader_parameter/opacity", 0.0, fade_duration / 2.0).from(1.0)
+	fade_tween.finished.connect(_on_fade_tween_finished)
 
+func _on_fade_tween_finished() -> void:
+	fade_tween = null
+	floor_mesh.visible = false
+
+func _on_fade_tween_finished2() -> void:
+	fade_tween = null
+	elevator_mesh.visible = false
+
+
+func play_walk_animation(speed : float) -> void:
+	elevator_anim_player.speed_scale = speed
+	floor_anim_player.speed_scale = speed
+	elevator_anim_player.play("Walk")
+	floor_anim_player.play("Walk")
+
+func play_idle_animation() -> void:
+	elevator_anim_player.play("Idle")
+
+func play_kill_animation() -> void:
+	elevator_anim_player.play("Kill")
+	AudioManager.play_guest_kill()
+	await elevator_anim_player.animation_finished
 
 func travelled_to_new_wrong_floor() -> bool:
 	floors_travelled_to += 1

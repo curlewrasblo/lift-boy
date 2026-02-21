@@ -97,12 +97,9 @@ func _face_defeat() -> void:
 	lift_controller.make_not_ready()
 	await lift_controller.close_doors()
 	var guest = await guest_spawner._move_any_guest_into_kill_mark()
+	
 	await get_tree().create_timer(2.2).timeout
-
-	guest.shake_mad()
-	print("CHOMP")
-
-	await get_tree().create_timer(1.5).timeout
+	await guest.play_kill_animation()
 
 	Fader.instant_fade_in()
 

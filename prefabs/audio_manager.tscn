@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dk1dgicpowhek"]
+
+[ext_resource type="Script" uid="uid://bfbc2drel4cwj" path="res://AudioManager.gd" id="1_hju6s"]
+[ext_resource type="AudioStream" uid="uid://c8etkmbsdqwxs" path="res://sounds/lift_button_press.wav" id="2_dn1u1"]
+[ext_resource type="AudioStream" uid="uid://bxmxakrnq12qw" path="res://sounds/lift_doors_open.wav" id="3_6hqem"]
+[ext_resource type="AudioStream" uid="uid://taifeekcexmq" path="res://sounds/lift_doors_close.wav" id="4_aymke"]
+[ext_resource type="AudioStream" uid="uid://df11t3lmcxaxf" path="res://sounds/guest_voice_1.wav" id="5_4jimw"]
+[ext_resource type="AudioStream" uid="uid://cev4xfu0vs3ca" path="res://sounds/maybe_elevator_loop.wav" id="5_g7wom"]
+[ext_resource type="AudioStream" uid="uid://q7c0dp7g61a" path="res://sounds/guest_voice_2.wav" id="6_xjk7e"]
+[ext_resource type="AudioStream" uid="uid://bu06qejo4lfp2" path="res://sounds/guest_voice_3.wav" id="7_g7wom"]
+[ext_resource type="AudioStream" uid="uid://cb58am05jypw5" path="res://sounds/guest_kill.wav" id="8_xjk7e"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xjk7e"]
+playback_mode = 1
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("2_dn1u1")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xqjjb"]
+random_pitch = 1.0594631
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("5_4jimw")
+stream_1/stream = ExtResource("6_xjk7e")
+stream_2/stream = ExtResource("7_g7wom")
+
+[node name="audio_manager" type="Node" unique_id=1174426720 node_paths=PackedStringArray("sound_lift_press", "sound_lift_doors_open", "sound_lift_doors_close", "sound_lift_move", "sound_guest_speak", "sound_guest_kill")]
+script = ExtResource("1_hju6s")
+sound_lift_press = NodePath("lift_sounds/button_press")
+sound_lift_doors_open = NodePath("lift_sounds/doors_open")
+sound_lift_doors_close = NodePath("lift_sounds/doors_close")
+sound_lift_move = NodePath("lift_sounds/moving_loop")
+sound_guest_speak = NodePath("guest_sounds/guest_speak")
+sound_guest_kill = NodePath("guest_sounds/guest_kill")
+
+[node name="lift_sounds" type="Node" parent="." unique_id=1238091031]
+
+[node name="button_press" type="AudioStreamPlayer" parent="lift_sounds" unique_id=426111064]
+stream = SubResource("AudioStreamRandomizer_xjk7e")
+bus = &"Sfx"
+
+[node name="doors_open" type="AudioStreamPlayer" parent="lift_sounds" unique_id=922213265]
+stream = ExtResource("3_6hqem")
+bus = &"Sfx"
+
+[node name="doors_close" type="AudioStreamPlayer" parent="lift_sounds" unique_id=1673828664]
+stream = ExtResource("4_aymke")
+bus = &"Sfx"
+
+[node name="moving_loop" type="AudioStreamPlayer" parent="lift_sounds" unique_id=144761819]
+stream = ExtResource("5_g7wom")
+bus = &"Sfx"
+
+[node name="guest_sounds" type="Node" parent="." unique_id=1501643738]
+
+[node name="guest_speak" type="AudioStreamPlayer" parent="guest_sounds" unique_id=1106898164]
+stream = SubResource("AudioStreamRandomizer_xqjjb")
+volume_db = -12.0
+bus = &"Sfx"
+
+[node name="guest_kill" type="AudioStreamPlayer" parent="guest_sounds" unique_id=556680635]
+stream = ExtResource("8_xjk7e")
+bus = &"Sfx"

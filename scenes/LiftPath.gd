@@ -47,6 +47,8 @@ func _handle_guest_getting_to_path(duration: float) -> void:
 		move_tween.kill()
 		move_tween = null
 
+	guest.play_walk_animation(1.4)
+
 	move_tween = create_tween()
 	move_tween.tween_property(guest, "global_position", target_position, duration).set_ease(Tween.EASE_IN)
 	move_tween.play()
@@ -59,6 +61,7 @@ func _handle_path_follower(from: float, to: float, duration: float) -> void:
 		move_tween = null
 
 	follower.progress_ratio = from
+	guest.play_walk_animation(2.1)
 
 	move_tween = create_tween()
 	move_tween.tween_property(follower, "progress_ratio", to, duration).set_ease(Tween.EASE_IN)
