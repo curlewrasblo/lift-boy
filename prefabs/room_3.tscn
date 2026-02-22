@@ -1,13 +1,57 @@
 [gd_scene format=3 uid="uid://vnuqyvijwdkt"]
 
 [ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_wkqbs"]
+[ext_resource type="PackedScene" uid="uid://dmw3nn8n5hdau" path="res://prefabs/room_guest.tscn" id="2_wkqbs"]
+[ext_resource type="Shader" uid="uid://b7tftvlh8xwht" path="res://prefabs/CharacterShader.gdshader" id="3_fmlap"]
+[ext_resource type="Texture2D" uid="uid://da4ujy2q3g35p" path="res://textures/guest_uv_rgb_texture.png" id="4_46gk7"]
+[ext_resource type="Script" uid="uid://dmefr3ll3ims5" path="res://prefabs/dark_room.gd" id="4_u3cej"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gxgn"]
 diffuse_mode = 1
-albedo_color = Color(0.08736, 0.09, 0.08280001, 1)
+albedo_color = Color(0.10677333, 0.11, 0.1012, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]
 size = Vector2(20, 40)
+
+[sub_resource type="Curve3D" id="Curve3D_0ypfr"]
+closed = true
+bake_interval = 151.32
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 6.7671814, -105.77977, 0, 0, 0, 0, 0, 0, -2.574426, 7.2269135, -46.3143, 0, 0, 0, 0, 0, 0, -28.963722, -22.409565, -47.021366, 0, 0, 0, 0, 0, 0, -3.9767017, -24.255001, -35.338257, 0, 0, 0, 0, 0, 0, -9.795927, 45.592308, -30.651667, 0, 0, 0, 0, 0, 0, 8.858219, 8.009893, -41.8018),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fqf0x"]
+noise_type = 4
+frequency = 0.0187
+fractal_type = 2
+fractal_weighted_strength = 0.59
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jw1ud"]
+width = 256
+height = 256
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_fqf0x")
+seamless = true
+in_3d_space = true
+as_normal_map = true
+bump_strength = 2.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nc12n"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_fmlap")
+shader_parameter/r_color = Color(0.0010838978, 0.0010838978, 0.0010838978, 1)
+shader_parameter/g_color = Color(10.175062, 10.175062, 10.175062, 1)
+shader_parameter/b_color = Color(0, 0, 0, 1)
+shader_parameter/rgb_uv_texture_separator = ExtResource("4_46gk7")
+shader_parameter/opacity = 1.0
+shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
+shader_parameter/use_normal_map = false
+shader_parameter/shade_steps = 2.0
+shader_parameter/diffuse_strength = 1.5
+shader_parameter/specular_strength = 0.0
 
 [node name="room_3" type="Node3D" unique_id=1813439493]
 script = ExtResource("1_wkqbs")
@@ -31,3 +75,31 @@ light_color = Color(0.45, 0.45, 0.45, 1)
 light_cull_mask = 4294967294
 shadow_caster_mask = 4294967294
 sky_mode = 1
+
+[node name="Path3D" type="Path3D" parent="." unique_id=739983955]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.291479, -5.4226513, 0)
+curve = SubResource("Curve3D_0ypfr")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=908456609]
+transform = Transform3D(0.97268754, -0.029259617, -0.23017518, -0.018977467, 0.9786011, -0.2046024, 0.23125143, 0.20337963, 0.95137, -6.677106, 3.2371929, -42.93058)
+progress = 66.82056
+use_model_front = true
+
+[node name="Node3D" type="Node3D" parent="Path3D/PathFollow3D" unique_id=2072969558]
+transform = Transform3D(-1, -1.1877605e-08, 1.4819166e-07, 1.6769926e-08, 0.98142904, 0.19182558, -1.4771803e-07, 0.19182558, -0.98142904, 0, 0, 0)
+
+[node name="RoomGuest" parent="Path3D/PathFollow3D/Node3D" unique_id=1684007482 instance=ExtResource("2_wkqbs")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 12, 0, 0, 28.87)
+
+[node name="Guest" parent="Path3D/PathFollow3D/Node3D/RoomGuest/alien_guest/Skeleton3D" parent_id_path=PackedInt32Array(1684007482, 155533951, 2104805073) index="0" unique_id=1669150990]
+transform = Transform3D(-0.9943955, 2.980233e-08, -0.105726, 0.103686206, 0.19548413, -0.97521067, 0.020667734, -0.98070717, -0.19438854, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_nc12n")
+cast_shadow = 0
+
+[node name="DarkRoom" type="Node3D" parent="." unique_id=1849865264 node_paths=PackedStringArray("follower")]
+script = ExtResource("4_u3cej")
+follower = NodePath("../Path3D/PathFollow3D")
+move_speed = 0.01
+
+[editable path="Path3D/PathFollow3D/Node3D/RoomGuest"]
+[editable path="Path3D/PathFollow3D/Node3D/RoomGuest/alien_guest"]

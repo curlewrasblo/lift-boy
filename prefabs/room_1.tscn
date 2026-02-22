@@ -2,73 +2,214 @@
 
 [ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_vu5en"]
 [ext_resource type="Material" uid="uid://ccnt2fbcclisv" path="res://materials/doors_mat.tres" id="2_8oql1"]
+[ext_resource type="Material" uid="uid://btrcawpwn8a82" path="res://materials/green_mat.tres" id="2_tbt0j"]
+[ext_resource type="PackedScene" uid="uid://bqj2chhebqpy" path="res://alien_guest.glb" id="4_7w1n3"]
+[ext_resource type="PackedScene" uid="uid://dmw3nn8n5hdau" path="res://prefabs/room_guest.tscn" id="5_k62gv"]
+[ext_resource type="Shader" uid="uid://b7tftvlh8xwht" path="res://prefabs/CharacterShader.gdshader" id="6_repb3"]
+[ext_resource type="Texture2D" uid="uid://da4ujy2q3g35p" path="res://textures/guest_uv_rgb_texture.png" id="7_k62gv"]
+[ext_resource type="Script" uid="uid://r0k60kq3dmcm" path="res://prefabs/GreenRoom.gd" id="8_k62gv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6tfno"]
-size = Vector3(2, 2, 2)
+size = Vector3(1.5, 1.5, 1.5)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]
 size = Vector2(20, 40)
+
+[sub_resource type="Curve3D" id="Curve3D_0uni2"]
+closed = true
+bake_interval = 12.0
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -12.638183, 9.536743e-07, -5.8031178, 0, 0, 0, 0, 0, 0, -1.9634814, 4.6876397e-07, -7.131296, 0, 0, 0, 0, 0, 0, 8.355778, 0, -5.2956448, 0, 0, 0, 0, 0, 0, 10.775392, 1.9073486e-06, -19.035017, 0, 0, 0, 0, 0, 0, -2.463, 0, -21.331999, 0, 0, 0, 0, 0, 0, -9.18, 0, -29.088),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fqf0x"]
+noise_type = 4
+frequency = 0.0187
+fractal_type = 2
+fractal_weighted_strength = 0.59
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jw1ud"]
+width = 256
+height = 256
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_fqf0x")
+seamless = true
+in_3d_space = true
+as_normal_map = true
+bump_strength = 2.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k62gv"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("6_repb3")
+shader_parameter/r_color = Color(0.65882355, 0.44705883, 0.21960784, 1)
+shader_parameter/g_color = Color(0.6784314, 0.6039216, 0.6431373, 1)
+shader_parameter/b_color = Color(0.019607844, 0, 0.09019608, 1)
+shader_parameter/rgb_uv_texture_separator = ExtResource("7_k62gv")
+shader_parameter/opacity = 1.0
+shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
+shader_parameter/use_normal_map = true
+shader_parameter/shade_steps = 2.0
+shader_parameter/diffuse_strength = 1.0000000475
+shader_parameter/specular_strength = 0.006000000285
 
 [node name="room_1" type="Node3D" unique_id=1563608849]
 script = ExtResource("1_vu5en")
 metadata/_custom_type_script = "uid://dd0en0wyj5nxi"
 
+[node name="GreenRoom" type="Node3D" parent="." unique_id=175226826 node_paths=PackedStringArray("walking_guest", "walking_guest_path_follow", "walking_guest_animator")]
+script = ExtResource("8_k62gv")
+walking_guest = NodePath("../Path3D/PathFollow3D/alien_guest2")
+walking_guest_path_follow = NodePath("../Path3D/PathFollow3D")
+walking_guest_animator = NodePath("../Path3D/PathFollow3D/alien_guest2/AnimationPlayer")
+movement_speed = 0.025
+metadata/_custom_type_script = "uid://r0k60kq3dmcm"
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1895406522]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -0.7645359, 1.0117203, -29.295582)
+transform = Transform3D(0.53178287, 0, -0.8468807, 0, 1, 0, 0.8468807, 0, 0.53178287, 0.024977565, 0.73358166, -29.63097)
 layers = 2
+material_override = ExtResource("2_tbt0j")
 mesh = SubResource("BoxMesh_6tfno")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="." unique_id=1992246613]
-transform = Transform3D(4.2426405, 3.3527613e-08, -4.242641, 0.22795813, 5.991333, 0.22795817, 4.236512, -0.3223815, 4.236512, -1.1135798, 5.836913, -41.34036)
+transform = Transform3D(2.6600523, 0.09577216, -4.2332654, 0.1899651, 7.988444, 0.18996514, 4.2294245, -0.4190368, 2.653936, 9.834496, 3.1187248, -41.45074)
 layers = 2
+material_override = ExtResource("2_tbt0j")
+mesh = SubResource("BoxMesh_6tfno")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="." unique_id=511509087]
+transform = Transform3D(2.140673, 0.006748189, 2.1017876, -0.07773481, 8.994088, 0.07596442, -2.100351, -0.3259972, 2.1393251, 4.222076, 3.8846416, -53.279892)
+layers = 2
+material_override = ExtResource("2_tbt0j")
+mesh = SubResource("BoxMesh_6tfno")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="." unique_id=1383627919]
+transform = Transform3D(2.1280417, 0.10774368, -3.3866124, 0.15197209, 8.9869995, 0.1519721, 3.3835397, -0.47141638, 2.1231487, -0.51340866, 3.432684, -47.628437)
+layers = 2
+material_override = ExtResource("2_tbt0j")
 mesh = SubResource("BoxMesh_6tfno")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1455908138]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 4.21443, 1.0117203, -28.763062)
+transform = Transform3D(-0.80767095, 0, -0.5896334, 0, 1, 0, 0.5896334, 0, -0.80767095, 4.0854053, 0.73358166, -30.78)
 layers = 2
+material_override = ExtResource("2_tbt0j")
 mesh = SubResource("BoxMesh_6tfno")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=427671182]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 1.6053696, 1.0117203, -25.761269)
+transform = Transform3D(-0.80767095, 0, -0.5896334, 0, 1, 0, 0.5896334, 0, -0.80767095, 2.3120775, 0.73358166, -29.554935)
 layers = 2
+material_override = ExtResource("2_tbt0j")
 mesh = SubResource("BoxMesh_6tfno")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=955145435]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -4.481558, 1.0117203, -30.560005)
+transform = Transform3D(-0.80767095, 0, -0.5896334, 0, 1, 0, 0.5896334, 0, -0.80767095, 1.3013253, 0.7585474, -31.563524)
 layers = 2
+material_override = ExtResource("2_tbt0j")
 mesh = SubResource("BoxMesh_6tfno")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=2076723328]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -4.481558, 3.0430288, -29.604164)
+transform = Transform3D(-0.80767095, 0, -0.5896334, 0, 1, 0, 0.5896334, 0, -0.80767095, 1.0883565, 2.2250853, -30.63171)
 layers = 2
+material_override = ExtResource("2_tbt0j")
 mesh = SubResource("BoxMesh_6tfno")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="." unique_id=260781749]
-transform = Transform3D(-0.071514815, 0, -0.9974395, 0, 1, 0, 0.9974395, 0, -0.071514815, -4.481558, 5.074333, -30.282148)
+transform = Transform3D(-0.29195437, 0, -0.9564322, 0, 1, 0, 0.9564322, 0, -0.29195437, 1.2394166, 3.7500443, -31.292652)
 layers = 2
+material_override = ExtResource("2_tbt0j")
 mesh = SubResource("BoxMesh_6tfno")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="." unique_id=362760165]
-transform = Transform3D(0.32284394, 0, -0.9464522, 0, 1, 0, 0.9464522, 0, 0.32284394, -0.15221214, 3.1554785, -29.210594)
+transform = Transform3D(0.10385154, 0, -0.9945929, 0, 1, 0, 0.9945929, 0, 0.10385154, 0.602973, 2.2592578, -29.411688)
 layers = 2
+material_override = ExtResource("2_tbt0j")
 mesh = SubResource("BoxMesh_6tfno")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="." unique_id=150825677]
-transform = Transform3D(0.8637828, 0, -0.50386447, 0, 1, 0, 0.50386447, 0, 0.8637828, 3.1088505, 3.1554785, -27.411385)
+transform = Transform3D(0.72980446, 0, -0.68365604, 0, 1, 0, 0.68365604, 0, 0.72980446, 2.7064538, 2.2592578, -29.708633)
 layers = 2
+material_override = ExtResource("2_tbt0j")
 mesh = SubResource("BoxMesh_6tfno")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2073767923]
+[node name="ground" type="MeshInstance3D" parent="." unique_id=2073767923]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.8)
 layers = 2
 material_override = ExtResource("2_8oql1")
 mesh = SubResource("PlaneMesh_6tfno")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=130536017]
-transform = Transform3D(-0.0134109855, 0.91706336, -0.3985159, -0.71615624, 0.26932946, 0.64388037, 0.69781125, 0.29403472, 0.65314865, 0, 0.9578903, 0)
+transform = Transform3D(-0.5505867, 0.58499694, 0.5955108, 0.037492782, -0.6953268, 0.71771514, 0.8339357, 0.4174916, 0.3609044, 0, 0.9578903, 0)
 layers = 2
-light_color = Color(0.08799998, 0.33, 0.066, 1)
+light_color = Color(0.026666641, 0.32, 0, 1)
 light_cull_mask = 4294967294
 shadow_enabled = true
 shadow_caster_mask = 4294967294
 sky_mode = 1
+
+[node name="RoomGuest" parent="." unique_id=1684007482 instance=ExtResource("5_k62gv")]
+transform = Transform3D(-0.41025734, 0, 0.91196984, 0, 1, 0, -0.91196984, 0, -0.41025734, -1.1212045, 0, -28.995028)
+
+[node name="Path3D" type="Path3D" parent="." unique_id=1669194414]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8012781, 0, -13.527369)
+curve = SubResource("Curve3D_0uni2")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=261307934]
+transform = Transform3D(0.98913544, 0, -0.14690247, 0, 0.99999774, 0, 0.14690258, 0, 0.9891347, -12.638184, 9.536743e-07, -5.8031197)
+progress = 85.21123
+rotation_mode = 1
+use_model_front = true
+tilt_enabled = false
+
+[node name="alien_guest2" parent="Path3D/PathFollow3D" unique_id=1613432801 instance=ExtResource("4_7w1n3")]
+transform = Transform3D(0.98587227, 4.440892e-16, -0.16749947, -7.55063e-09, 1, -4.4441673e-08, 0.16749947, 4.507853e-08, 0.98587227, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Path3D/PathFollow3D/alien_guest2" index="0" unique_id=2104805073]
+bones/0/rotation = Quaternion(6.717942e-08, 0, 0, 1)
+bones/1/rotation = Quaternion(0.012931988, 1.4541501e-25, -2.871479e-18, 0.9999164)
+bones/2/position = Vector3(3.3762049e-18, 2.1822376, 0.015205079)
+bones/2/rotation = Quaternion(-0.009880914, 9.587858e-18, 3.541405e-18, 0.9999512)
+bones/3/position = Vector3(2.0173421e-18, 2.3690643, 0.011512492)
+bones/3/rotation = Quaternion(-0.013161673, 9.493213e-18, 9.601829e-19, 0.9999134)
+bones/4/position = Vector3(1.5228155e-18, 2.5968676, 0.0055144313)
+bones/4/rotation = Quaternion(-0.012587521, 9.539461e-18, 3.6796513e-18, 0.9999208)
+bones/5/position = Vector3(-0.40107247, 2.0136614, 0.010843911)
+bones/5/rotation = Quaternion(-0.045752786, -0.18151084, 0.9077426, 0.37545162)
+bones/6/position = Vector3(-0.656713, 1.7629557, -0.12903857)
+bones/6/rotation = Quaternion(0.026108444, 0.17203733, 0.9847402, -0.0028652397)
+bones/7/position = Vector3(0.40107247, 2.0136614, 0.010843911)
+bones/7/rotation = Quaternion(0.045844838, -0.22798088, 0.8913423, -0.3891425)
+bones/8/position = Vector3(0.6597104, 1.7856337, -0.15910423)
+bones/8/rotation = Quaternion(0.0047470103, 0.051692393, 0.9976893, -0.043833476)
+bones/9/rotation = Quaternion(-0.18645062, -0.14141539, 0.5875259, 0.7746297)
+bones/10/position = Vector3(-0.22788212, 1.0384666, -0.12092577)
+bones/10/rotation = Quaternion(0.032377366, 0.23587097, 0.96206915, 0.13318999)
+bones/11/position = Vector3(-0.3757224, 0.5150492, 0.16277328)
+bones/11/rotation = Quaternion(-0.018523602, -0.1164933, 0.9804215, 0.15767017)
+bones/12/rotation = Quaternion(-0.18645062, 0.14141539, -0.5875259, 0.7746297)
+bones/13/position = Vector3(0.22788212, 1.0384666, -0.12092577)
+bones/13/rotation = Quaternion(-0.03318763, 0.24084243, 0.9607971, -0.1332767)
+bones/14/position = Vector3(0.37517986, 0.5179852, 0.16840124)
+bones/14/rotation = Quaternion(0.016521933, -0.10258374, 0.98196524, -0.15794888)
+bones/18/position = Vector3(-0.5353703, 0.031608254, 0.040089726)
+bones/19/position = Vector3(-0.64867747, 1.2461045, 0.057022464)
+bones/20/position = Vector3(0.5358543, 0.031444564, 0.060161054)
+bones/21/position = Vector3(0.7080309, 1.2413007, -0.10266653)
+
+[node name="Guest" parent="Path3D/PathFollow3D/alien_guest2/Skeleton3D" index="0" unique_id=1669150990]
+layers = 2
+material_override = SubResource("ShaderMaterial_k62gv")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Path3D/PathFollow3D/alien_guest2/Skeleton3D" index="1" unique_id=1370124339]
+transform = Transform3D(1, -7.598876e-18, 1.8984774e-17, 7.118563e-18, 0.9996831, 0.025173048, -1.9170046e-17, -0.025173048, 0.9996831, 1.5228155e-18, 2.5968676, 0.0055144313)
+bone_name = "Head.Upper"
+bone_idx = 4
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Path3D/PathFollow3D/alien_guest2/Skeleton3D/BoneAttachment3D" unique_id=583611861]
+transform = Transform3D(0.99771255, 9.981438e-11, 0.06759739, 0.001701632, 0.99968314, -0.025115468, -0.06757596, 0.025173048, 0.9973964, -0.1828289, 0.8445554, 0.00055503845)
+layers = 2
+material_override = ExtResource("2_tbt0j")
+mesh = SubResource("BoxMesh_6tfno")
+
+[editable path="Path3D/PathFollow3D/alien_guest2"]

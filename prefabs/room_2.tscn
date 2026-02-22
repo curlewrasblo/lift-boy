@@ -1,74 +1,121 @@
 [gd_scene format=3 uid="uid://dd0uy2x2vu4vo"]
 
 [ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_w0ydv"]
+[ext_resource type="Script" uid="uid://dfek8gfybdi4q" path="res://prefabs/RedRoom.gd" id="2_3a5dv"]
 [ext_resource type="Material" uid="uid://dpum6i1rmauai" path="res://materials/elevator_mat.tres" id="2_4et86"]
+[ext_resource type="PackedScene" uid="uid://dmw3nn8n5hdau" path="res://prefabs/room_guest.tscn" id="3_p722y"]
+[ext_resource type="Material" uid="uid://b5l3p5b82l4ys" path="res://materials/elevator_dark_mat.tres" id="4_iimsv"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_507rt"]
-radius = 2.0
-height = 4.0
+radius = 0.6
+height = 1.2
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]
-size = Vector2(20, 40)
+[sub_resource type="PlaneMesh" id="PlaneMesh_hbc1i"]
+size = Vector2(20, 20)
 
 [node name="room_2" type="Node3D" unique_id=1813439493]
 script = ExtResource("1_w0ydv")
 metadata/_custom_type_script = "uid://dd0en0wyj5nxi"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=230635786]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -0.7645359, 1.6, -18.353931)
+[node name="RedRoom" type="Node3D" parent="." unique_id=1205142825 node_paths=PackedStringArray("small_sphere_parent", "big_sphere")]
+script = ExtResource("2_3a5dv")
+small_sphere_parent = NodePath("../small_spheres")
+big_sphere = NodePath("../MeshInstance3D10")
+metadata/_custom_type_script = "uid://dfek8gfybdi4q"
+
+[node name="small_spheres" type="Node3D" parent="." unique_id=1341336005]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="small_spheres" unique_id=230635786]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -1.0123901, 2.7804139, -46.1718)
 layers = 2
+material_override = ExtResource("2_4et86")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="small_spheres" unique_id=762592114]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 5.3554974, 1.1671816, -30.499228)
+layers = 2
+material_override = ExtResource("2_4et86")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="small_spheres" unique_id=1524003635]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 3.100792, 4.6297326, -42.63748)
+layers = 2
+material_override = ExtResource("2_4et86")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="small_spheres" unique_id=1722681467]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -2.5141973, 2.1508617, -32.29617)
+layers = 2
+material_override = ExtResource("2_4et86")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="small_spheres" unique_id=1471688113]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -1.2254968, 4.9135623, -35.27005)
+layers = 2
+material_override = ExtResource("2_4et86")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="small_spheres" unique_id=1702741003]
+transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -4.481558, 7.5598917, -41.090065)
+layers = 2
+material_override = ExtResource("2_4et86")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="small_spheres" unique_id=363603768]
+transform = Transform3D(0.32284394, 0, -0.9464522, 0, 1, 0, 0.9464522, 0, 0.32284394, 6.6145144, 3.8055248, -34.87648)
+layers = 2
+material_override = ExtResource("2_4et86")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="small_spheres" unique_id=384532205]
+transform = Transform3D(0.8637828, 0, -0.50386447, 0, 1, 0, 0.50386447, 0, 0.8637828, 2.5036526, 7.6270323, -38.16635)
+layers = 2
+material_override = ExtResource("2_4et86")
+cast_shadow = 0
 mesh = SubResource("SphereMesh_507rt")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="." unique_id=1262230194]
-transform = Transform3D(3.5355334, 2.7939677e-08, -3.5355341, 0.1899651, 4.9927773, 0.18996514, 3.530427, -0.26865125, 3.5304265, 0.8641453, 8.510162, -34.2492)
-layers = 2
-mesh = SubResource("SphereMesh_507rt")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=762592114]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 4.21443, 1.6, -17.821411)
-layers = 2
-mesh = SubResource("SphereMesh_507rt")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1524003635]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 1.6053696, 1.6, -14.819618)
-layers = 2
-mesh = SubResource("SphereMesh_507rt")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=1722681467]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -4.481558, 1.6, -19.618353)
-layers = 2
-mesh = SubResource("SphereMesh_507rt")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=1471688113]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -4.481558, 4.5799475, -18.662514)
-layers = 2
-mesh = SubResource("SphereMesh_507rt")
-
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="." unique_id=1702741003]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -4.481558, 7.5598917, -19.393448)
-layers = 2
-mesh = SubResource("SphereMesh_507rt")
-
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="." unique_id=363603768]
-transform = Transform3D(0.32284394, 0, -0.9464522, 0, 1, 0, 0.9464522, 0, 0.32284394, -0.15221214, 4.692397, -18.268944)
-layers = 2
-mesh = SubResource("SphereMesh_507rt")
-
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="." unique_id=384532205]
-transform = Transform3D(0.8637828, 0, -0.50386447, 0, 1, 0, 0.50386447, 0, 0.8637828, 3.1088505, 4.692397, -16.469732)
-layers = 2
-mesh = SubResource("SphereMesh_507rt")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=629739209]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.8)
+transform = Transform3D(4.2426405, 4.4703484e-08, -4.242641, 0.22795811, 5.991333, 0.22795814, 4.236512, -0.32238147, 4.236512, 3.5875607, 4.331276, -53.57577)
 layers = 2
 material_override = ExtResource("2_4et86")
-mesh = SubResource("PlaneMesh_6tfno")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_507rt")
+
+[node name="ground" type="MeshInstance3D" parent="." unique_id=629739209]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.9)
+layers = 2
+material_override = ExtResource("2_4et86")
+mesh = SubResource("PlaneMesh_hbc1i")
+
+[node name="ground2" type="MeshInstance3D" parent="." unique_id=172630758]
+transform = Transform3D(1, 0, 0, 0, 0.25881907, -0.9659258, 0, 0.9659258, 0.25881907, 3.6414452, 4.8067074, -55.45682)
+layers = 2
+material_override = ExtResource("4_iimsv")
+mesh = SubResource("PlaneMesh_hbc1i")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1594981417]
-transform = Transform3D(0.17363253, -0.9189244, -0.35416043, 0.065755785, -0.34800255, 0.93518466, -0.9826128, -0.18566659, 2.9305278e-08, 0, 1.1710849, 0)
+transform = Transform3D(0.17363255, -0.9189245, -0.35416046, 0.6688495, -0.15392199, 0.72728825, -0.722836, -0.36316097, 0.58789635, 0, 1.1710849, 0)
 light_color = Color(0.81, 0.06749999, 0, 1)
 light_cull_mask = 4294967294
 shadow_enabled = true
 shadow_caster_mask = 4294967294
 sky_mode = 1
+
+[node name="RoomGuest" parent="." unique_id=1684007482 instance=ExtResource("3_p722y")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.3480301, 0, -19.478569)
+
+[node name="RoomGuest2" parent="." unique_id=1263802787 instance=ExtResource("3_p722y")]
+transform = Transform3D(0.591866, 0, 0.37375742, 0, 0.7, 0, -0.37375742, 0, 0.591866, -1.9024992, 0, -19)
+
+[node name="RoomGuest3" parent="." unique_id=1106210752 instance=ExtResource("3_p722y")]
+transform = Transform3D(0.69700277, 0, -0.06470808, 0, 0.7, 0, 0.06470808, 0, 0.69700277, 2.4747372, 9.536743e-07, -18.894274)
+
+[node name="RoomGuest4" parent="." unique_id=1244546515 instance=ExtResource("3_p722y")]
+transform = Transform3D(0.63348293, 0, -0.29782435, 0, 0.7, 0, 0.29782435, 0, 0.63348293, 6.1293964, 0, -19.299774)

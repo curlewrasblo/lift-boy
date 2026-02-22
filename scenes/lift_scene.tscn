@@ -15,7 +15,6 @@
 [ext_resource type="ArrayMesh" uid="uid://cd4mcdkox1w0j" path="res://button_mesh.tres" id="7_e203u"]
 [ext_resource type="Script" uid="uid://d2gjextgphvai" path="res://scenes/GameManager.gd" id="8_qhcon"]
 [ext_resource type="Script" uid="uid://bc150812egh8j" path="res://scenes/RoomManager.gd" id="9_6v0m2"]
-[ext_resource type="Texture2D" uid="uid://b61jj1gwydbql" path="res://icon.svg" id="10_507rt"]
 [ext_resource type="Script" uid="uid://cy5b2yb4a5a1t" path="res://scenes/GuestSpawner.gd" id="11_drltt"]
 [ext_resource type="PackedScene" uid="uid://bqln5jtayrqik" path="res://prefabs/room_1.tscn" id="11_ohcas"]
 [ext_resource type="PackedScene" uid="uid://c2t8bxbohlvi" path="res://prefabs/guest.tscn" id="11_rw2bm"]
@@ -23,20 +22,22 @@
 [ext_resource type="Texture2D" uid="uid://e4q55nmflknc" path="res://textures/first_floor.png" id="13_cge54"]
 [ext_resource type="Texture2D" uid="uid://cmykbr0bndgq1" path="res://textures/pink_donut.png" id="13_jybhw"]
 [ext_resource type="PackedScene" uid="uid://vnuqyvijwdkt" path="res://prefabs/room_3.tscn" id="14_h1faf"]
-[ext_resource type="Texture2D" uid="uid://n8jtjfutp8a6" path="res://textures/green_cube.png" id="14_qyj5y"]
 [ext_resource type="PackedScene" uid="uid://dhpmaegonireh" path="res://scenes/liftboy.tscn" id="14_rw2bm"]
 [ext_resource type="Texture2D" uid="uid://d1lgtbtefwbd6" path="res://textures/red_sphere.png" id="15_0jfjd"]
 [ext_resource type="PackedScene" uid="uid://dir452doe4vju" path="res://prefabs/room_4.tscn" id="15_qa08c"]
 [ext_resource type="Texture2D" uid="uid://c5hwxpb4dolyy" path="res://textures/black_empty.png" id="16_n6p47"]
 [ext_resource type="PackedScene" uid="uid://c031ae14yixt5" path="res://prefabs/room_5.tscn" id="16_wgmnt"]
 [ext_resource type="PackedScene" uid="uid://bs2a47kmhrx02" path="res://prefabs/room_entrance.tscn" id="17_4dv34"]
-[ext_resource type="Texture2D" uid="uid://dg32chjnn4w1d" path="res://textures/yellow_car.png" id="17_5mvw7"]
+[ext_resource type="Texture2D" uid="uid://n8jtjfutp8a6" path="res://textures/green_cube.png" id="19_qoafw"]
 [ext_resource type="Script" uid="uid://dkwn76vc85k38" path="res://scenes/LiftPath.gd" id="20_eixtg"]
 [ext_resource type="Texture2D" uid="uid://d3xtrf8frl66t" path="res://textures/number_1.png" id="20_w4elo"]
+[ext_resource type="Texture2D" uid="uid://dyf07bwpg1woy" path="res://textures/gym.png" id="21_oomqi"]
 [ext_resource type="Texture2D" uid="uid://beto4be7pbkgq" path="res://textures/number_2.png" id="21_u6h0e"]
 [ext_resource type="Texture2D" uid="uid://de1dheylm1x7n" path="res://textures/number_3.png" id="22_eoqc6"]
 [ext_resource type="Texture2D" uid="uid://ci0hqsw24tmvu" path="res://textures/number_4.png" id="23_e203u"]
+[ext_resource type="Texture2D" uid="uid://c0deihxpl57qa" path="res://textures/yellow_swim_icon.png" id="23_iubam"]
 [ext_resource type="Texture2D" uid="uid://d2e3uddhybd1o" path="res://textures/number_5.png" id="24_chv4t"]
+[ext_resource type="Texture2D" uid="uid://dxbdkcae7hnu0" path="res://textures/blue_icon.png" id="24_qoafw"]
 [ext_resource type="Texture2D" uid="uid://qdqy0jfv6o5p" path="res://textures/number_6.png" id="25_g0xgo"]
 [ext_resource type="Texture2D" uid="uid://b1ayomem0q161" path="res://textures/number_7.png" id="26_66li0"]
 [ext_resource type="Texture2D" uid="uid://b4f2toc13c5kg" path="res://textures/number_8.png" id="32_oomqi"]
@@ -44,7 +45,10 @@
 [ext_resource type="Texture2D" uid="uid://1chs3ipfjwbs" path="res://textures/listboy_sad.png" id="36_n6p47"]
 [ext_resource type="Texture2D" uid="uid://3017a1s7gt7" path="res://textures/listboy_happy.png" id="37_5mvw7"]
 [ext_resource type="Script" uid="uid://m3ree1qxpbd2" path="res://scenes/VibeManager.gd" id="38_5mvw7"]
+[ext_resource type="PackedScene" uid="uid://cxnn5ny3c03sx" path="res://prefabs/room_6.tscn" id="40_5ahvf"]
+[ext_resource type="PackedScene" uid="uid://dopdq2o3afq54" path="res://prefabs/room_7.tscn" id="41_iubam"]
 [ext_resource type="Script" uid="uid://yd8n6ugdg1bq" path="res://scenes/ProgressBarKnower.gd" id="42_g0xgo"]
+[ext_resource type="PackedScene" uid="uid://1xclhthd5ifb" path="res://prefabs/room_end.tscn" id="42_qoafw"]
 [ext_resource type="Script" uid="uid://dfxjx2idla5q2" path="res://scenes/NewScoreShowing.gd" id="45_66li0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u6h0e"]
@@ -332,7 +336,7 @@ material_override = ExtResource("3_w4elo")
 material_override = ExtResource("3_w4elo")
 
 [node name="LiftDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="2" unique_id=960699246]
-transform = Transform3D(0.9816611, 0, 0, 0, 0.98166084, 0, 0, 0, 1.6239326, 0.48249033, 1.0233474, -0.87390137)
+transform = Transform3D(0.9816611, 0, 0, 0, 0.9816608, 0, 0, 0, 1.6239326, 0.48249033, 1.0233474, -0.87390137)
 material_override = ExtResource("4_w4elo")
 
 [node name="FrontViewQuad" parent="ElevatorOrigin/ElevatorVisuals/lift" index="3" unique_id=717800495]
@@ -579,8 +583,8 @@ metadata/_custom_type_script = "uid://cy5b2yb4a5a1t"
 
 [node name="RoomManager" type="Node" parent="." unique_id=446105328 node_paths=PackedStringArray("all_rooms")]
 script = ExtResource("9_6v0m2")
-all_rooms = [NodePath("../rooms/room_entrance"), NodePath("../rooms/room_1"), NodePath("../rooms/room_2"), NodePath("../rooms/room_3"), NodePath("../rooms/room_4"), NodePath("../rooms/room_5"), NodePath("../rooms/room_4"), NodePath("../rooms/room_entrance")]
-icons_per_room = Array[Texture2D]([ExtResource("13_cge54"), ExtResource("14_qyj5y"), ExtResource("15_0jfjd"), ExtResource("16_n6p47"), ExtResource("17_5mvw7"), ExtResource("13_jybhw"), ExtResource("10_507rt"), ExtResource("10_507rt")])
+all_rooms = [NodePath("../rooms/room_entrance"), NodePath("../rooms/room_1"), NodePath("../rooms/room_2"), NodePath("../rooms/room_3"), NodePath("../rooms/room_4"), NodePath("../rooms/room_5"), NodePath("../rooms/room_6"), NodePath("../rooms/room_7"), NodePath("../rooms/room_end")]
+icons_per_room = Array[Texture2D]([ExtResource("13_cge54"), ExtResource("19_qoafw"), ExtResource("15_0jfjd"), ExtResource("16_n6p47"), ExtResource("21_oomqi"), ExtResource("13_jybhw"), ExtResource("23_iubam"), ExtResource("24_qoafw")])
 icons_per_floor = Array[Texture2D]([ExtResource("20_w4elo"), ExtResource("21_u6h0e"), ExtResource("22_eoqc6"), ExtResource("23_e203u"), ExtResource("24_chv4t"), ExtResource("25_g0xgo"), ExtResource("26_66li0"), ExtResource("32_oomqi")])
 metadata/_custom_type_script = "uid://bc150812egh8j"
 
@@ -600,7 +604,7 @@ metadata/_custom_type_script = "uid://m3ree1qxpbd2"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 
 [node name="liftboy" parent="." unique_id=1727757550 node_paths=PackedStringArray("victory_animator") instance=ExtResource("14_rw2bm")]
-transform = Transform3D(0.6274228, -0.065317996, 0.7759339, 0.034845065, 0.99783266, 0.055821486, -0.7778984, -0.007986211, 0.6283389, -1.1222178, 0.015355182, -0.16674891)
+transform = Transform3D(0.6274228, -0.065317996, 0.7759339, 0.034845065, 0.99783266, 0.055821482, -0.7778984, -0.007986211, 0.6283389, -1.1222178, 0.015355182, -0.16674891)
 victory_animator = NodePath("AnimationPlayer")
 victory_anim = &"Victory"
 
@@ -610,16 +614,31 @@ libraries/ = SubResource("AnimationLibrary_5ahvf")
 [node name="rooms" type="Node3D" parent="." unique_id=1331285265]
 
 [node name="room_1" parent="rooms" unique_id=1563608849 instance=ExtResource("11_ohcas")]
+visible = false
 
 [node name="room_2" parent="rooms" unique_id=1813439493 instance=ExtResource("12_ok3pb")]
+visible = false
 
-[node name="room_3" parent="rooms" unique_id=1690334209 instance=ExtResource("14_h1faf")]
+[node name="room_3" parent="rooms" unique_id=468672506 instance=ExtResource("14_h1faf")]
+visible = false
 
 [node name="room_4" parent="rooms" unique_id=323456603 instance=ExtResource("15_qa08c")]
+visible = false
 
 [node name="room_5" parent="rooms" unique_id=60564637 instance=ExtResource("16_wgmnt")]
+visible = false
+
+[node name="room_6" parent="rooms" unique_id=352286411 instance=ExtResource("40_5ahvf")]
+visible = false
+
+[node name="room_7" parent="rooms" unique_id=1477573976 instance=ExtResource("41_iubam")]
+visible = false
+
+[node name="room_end" parent="rooms" unique_id=1967174449 instance=ExtResource("42_qoafw")]
+visible = false
 
 [node name="room_entrance" parent="rooms" unique_id=752513694 instance=ExtResource("17_4dv34")]
+visible = false
 
 [node name="paths" type="Node3D" parent="." unique_id=1019826404]
 

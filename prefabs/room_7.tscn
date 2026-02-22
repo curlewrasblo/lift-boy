@@ -1,0 +1,356 @@
+[gd_scene format=3 uid="uid://dopdq2o3afq54"]
+
+[ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_vluxj"]
+[ext_resource type="Material" uid="uid://bi8a5o1lglx52" path="res://materials/blue_mat.tres" id="2_ynrle"]
+[ext_resource type="Material" uid="uid://b5l3p5b82l4ys" path="res://materials/elevator_dark_mat.tres" id="3_jyikt"]
+[ext_resource type="PackedScene" uid="uid://dmw3nn8n5hdau" path="res://prefabs/room_guest.tscn" id="5_vgqx7"]
+[ext_resource type="Script" uid="uid://c1g3w7xjgkjxs" path="res://prefabs/animation_player.gd" id="5_vluxj"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]
+size = Vector2(20, 40)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ynrle"]
+top_radius = 0.4
+bottom_radius = 0.2
+height = 10.0
+radial_segments = 16
+rings = 1
+cap_top = false
+
+[sub_resource type="Animation" id="Animation_8t7xx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RoomGuest5:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.3486931, 9.536743e-07, -22.17607)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RoomGuest4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.09037638, 5.500001, -22.41184)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RoomGuest3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.659448, 9.536743e-07, -16.442259)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RoomGuest2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.8144376, 4.800001, -18.928299)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RoomGuest:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.73453736, 0, -12.182507)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RoomGuest5:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.3911707, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RoomGuest4:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -5.5850534, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RoomGuest3:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.3138664, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("RoomGuest2:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.57686615, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("RoomGuest:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.89990926, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jyikt"]
+resource_name = "VineRoom"
+length = 10.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RoomGuest5:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333335, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(3.3486931, 9.536743e-07, -22.17607), Vector3(3.3486931, 9.536743e-07, -22.17607), Vector3(3.3486931, 5.000001, -22.17607)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RoomGuest4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.9666667, 5.366667, 5.4666667, 5.6333337),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.09037638, 5.500001, -22.41184), Vector3(-0.09037638, 5.500001, -22.41184), Vector3(-0.09037638, 9.536743e-07, -22.41184), Vector3(-0.09, 0.24, -22.412), Vector3(-0.09, 0, -22.412)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RoomGuest3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.659448, 9.536743e-07, -16.442259)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RoomGuest2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.6000001, 1.9333333, 2.0666666, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.8144376, 4.800001, -18.928299), Vector3(1.8144376, 4.800001, -18.928299), Vector3(1.814, 0, -18.928), Vector3(1.814, 0.31035855, -18.928), Vector3(1.814, 0, -18.928)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RoomGuest:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.73333335, 1.5333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.73453736, 0, -12.182507), Vector3(-0.73453736, 0, -12.182507), Vector3(-0.73453736, 6, -12.182507)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RoomGuest5:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.23333335, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2.3911707, 0), Vector3(0, 2.3911707, 0), Vector3(0, -0.7504218, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RoomGuest4:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 4.9666667, 5.366667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -5.5850534, 0), Vector3(0, -5.5850534, 0), Vector3(0, 2.3911707, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RoomGuest3:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.3138664, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("RoomGuest2:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.6000001, 1.9333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.57686615, 0), Vector3(0, -0.57686615, 0), Vector3(0, 5.3564153, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("RoomGuest:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.73333335, 1.5333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.89990926, 0), Vector3(0, 0.89990926, 0), Vector3(0, -2.7080877, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8t7xx"]
+_data = {
+&"RESET": SubResource("Animation_8t7xx"),
+&"VineRoom": SubResource("Animation_jyikt")
+}
+
+[node name="room_7" type="Node3D" unique_id=1813439493]
+script = ExtResource("1_vluxj")
+metadata/_custom_type_script = "uid://dd0en0wyj5nxi"
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=629739209]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.8)
+layers = 2
+material_override = ExtResource("2_ynrle")
+mesh = SubResource("PlaneMesh_6tfno")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1320487271]
+transform = Transform3D(1, 0, 0, 0, 0.5063197, -0.862346, 0, 0.862346, 0.5063197, 3.8883972, 6.369669, -53.780594)
+layers = 2
+material_override = ExtResource("2_ynrle")
+mesh = SubResource("PlaneMesh_6tfno")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1605097314]
+transform = Transform3D(0.8200619, 0, -0.5722747, 0.53555655, -0.3524297, 0.76744545, -0.20168659, -0.9358383, -0.28901422, 0, 6.018776, 0)
+layers = 2
+light_color = Color(0.35000002, 0.4475001, 1, 1)
+light_cull_mask = 4294967294
+shadow_enabled = true
+shadow_opacity = 0.3
+shadow_blur = 0.007
+shadow_caster_mask = 4294967294
+sky_mode = 1
+
+[node name="RoomGuest" parent="." unique_id=1684007482 instance=ExtResource("5_vgqx7")]
+transform = Transform3D(0.4662608, 0, 0.5874529, 0, 0.75, 0, -0.5874529, 0, 0.4662608, -0.73453736, 0, -12.182507)
+
+[node name="vine" type="MeshInstance3D" parent="RoomGuest" unique_id=53487541]
+transform = Transform3D(0.8289081, 0, -1.0443606, 0, 1.3333334, 0, 1.0443606, 0, 0.8289081, -0.025201797, 9.449168, -0.051825523)
+layers = 2
+material_override = ExtResource("3_jyikt")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_ynrle")
+
+[node name="RoomGuest2" parent="." unique_id=1954892885 instance=ExtResource("5_vgqx7")]
+transform = Transform3D(0.5029056, 0, -0.32723996, 0, 0.6, 0, 0.32723996, 0, 0.5029056, 1.8144376, 4.800001, -18.928299)
+
+[node name="vine" type="MeshInstance3D" parent="RoomGuest2" unique_id=736485187]
+transform = Transform3D(0.8289081, 0, -1.0443606, 0, 1.3333334, 0, 1.0443606, 0, 0.8289081, -0.025201797, 9.449168, -0.051825523)
+layers = 2
+material_override = ExtResource("3_jyikt")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_ynrle")
+
+[node name="RoomGuest3" parent="." unique_id=910319437 instance=ExtResource("5_vgqx7")]
+transform = Transform3D(0.16771422, 0, -0.6383352, 0, 0.66, 0, 0.6383352, 0, 0.16771422, 3.659448, 9.536743e-07, -16.442259)
+
+[node name="vine" type="MeshInstance3D" parent="RoomGuest3" unique_id=1350426385]
+transform = Transform3D(0.8289081, 0, -1.0443606, 0, 1.3333334, 0, 1.0443606, 0, 0.8289081, -0.025201797, 9.449168, -0.051825523)
+layers = 2
+material_override = ExtResource("3_jyikt")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_ynrle")
+
+[node name="RoomGuest4" parent="." unique_id=330956457 instance=ExtResource("5_vgqx7")]
+transform = Transform3D(0.38302216, 0, 0.32139388, 0, 0.5, 0, -0.32139388, 0, 0.38302216, -0.09037638, 5.500001, -22.41184)
+
+[node name="vine" type="MeshInstance3D" parent="RoomGuest4" unique_id=1349801479]
+transform = Transform3D(0.8289081, 0, -1.0443606, 0, 1.3333334, 0, 1.0443606, 0, 0.8289081, -0.025201797, 9.449168, -0.051825523)
+layers = 2
+material_override = ExtResource("3_jyikt")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_ynrle")
+
+[node name="RoomGuest5" parent="." unique_id=1985555186 instance=ExtResource("5_vgqx7")]
+transform = Transform3D(-0.3657006, 0, 0.3409737, 0, 0.5, 0, -0.3409737, 0, -0.3657006, 3.3486931, 9.536743e-07, -22.17607)
+
+[node name="vine" type="MeshInstance3D" parent="RoomGuest5" unique_id=279800194]
+transform = Transform3D(0.8289081, 0, -1.0443606, 0, 1.3333334, 0, 1.0443606, 0, 0.8289081, -0.025201797, 9.449168, -0.051825523)
+layers = 2
+material_override = ExtResource("3_jyikt")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_ynrle")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1694246546 node_paths=PackedStringArray("my_room")]
+libraries/ = SubResource("AnimationLibrary_8t7xx")
+speed_scale = 0.3
+script = ExtResource("5_vluxj")
+my_room = NodePath("..")
+my_animation = &"VineRoom"

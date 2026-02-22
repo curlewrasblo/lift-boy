@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dmw3nn8n5hdau"]
+
+[ext_resource type="PackedScene" uid="uid://bqj2chhebqpy" path="res://alien_guest.glb" id="1_m14kc"]
+[ext_resource type="Shader" uid="uid://b7tftvlh8xwht" path="res://prefabs/CharacterShader.gdshader" id="2_rxpsy"]
+[ext_resource type="Texture2D" uid="uid://da4ujy2q3g35p" path="res://textures/guest_uv_rgb_texture.png" id="3_jprwd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fqf0x"]
+noise_type = 4
+frequency = 0.0187
+fractal_type = 2
+fractal_weighted_strength = 0.59
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jw1ud"]
+width = 256
+height = 256
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_fqf0x")
+seamless = true
+in_3d_space = true
+as_normal_map = true
+bump_strength = 2.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m14kc"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_rxpsy")
+shader_parameter/r_color = Color(0.65882355, 0.44705883, 0.21960784, 1)
+shader_parameter/g_color = Color(0.6784314, 0.6039216, 0.6431373, 1)
+shader_parameter/b_color = Color(0.019607844, 0, 0.09019608, 1)
+shader_parameter/rgb_uv_texture_separator = ExtResource("3_jprwd")
+shader_parameter/opacity = 1.0
+shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
+shader_parameter/use_normal_map = true
+shader_parameter/shade_steps = 2.0
+shader_parameter/diffuse_strength = 1.0000000475
+shader_parameter/specular_strength = 0.006000000285
+
+[node name="RoomGuest" type="Node3D" unique_id=1684007482]
+
+[node name="alien_guest" parent="." unique_id=155533951 instance=ExtResource("1_m14kc")]
+
+[node name="Skeleton3D" parent="alien_guest" index="0" unique_id=2104805073]
+bones/0/rotation = Quaternion(6.717942e-08, 0, 0, 1)
+bones/1/rotation = Quaternion(0.012931988, 1.4541501e-25, -2.871479e-18, 0.9999164)
+bones/2/position = Vector3(3.3762049e-18, 2.1822376, 0.015205079)
+bones/2/rotation = Quaternion(-0.009880914, 9.587858e-18, 3.541405e-18, 0.9999512)
+bones/3/position = Vector3(2.0173421e-18, 2.3690643, 0.011512492)
+bones/3/rotation = Quaternion(-0.013161673, 9.493213e-18, 9.601829e-19, 0.9999134)
+bones/4/position = Vector3(1.5228155e-18, 2.5968676, 0.0055144313)
+bones/4/rotation = Quaternion(-0.012587521, 9.539461e-18, 3.6796513e-18, 0.9999208)
+bones/5/position = Vector3(-0.40107247, 2.0136614, 0.010843911)
+bones/5/rotation = Quaternion(-0.045752786, -0.18151084, 0.9077426, 0.37545162)
+bones/6/position = Vector3(-0.656713, 1.7629557, -0.12903857)
+bones/6/rotation = Quaternion(0.026108444, 0.17203733, 0.9847402, -0.0028652397)
+bones/7/position = Vector3(0.40107247, 2.0136614, 0.010843911)
+bones/7/rotation = Quaternion(0.045844838, -0.22798088, 0.8913423, -0.3891425)
+bones/8/position = Vector3(0.6597104, 1.7856337, -0.15910423)
+bones/8/rotation = Quaternion(0.0047470103, 0.051692393, 0.9976893, -0.043833476)
+bones/9/rotation = Quaternion(-0.18645062, -0.14141539, 0.5875259, 0.7746297)
+bones/10/position = Vector3(-0.22788212, 1.0384666, -0.12092577)
+bones/10/rotation = Quaternion(0.032377366, 0.23587097, 0.96206915, 0.13318999)
+bones/11/position = Vector3(-0.3757224, 0.5150492, 0.16277328)
+bones/11/rotation = Quaternion(-0.018523602, -0.1164933, 0.9804215, 0.15767017)
+bones/12/rotation = Quaternion(-0.18645062, 0.14141539, -0.5875259, 0.7746297)
+bones/13/position = Vector3(0.22788212, 1.0384666, -0.12092577)
+bones/13/rotation = Quaternion(-0.03318763, 0.24084243, 0.9607971, -0.1332767)
+bones/14/position = Vector3(0.37517986, 0.5179852, 0.16840124)
+bones/14/rotation = Quaternion(0.016521933, -0.10258374, 0.98196524, -0.15794888)
+bones/18/position = Vector3(-0.5353703, 0.031608254, 0.040089726)
+bones/19/position = Vector3(-0.64867747, 1.2461045, 0.057022464)
+bones/20/position = Vector3(0.5358543, 0.031444564, 0.060161054)
+bones/21/position = Vector3(0.7080309, 1.2413007, -0.10266653)
+
+[node name="Guest" parent="alien_guest/Skeleton3D" index="0" unique_id=1669150990]
+transform = Transform3D(-0.99439526, 0, -0.10572606, 0, 1, 0, 0.10572606, 0, -0.99439526, 0, 0, 0)
+layers = 2
+material_override = SubResource("ShaderMaterial_m14kc")
+
+[editable path="alien_guest"]

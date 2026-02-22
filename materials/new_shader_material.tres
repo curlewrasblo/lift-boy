@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c142vnib5jnnu"]
+
+[ext_resource type="Shader" uid="uid://b7tftvlh8xwht" path="res://prefabs/CharacterShader.gdshader" id="1_72u4d"]
+[ext_resource type="Texture2D" uid="uid://da4ujy2q3g35p" path="res://textures/guest_uv_rgb_texture.png" id="2_deope"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fqf0x"]
+noise_type = 4
+frequency = 0.0187
+fractal_type = 2
+fractal_weighted_strength = 0.59
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jw1ud"]
+width = 256
+height = 256
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_fqf0x")
+seamless = true
+in_3d_space = true
+as_normal_map = true
+bump_strength = 2.3
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_72u4d")
+shader_parameter/r_color = Color(0.0010838978, 0.0010838978, 0.0010838978, 1)
+shader_parameter/g_color = Color(10.175062, 10.175062, 10.175062, 1)
+shader_parameter/b_color = Color(0, 0, 0, 1)
+shader_parameter/rgb_uv_texture_separator = ExtResource("2_deope")
+shader_parameter/opacity = 1.0
+shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
+shader_parameter/use_normal_map = false
+shader_parameter/shade_steps = 2.0
+shader_parameter/diffuse_strength = 1.5
+shader_parameter/specular_strength = 0.0

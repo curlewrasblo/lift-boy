@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://c031ae14yixt5"]
 
 [ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_0vjft"]
+[ext_resource type="PackedScene" uid="uid://dmw3nn8n5hdau" path="res://prefabs/room_guest.tscn" id="2_0vjft"]
+[ext_resource type="Shader" uid="uid://b7tftvlh8xwht" path="res://prefabs/CharacterShader.gdshader" id="3_4rnht"]
+[ext_resource type="Script" uid="uid://bpjiyupmql1i7" path="res://prefabs/pink_room.gd" id="3_y6mad"]
+[ext_resource type="Texture2D" uid="uid://da4ujy2q3g35p" path="res://textures/guest_uv_rgb_texture.png" id="4_xbwhs"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]
 size = Vector2(20, 40)
@@ -9,7 +13,47 @@ size = Vector2(20, 40)
 inner_radius = 1.2
 outer_radius = 1.6
 
-[node name="room_4" type="Node3D" unique_id=1813439493]
+[sub_resource type="Curve3D" id="Curve3D_y6mad"]
+closed = true
+bake_interval = 11.48
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3.808447, 0, -2.047327, 0, 0, 0, 0, 0, 0, -0.27125955, 0, -8.006531, 0, 0, 0, 0, 0, 0, 2.0135164, 0, -9.834544, 0, 0, 0, 0, 0, 0, 1.0026264, 0, -12.067378, 0, 0, 0, 0, 0, 0, 2.6504397, 0, -13.919492, 0, 0, 0, 0, 0, 0, 11.046564, 0, -14.843783, 0, 0, 0, 0, 0, 0, 11.23428, -2.7346625, -14.738078, 0, 0, 0, 0, 0, 0, -7.5550356, -3.6672866, -11.556524, 0, 0, 0, 0, 0, 0, -8.762, 0, -10.408, 0, 0, 0, 0, 0, 0, -3.3086271, 0, -13.999469, 0, 0, 0, 0, 0, 0, 0.58601665, 9.536743e-07, -18.930843, 0, 0, 0, 0, 0, 0, 0.06221795, 0, -22.886494, 0, 0, 0, 0, 0, 0, 0.6301974, 0, -24.307867, 0, 0, 0, 0, 0, 0, 2.4281845, 0, -23.69541, 0, 0, 0, 0, 0, 0, 2.476152, 0, -26.031677, 0, 0, 0, 0, 0, 0, -0.6705941, 0, -26.767626, 0, 0, 0, 0, 0, 0, -1.4092994, 0.440988, -35.096424, 0, 0, 0, 0, 0, 0, -1.2614286, -3.3698606, -34.467743, 0, 0, 0, 0, 0, 0, -3.6136494, -4.6624627, -1.6981716),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 19
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fqf0x"]
+noise_type = 4
+frequency = 0.0187
+fractal_type = 2
+fractal_weighted_strength = 0.59
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jw1ud"]
+width = 256
+height = 256
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_fqf0x")
+seamless = true
+in_3d_space = true
+as_normal_map = true
+bump_strength = 2.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_00em5"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_4rnht")
+shader_parameter/r_color = Color(0.65882355, 0.44705883, 0.21960784, 1)
+shader_parameter/g_color = Color(0.6784314, 0.6039216, 0.6431373, 1)
+shader_parameter/b_color = Color(0.019607844, 0, 0.09019608, 1)
+shader_parameter/rgb_uv_texture_separator = ExtResource("4_xbwhs")
+shader_parameter/opacity = 1.0
+shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
+shader_parameter/use_normal_map = true
+shader_parameter/shade_steps = 2.0
+shader_parameter/diffuse_strength = 1.0000000475
+shader_parameter/specular_strength = 0.006000000285
+
+[node name="room_5" type="Node3D" unique_id=1813439493]
 script = ExtResource("1_0vjft")
 metadata/_custom_type_script = "uid://dd0en0wyj5nxi"
 
@@ -26,8 +70,8 @@ mesh = SubResource("PlaneMesh_6tfno")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1594981417]
 transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 8.149672, 0)
 layers = 2
-light_color = Color(1, 0.29000002, 0.6568335, 1)
-light_energy = 0.8
+light_color = Color(1, 0.22000003, 0.62300014, 1)
+light_energy = 1.25
 light_cull_mask = 4294967294
 shadow_enabled = true
 shadow_opacity = 0.5
@@ -36,41 +80,71 @@ shadow_caster_mask = 4294967294
 sky_mode = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=420596116]
-transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -0.9999999, 0, 0.9999999, -4.371138e-08, 0, 0.7, -8)
+transform = Transform3D(0.9838975, -0.1787335, 7.812687e-09, 0, -4.3711378e-08, -0.9999999, 0.17873351, 0.9838974, -4.3007514e-08, 0, 0.7, -8.738666)
 layers = 2
 mesh = SubResource("TorusMesh_kuuhf")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1717356833]
-transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -0.9999999, 0, 0.9999999, -4.371138e-08, 1.642683, 0.7, -10.767805)
+transform = Transform3D(0.9336511, -0.17548712, 7.670785e-09, 0, -4.152582e-08, -0.95, 0.17548712, 0.9336511, -4.081118e-08, 1.8778716, 0.7, -9.897769)
 layers = 2
 mesh = SubResource("TorusMesh_kuuhf")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=1471990987]
-transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -0.9999999, 0, 0.9999999, -4.371138e-08, -2.250246, 0.7, -14.998272)
+transform = Transform3D(0.8, 0, 0, 0, -3.4969112e-08, -0.8, 0, 0.8, -3.4969112e-08, -2.250246, 0.7, -14.998272)
+layers = 2
+mesh = SubResource("TorusMesh_kuuhf")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="." unique_id=1395995196]
+transform = Transform3D(0.8990911, -0.04043439, 1.7674417e-09, 1.2436275e-15, -3.934024e-08, -0.8999999, 0.04043439, 0.8990911, -3.9300527e-08, 1.0954742, 0.7, -12.043613)
 layers = 2
 mesh = SubResource("TorusMesh_kuuhf")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=1252601251]
-transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -0.9999999, 0, 0.9999999, -4.371138e-08, -3.127842, 0.7, -16.730965)
+transform = Transform3D(0.7, 0, 0, 0, -3.059797e-08, -0.7, 0, 0.7, -3.059797e-08, -1.3898067, 0.7, -16.122654)
 layers = 2
 mesh = SubResource("TorusMesh_kuuhf")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="." unique_id=1107878292]
-transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -0.9999999, 0, 0.9999999, -4.371138e-08, -2.250246, 0.7, -24.539326)
+transform = Transform3D(0.6, 0, 0, 0, -2.6226834e-08, -0.6, 0, 0.6, -2.6226834e-08, -0.42531013, 0.7, -17.239578)
 layers = 2
 mesh = SubResource("TorusMesh_kuuhf")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="." unique_id=1363133818]
-transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -0.9999999, 0, 0.9999999, -4.371138e-08, -0.45004845, 0.7, -25.394423)
+transform = Transform3D(0.75, 0, 0, 0, -3.278354e-08, -0.75, 0, 0.75, -3.278354e-08, 0.11481285, 0.7, -23.395683)
 layers = 2
 mesh = SubResource("TorusMesh_kuuhf")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="." unique_id=215018055]
-transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -0.9999999, 0, 0.9999999, -4.371138e-08, 1.8902092, 0.7, -26.429535)
+transform = Transform3D(0.75, 0, 0, 0, -3.278354e-08, -0.75, 0, 0.75, -3.278354e-08, 2.4550705, 0.7, -24.430796)
 layers = 2
 mesh = SubResource("TorusMesh_kuuhf")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="." unique_id=2042783934]
-transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -0.9999999, 0, 0.9999999, -4.371138e-08, -2.4302673, 0.7, -28.432257)
+transform = Transform3D(0.75, 0, 0, 0, -3.278354e-08, -0.75, 0, 0.75, -3.278354e-08, -0.91334534, 0.7, -27.397991)
 layers = 2
 mesh = SubResource("TorusMesh_kuuhf")
+
+[node name="Path3D" type="Path3D" parent="." unique_id=1553594041]
+curve = SubResource("Curve3D_y6mad")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" unique_id=1625493429]
+transform = Transform3D(0.8599166, 0, -0.5104175, 0, 0.9999924, 0, 0.51041824, 0, 0.85991544, -3.808447, 0, -2.047327)
+tilt_enabled = false
+
+[node name="RoomGuest" parent="Path3D/PathFollow3D" unique_id=1684007482 instance=ExtResource("2_0vjft")]
+transform = Transform3D(0.42, 0, 0, 0, 0.42, 0, 0, 0, 0.42, 0, 0, 0)
+
+[node name="Guest" parent="Path3D/PathFollow3D/RoomGuest/alien_guest/Skeleton3D" parent_id_path=PackedInt32Array(1684007482, 155533951, 2104805073) index="0" unique_id=1669150990]
+material_override = SubResource("ShaderMaterial_00em5")
+
+[node name="PinkRoom" type="Node3D" parent="." unique_id=2007727385 node_paths=PackedStringArray("follower", "animator")]
+script = ExtResource("3_y6mad")
+follower = NodePath("../Path3D/PathFollow3D")
+move_speed = 0.021
+animator = NodePath("../Path3D/PathFollow3D/RoomGuest/alien_guest/AnimationPlayer")
+walk_animation = &"Walk"
+walk_speed = 2.2
+metadata/_custom_type_script = "uid://bpjiyupmql1i7"
+
+[editable path="Path3D/PathFollow3D/RoomGuest"]
+[editable path="Path3D/PathFollow3D/RoomGuest/alien_guest"]

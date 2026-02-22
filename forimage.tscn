@@ -1,0 +1,424 @@
+[gd_scene format=3 uid="uid://ch8s3b3o4sucu"]
+
+[ext_resource type="Environment" uid="uid://hkjmpt7k1oa8" path="res://default_environment.tres" id="1_bvbwp"]
+[ext_resource type="Script" uid="uid://bruclvenhfbf6" path="res://forimage.gd" id="1_qscxm"]
+[ext_resource type="PackedScene" uid="uid://dfk076khkyyak" path="res://liftboy.glb" id="2_dk1v4"]
+[ext_resource type="PackedScene" uid="uid://cu3v4ku0cbgh7" path="res://lift.glb" id="4_y4h4o"]
+[ext_resource type="Material" uid="uid://dpum6i1rmauai" path="res://materials/elevator_mat.tres" id="5_jmnym"]
+[ext_resource type="Material" uid="uid://ccnt2fbcclisv" path="res://materials/doors_mat.tres" id="6_2pb4g"]
+[ext_resource type="Material" uid="uid://dy7mnuivkmjns" path="res://materials/elevator_moving_mat.tres" id="7_e5b16"]
+[ext_resource type="Material" uid="uid://bm10j1w0h1lpv" path="res://materials/elevator_side_obj.tres" id="8_der6d"]
+[ext_resource type="ArrayMesh" uid="uid://cd4mcdkox1w0j" path="res://button_mesh.tres" id="9_bkmnr"]
+[ext_resource type="Material" uid="uid://b5l3p5b82l4ys" path="res://materials/elevator_dark_mat.tres" id="10_hdg5o"]
+[ext_resource type="PackedScene" uid="uid://dquyd4j8v6iv6" path="res://prefabs/lift_button.tscn" id="11_trg2p"]
+[ext_resource type="Shader" uid="uid://c57yfj2tx5gal" path="res://prefabs/IconShader.gdshader" id="12_qscxm"]
+[ext_resource type="Script" uid="uid://c1o8smjuxcnum" path="res://scenes/LiftMark.gd" id="12_sprfn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_odmnb"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_color = Color(0.06, 0.05375, 0.044999998, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_1w64a"]
+size = Vector2(6.4, 4)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wv5rq"]
+top_radius = 0.2
+bottom_radius = 0.2
+radial_segments = 12
+rings = 1
+cap_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ohtu"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("12_qscxm")
+shader_parameter/icon_opacity = 1.0
+shader_parameter/billboard = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y4h4o"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("12_qscxm")
+shader_parameter/icon_opacity = 1.0
+shader_parameter/billboard = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jmnym"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("12_qscxm")
+shader_parameter/icon_opacity = 1.0
+shader_parameter/billboard = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2pb4g"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("12_qscxm")
+shader_parameter/icon_opacity = 1.0
+shader_parameter/billboard = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qscxm"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("12_qscxm")
+shader_parameter/icon_opacity = 1.0
+shader_parameter/billboard = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e5b16"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("12_qscxm")
+shader_parameter/icon_opacity = 1.0
+shader_parameter/billboard = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_der6d"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("12_qscxm")
+shader_parameter/icon_opacity = 1.0
+shader_parameter/billboard = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bkmnr"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("12_qscxm")
+shader_parameter/icon_opacity = 1.0
+shader_parameter/billboard = false
+
+[node name="Node3D" type="Node3D" unique_id=587177788]
+script = ExtResource("1_qscxm")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1456252137]
+transform = Transform3D(0.03293525, 0.9968608, -0.07199953, 0.028134027, 0.07108537, 0.9970734, 0.99906147, -0.0348645, -0.025704494, 1.356902, 1.176034, 0.07639116)
+current = true
+fov = 36.0
+size = 2.869
+near = 0.008
+far = 7.05
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1160461933]
+environment = ExtResource("1_bvbwp")
+
+[node name="liftboy" type="Node3D" parent="." unique_id=578582774]
+transform = Transform3D(-0.0021641552, 0.9999977, 4.3711285e-08, 0.17466179, 0.00037795305, 0.98462844, 0.9846262, 0.0021308966, -0.17466219, 0.23621523, 0.10457158, 0.1670022)
+
+[node name="liftboy" parent="liftboy" unique_id=1469781261 instance=ExtResource("2_dk1v4")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
+
+[node name="Skeleton3D" parent="liftboy/liftboy/Root" parent_id_path=PackedInt32Array(1469781261, 1963038793) index="0" unique_id=1166260879]
+bones/1/position = Vector3(-2.5820583e-09, -0.7985116, 0.017100204)
+bones/3/rotation = Quaternion(-0.02455229, -5.95873e-08, -1.4634529e-09, 0.9996985)
+bones/4/rotation = Quaternion(0.062989324, -3.793761e-13, 2.4041438e-14, 0.9980142)
+bones/5/rotation = Quaternion(-0.00075089396, 0.014519517, 0.98880845, 0.14848077)
+bones/8/rotation = Quaternion(-0.0008839894, -0.014479298, -0.98539764, 0.16964991)
+bones/12/rotation = Quaternion(0.03671653, 0.05134824, 0.7996573, 0.5971294)
+bones/13/rotation = Quaternion(-0.23399587, -0.015316043, 0.040078107, 0.9712904)
+bones/15/rotation = Quaternion(0.018313838, -0.023639712, -0.80430454, 0.59346455)
+bones/16/rotation = Quaternion(-0.081413895, 0.0010706009, -0.038632426, 0.9959308)
+
+[node name="TwoBoneIK3D" type="TwoBoneIK3D" parent="liftboy/liftboy/Root/Skeleton3D" index="1" unique_id=1923081533]
+active = false
+mutable_bone_axes = false
+setting_count = 1
+settings/0/target_node = NodePath("../../../../LeftArmIK")
+settings/0/pole_node = NodePath("../../../../IKPole")
+settings/0/root_bone_name = "Arm.Upper.L"
+settings/0/root_bone = 8
+settings/0/middle_bone_name = "Arm.Lower.L"
+settings/0/middle_bone = 9
+settings/0/pole_direction = 0
+settings/0/end_bone_name = "Hand.L"
+settings/0/end_bone = 10
+settings/0/use_virtual_end = false
+settings/0/extend_end_bone = true
+settings/0/end_bone/direction = 6
+settings/0/end_bone/length = 0.0
+
+[node name="LookAtModifier3D" type="LookAtModifier3D" parent="liftboy/liftboy/Root/Skeleton3D" index="2" unique_id=782954502]
+visible = false
+active = false
+bone_name = "Neck"
+bone = 3
+origin_offset = Vector3(0, -2, 0)
+duration = 0.5
+transition_type = 7
+ease_type = 2
+use_angle_limitation = true
+symmetry_limitation = true
+primary_limit_angle = 1.5707964
+primary_damp_threshold = 0.9
+secondary_limit_angle = 6.2831855
+secondary_damp_threshold = 1.0
+
+[node name="LeftArmIK" type="Marker3D" parent="liftboy" unique_id=1104113012]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1779306, 0.56620044, 0.023010254)
+visible = false
+
+[node name="IKPole" type="Node3D" parent="liftboy" unique_id=2099284726]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47161865, 0.66638184, -0.48986816)
+visible = false
+
+[node name="IKHead" type="Node3D" parent="liftboy" unique_id=1196753573]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+visible = false
+
+[node name="ElevatorOrigin" type="Node3D" parent="." unique_id=1623793177]
+transform = Transform3D(0.99985933, 0, 0.016771829, 0, 1, 0, -0.016771829, 0, 0.99985933, 1.0029957, -1.1920929e-07, 0.069676876)
+
+[node name="ElevatorVisuals" type="Node3D" parent="ElevatorOrigin" unique_id=1107196874]
+
+[node name="lift" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1239071263 instance=ExtResource("4_y4h4o")]
+
+[node name="BoyDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="0" unique_id=1144416654]
+material_override = ExtResource("5_jmnym")
+
+[node name="Lift" parent="ElevatorOrigin/ElevatorVisuals/lift" index="1" unique_id=129340244]
+material_override = ExtResource("5_jmnym")
+
+[node name="LiftDoor" parent="ElevatorOrigin/ElevatorVisuals/lift" index="2" unique_id=960699246]
+transform = Transform3D(0.9816611, 0, 0, 0, 0.9816608, 0, 0, 0, 1.6239326, 0.48249033, 1.0233474, -0.87390137)
+material_override = ExtResource("6_2pb4g")
+
+[node name="FrontViewQuad" parent="ElevatorOrigin/ElevatorVisuals/lift" index="3" unique_id=717800495]
+material_override = ExtResource("7_e5b16")
+cast_shadow = 0
+
+[node name="ButtonBackground" parent="ElevatorOrigin/ElevatorVisuals/lift" index="4" unique_id=642498938]
+transform = Transform3D(-0.005030867, 0.29995796, -8.43248e-05, -0.0050285356, -1.3407665e-08, 0.29995787, 0.29991567, 0.0050315764, 0.0050278287, 0.03750968, 0.27584928, 0.029558636)
+material_override = ExtResource("8_der6d")
+
+[node name="ButtonVisual" parent="ElevatorOrigin/ElevatorVisuals/lift" index="5" unique_id=742591336]
+visible = false
+mesh = ExtResource("9_bkmnr")
+
+[node name="BehindDoorBlockerQuad" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=168371655]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.63855314, 1.2599237, -1.1652715)
+visible = false
+material_override = SubResource("StandardMaterial3D_odmnb")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_1w64a")
+
+[node name="toppipes" type="Node3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1765156049]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 2.835, 0)
+visible = false
+
+[node name="pipe5" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/toppipes" unique_id=1825339121]
+transform = Transform3D(2, 0, 0, 0, 0.99604106, 0.062314898, 0, -0.08889429, 0.6982248, 0, -1.077, 0.86)
+material_override = ExtResource("10_hdg5o")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wv5rq")
+
+[node name="pipe7" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/toppipes" unique_id=304834215]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.5, -1.3028063, -1.0800002, 0.771)
+material_override = ExtResource("10_hdg5o")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wv5rq")
+
+[node name="pipe8" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/toppipes" unique_id=488737240]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -1.0178062, -1.0800002, 0.772)
+material_override = ExtResource("10_hdg5o")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wv5rq")
+
+[node name="pipe9" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/toppipes" unique_id=2134052240]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.5, 1.2509933, -1.0799999, 0.766)
+material_override = ExtResource("10_hdg5o")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wv5rq")
+
+[node name="pipe10" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/toppipes" unique_id=97293099]
+transform = Transform3D(0.6, 0, 0, 0, 1, 0, 0, 0, 0.5, 0.99099326, -1.0799999, 0.736)
+material_override = ExtResource("10_hdg5o")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wv5rq")
+
+[node name="bottompipes" type="Node3D" parent="ElevatorOrigin/ElevatorVisuals" unique_id=1542109196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.043, 0)
+visible = false
+
+[node name="pipe2" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/bottompipes" unique_id=796549543]
+transform = Transform3D(2, 0, 0, 0, 0.99604106, 0.12578543, 0, -0.08889429, 1.4093981, 0, -1.089, 0.766)
+material_override = ExtResource("10_hdg5o")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wv5rq")
+
+[node name="pipe7" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/bottompipes" unique_id=1426501915]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.5, -1.2999415, -1.08, 0.771)
+material_override = ExtResource("10_hdg5o")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wv5rq")
+
+[node name="pipe8" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/bottompipes" unique_id=1491288633]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -1.0149415, -1.08, 0.772)
+material_override = ExtResource("10_hdg5o")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wv5rq")
+
+[node name="pipe9" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/bottompipes" unique_id=2144197662]
+transform = Transform3D(0.8, 0, 0, 0, 1, 0, 0, 0, 0.5, 1.2742813, -1.08, 0.766)
+material_override = ExtResource("10_hdg5o")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wv5rq")
+
+[node name="pipe10" type="MeshInstance3D" parent="ElevatorOrigin/ElevatorVisuals/bottompipes" unique_id=128957910]
+transform = Transform3D(0.6, 0, 0, 0, 1, 0, 0, 0, 0.5, 1.0142813, -1.08, 0.736)
+material_override = ExtResource("10_hdg5o")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_wv5rq")
+
+[node name="Buttons" type="Node3D" parent="ElevatorOrigin" unique_id=1783464795]
+transform = Transform3D(-0.00503087, 0.29995796, -8.436022e-05, -0.005030646, -1.341329e-08, 0.29995784, 0.29991564, 0.0050315796, 0.0050299405, 0.46216452, 0.035367727, -0.19955544)
+
+[node name="Button4" parent="ElevatorOrigin/Buttons" unique_id=1664231586 instance=ExtResource("11_trg2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11, 0)
+my_floor = 3
+
+[node name="SymbolMesh" parent="ElevatorOrigin/Buttons/Button4/Buttonbox" parent_id_path=PackedInt32Array(1664231586, 1429131886) index="0" unique_id=404405924]
+visible = false
+material_override = SubResource("ShaderMaterial_4ohtu")
+
+[node name="Button3" parent="ElevatorOrigin/Buttons" unique_id=1433273143 instance=ExtResource("11_trg2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29, 0)
+my_floor = 2
+
+[node name="SymbolMesh" parent="ElevatorOrigin/Buttons/Button3/Buttonbox" parent_id_path=PackedInt32Array(1433273143, 1429131886) index="0" unique_id=404405924]
+visible = false
+material_override = SubResource("ShaderMaterial_y4h4o")
+
+[node name="Button2" parent="ElevatorOrigin/Buttons" unique_id=818004866 instance=ExtResource("11_trg2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.47, 0)
+my_floor = 1
+
+[node name="SymbolMesh" parent="ElevatorOrigin/Buttons/Button2/Buttonbox" parent_id_path=PackedInt32Array(818004866, 1429131886) index="0" unique_id=404405924]
+visible = false
+material_override = SubResource("ShaderMaterial_jmnym")
+
+[node name="Button1" parent="ElevatorOrigin/Buttons" unique_id=1609144129 instance=ExtResource("11_trg2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0)
+
+[node name="SymbolMesh" parent="ElevatorOrigin/Buttons/Button1/Buttonbox" parent_id_path=PackedInt32Array(1609144129, 1429131886) index="0" unique_id=404405924]
+visible = false
+material_override = SubResource("ShaderMaterial_2pb4g")
+
+[node name="Buttons2" type="Node3D" parent="ElevatorOrigin" unique_id=144876824]
+transform = Transform3D(-0.00503087, 0.299958, -8.4360225e-05, -0.005030646, -1.341329e-08, 0.29995784, 0.29991564, 0.00503158, 0.005029941, 0.6796614, 0.035367727, -0.19590715)
+
+[node name="Button4" parent="ElevatorOrigin/Buttons2" unique_id=1368189836 instance=ExtResource("11_trg2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11, 0)
+my_floor = 3
+
+[node name="SymbolMesh" parent="ElevatorOrigin/Buttons2/Button4/Buttonbox" parent_id_path=PackedInt32Array(1368189836, 1429131886) index="0" unique_id=404405924]
+visible = false
+material_override = SubResource("ShaderMaterial_qscxm")
+
+[node name="Button3" parent="ElevatorOrigin/Buttons2" unique_id=1962897993 instance=ExtResource("11_trg2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29, 0)
+my_floor = 2
+
+[node name="SymbolMesh" parent="ElevatorOrigin/Buttons2/Button3/Buttonbox" parent_id_path=PackedInt32Array(1962897993, 1429131886) index="0" unique_id=404405924]
+visible = false
+material_override = SubResource("ShaderMaterial_e5b16")
+
+[node name="Button2" parent="ElevatorOrigin/Buttons2" unique_id=1357820787 instance=ExtResource("11_trg2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.47, 0)
+my_floor = 1
+
+[node name="SymbolMesh" parent="ElevatorOrigin/Buttons2/Button2/Buttonbox" parent_id_path=PackedInt32Array(1357820787, 1429131886) index="0" unique_id=404405924]
+visible = false
+material_override = SubResource("ShaderMaterial_der6d")
+
+[node name="Button1" parent="ElevatorOrigin/Buttons2" unique_id=763851984 instance=ExtResource("11_trg2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0)
+
+[node name="SymbolMesh" parent="ElevatorOrigin/Buttons2/Button1/Buttonbox" parent_id_path=PackedInt32Array(763851984, 1429131886) index="0" unique_id=404405924]
+visible = false
+material_override = SubResource("ShaderMaterial_bkmnr")
+
+[node name="marks" type="Node3D" parent="ElevatorOrigin" unique_id=2127299218]
+
+[node name="guest_mark1" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=1590864624]
+transform = Transform3D(-0.994271, 0, -0.10688875, 0, 1, 0, 0.10688875, 0, -0.994271, 0.62622046, 0, 0.21590614)
+script = ExtResource("12_sprfn")
+metadata/_custom_type_script = "uid://c1o8smjuxcnum"
+
+[node name="guest_mark2" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=819530759]
+transform = Transform3D(-0.13004154, 0, -0.9915086, 0, 1, 0, 0.9915086, 0, -0.13004154, 1.340641, 0, -0.16417158)
+script = ExtResource("12_sprfn")
+metadata/_custom_type_script = "uid://c1o8smjuxcnum"
+
+[node name="guest_mark3" type="Marker3D" parent="ElevatorOrigin/marks" unique_id=751603482]
+transform = Transform3D(-0.911274, 0, 0.4118008, 0, 1, 0, -0.4118008, 0, -0.911274, -0.14253017, 0, -0.24277578)
+script = ExtResource("12_sprfn")
+metadata/_custom_type_script = "uid://c1o8smjuxcnum"
+
+[node name="Lights" type="Node3D" parent="." unique_id=2140830834]
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lights" unique_id=135547047]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.055, 2.09, -0.225)
+light_color = Color(0.84000003, 0.90933335, 1, 1)
+light_energy = 0.7
+light_cull_mask = 4294967293
+omni_range = 4.0
+omni_attenuation = 0.1
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights" unique_id=2004546663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, 1.99, 0.5)
+light_color = Color(0.9915, 1, 0.83, 1)
+light_energy = 0.7
+omni_range = 3.0
+omni_attenuation = 0.5
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights" unique_id=143346135]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.765, 1.08, -0.345)
+light_color = Color(0.89, 1, 0.8, 1)
+light_energy = 0.42
+light_specular = 0.0
+omni_range = 0.67
+omni_attenuation = 0.42
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Lights" unique_id=1349084289]
+transform = Transform3D(0.949417, -0.061658088, 0.30790532, -0.0067613088, 0.9762923, 0.216351, -0.31394535, -0.20748916, 0.92649156, -0.123316176, 3.210105, 1.0672958)
+light_color = Color(0.80099994, 0.8366, 0.89, 1)
+light_cull_mask = 4294967293
+shadow_opacity = 0.36
+shadow_blur = 2.808
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 10.0
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="Lights" unique_id=106698198]
+transform = Transform3D(0.949417, -0.061658088, 0.30790532, -0.0067613088, 0.9762923, 0.216351, -0.31394535, -0.20748916, 0.92649156, -0.123316176, 3.210105, 1.0672958)
+layers = 4
+light_color = Color(0.9, 0.94, 1, 1)
+light_energy = 8.396
+light_negative = true
+light_cull_mask = 4294967292
+shadow_opacity = 0.36
+shadow_blur = 2.808
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 10.0
+
+[node name="DirectionWShadow" type="DirectionalLight3D" parent="Lights" unique_id=422706393]
+transform = Transform3D(0.9995121, -1.1797213e-09, 0.031236311, -0.031195758, -0.050941586, 0.9982143, 0.0015912262, -0.99870163, -0.05091673, 0, 3, 1.6544328)
+light_color = Color(0.998, 1, 0.88, 1)
+light_energy = 0.06
+light_cull_mask = 4294967293
+shadow_enabled = true
+shadow_opacity = 0.42
+shadow_caster_mask = 4294967293
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 10.0
+
+[editable path="liftboy/liftboy"]
+[editable path="ElevatorOrigin/ElevatorVisuals/lift"]
+[editable path="ElevatorOrigin/Buttons/Button4"]
+[editable path="ElevatorOrigin/Buttons/Button3"]
+[editable path="ElevatorOrigin/Buttons/Button2"]
+[editable path="ElevatorOrigin/Buttons/Button1"]
+[editable path="ElevatorOrigin/Buttons2/Button4"]
+[editable path="ElevatorOrigin/Buttons2/Button3"]
+[editable path="ElevatorOrigin/Buttons2/Button2"]
+[editable path="ElevatorOrigin/Buttons2/Button1"]

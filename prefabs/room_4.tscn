@@ -1,21 +1,239 @@
 [gd_scene format=3 uid="uid://dir452doe4vju"]
 
 [ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_g88hh"]
-[ext_resource type="Material" uid="uid://ccnt2fbcclisv" path="res://materials/doors_mat.tres" id="2_x1xg8"]
+[ext_resource type="Material" uid="uid://brf3tlccvox1v" path="res://materials/ground_mat.tres" id="2_5nbgj"]
+[ext_resource type="Material" uid="uid://b8yunscj62836" path="res://materials/neutral_mat.tres" id="3_plcum"]
+[ext_resource type="Shader" uid="uid://b7tftvlh8xwht" path="res://prefabs/CharacterShader.gdshader" id="4_mb6oy"]
+[ext_resource type="PackedScene" uid="uid://dmw3nn8n5hdau" path="res://prefabs/room_guest.tscn" id="4_plcum"]
+[ext_resource type="Texture2D" uid="uid://da4ujy2q3g35p" path="res://textures/guest_uv_rgb_texture.png" id="5_vclik"]
+[ext_resource type="Material" uid="uid://b5l3p5b82l4ys" path="res://materials/elevator_dark_mat.tres" id="6_vclik"]
+[ext_resource type="Script" uid="uid://c1g3w7xjgkjxs" path="res://prefabs/animation_player.gd" id="8_r0nlr"]
+[ext_resource type="Script" uid="uid://cgs1cxyxwmk10" path="res://prefabs/node.gd" id="9_p6rhi"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]
 size = Vector2(20, 40)
 
-[sub_resource type="SphereMesh" id="SphereMesh_g88hh"]
-radius = 0.8
-height = 1.6
-
-[sub_resource type="SphereMesh" id="SphereMesh_x1xg8"]
-radius = 0.8
-height = 1.6
-
 [sub_resource type="BoxMesh" id="BoxMesh_g88hh"]
-size = Vector3(5, 1, 8)
+size = Vector3(2.5, 0.5, 1.5)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fqf0x"]
+noise_type = 4
+frequency = 0.0187
+fractal_type = 2
+fractal_weighted_strength = 0.59
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jw1ud"]
+width = 256
+height = 256
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_fqf0x")
+seamless = true
+in_3d_space = true
+as_normal_map = true
+bump_strength = 2.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0nlr"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_mb6oy")
+shader_parameter/r_color = Color(0.65882355, 0.44705883, 0.21960784, 1)
+shader_parameter/g_color = Color(0.6784314, 0.6039216, 0.6431373, 1)
+shader_parameter/b_color = Color(0.019607844, 0, 0.09019608, 1)
+shader_parameter/rgb_uv_texture_separator = ExtResource("5_vclik")
+shader_parameter/opacity = 1.0
+shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
+shader_parameter/use_normal_map = true
+shader_parameter/shade_steps = 2.0
+shader_parameter/diffuse_strength = 1.0000000475
+shader_parameter/specular_strength = 0.006000000285
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x1xg8"]
+top_radius = 0.1
+bottom_radius = 0.1
+radial_segments = 8
+rings = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_vclik"]
+radius = 0.6
+height = 1.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p6rhi"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_mb6oy")
+shader_parameter/r_color = Color(0.65882355, 0.44705883, 0.21960784, 1)
+shader_parameter/g_color = Color(0.6784314, 0.6039216, 0.6431373, 1)
+shader_parameter/b_color = Color(0.019607844, 0, 0.09019608, 1)
+shader_parameter/rgb_uv_texture_separator = ExtResource("5_vclik")
+shader_parameter/opacity = 1.0
+shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
+shader_parameter/use_normal_map = true
+shader_parameter/shade_steps = 2.0
+shader_parameter/diffuse_strength = 1.0000000475
+shader_parameter/specular_strength = 0.006000000285
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qmv04"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_mb6oy")
+shader_parameter/r_color = Color(0.65882355, 0.44705883, 0.21960784, 1)
+shader_parameter/g_color = Color(0.6784314, 0.6039216, 0.6431373, 1)
+shader_parameter/b_color = Color(0.019607844, 0, 0.09019608, 1)
+shader_parameter/rgb_uv_texture_separator = ExtResource("5_vclik")
+shader_parameter/opacity = 1.0
+shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
+shader_parameter/use_normal_map = true
+shader_parameter/shade_steps = 2.0
+shader_parameter/diffuse_strength = 1.0000000475
+shader_parameter/specular_strength = 0.006000000285
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n2hrs"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_mb6oy")
+shader_parameter/r_color = Color(0.65882355, 0.44705883, 0.21960784, 1)
+shader_parameter/g_color = Color(0.6784314, 0.6039216, 0.6431373, 1)
+shader_parameter/b_color = Color(0.019607844, 0, 0.09019608, 1)
+shader_parameter/rgb_uv_texture_separator = ExtResource("5_vclik")
+shader_parameter/opacity = 1.0
+shader_parameter/normal_map_texture = SubResource("NoiseTexture2D_jw1ud")
+shader_parameter/use_normal_map = true
+shader_parameter/shade_steps = 2.0
+shader_parameter/diffuse_strength = 1.0000000475
+shader_parameter/specular_strength = 0.006000000285
+
+[sub_resource type="Animation" id="Animation_plcum"]
+resource_name = "GymAction"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-7.964, 0.36, -15.209), Vector3(-7.964, 0.36, -15.209), Vector3(14.491, 0.36, -15.209)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bar:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5836245, 0, 0), Vector3(-1.5836245, 0, 0), Vector3(-1.5836245, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RoomGuest:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.6, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-9.059588, 0, -15.282581), Vector3(-9.059588, 0, -15.282581), Vector3(12.053081, 0, -15.282581)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RoomGuest:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.6, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, 0), Vector3(0, -1.5707964, 0), Vector3(0, -1.5707964, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RoomGuest/alien_guest/AnimationPlayer:speed_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.291]
+}
+
+[sub_resource type="Animation" id="Animation_qmv04"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-7.96419, 0.91758394, -15.209194)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bar:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5836245, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RoomGuest:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-9.059588, 0, -15.282581)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RoomGuest:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RoomGuest/alien_guest/AnimationPlayer:speed_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.291]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0nlr"]
+_data = {
+&"GymAction": SubResource("Animation_plcum"),
+&"RESET": SubResource("Animation_qmv04")
+}
 
 [node name="room_4" type="Node3D" unique_id=1813439493]
 script = ExtResource("1_g88hh")
@@ -24,19 +242,18 @@ metadata/_custom_type_script = "uid://dd0en0wyj5nxi"
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=629739209]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.8)
 layers = 2
-material_override = ExtResource("2_x1xg8")
+material_override = ExtResource("2_5nbgj")
 mesh = SubResource("PlaneMesh_6tfno")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1320487271]
-transform = Transform3D(1, 0, 0, 0, 0.5, -0.8660255, 0, 0.8660255, 0.5, 0, 6, -33.8)
+transform = Transform3D(1, 0, 0, 0, 0.0048694015, -0.9999882, 0, 0.9999882, 0.0048694015, 0, 6, -33.8)
 layers = 2
-material_override = ExtResource("2_x1xg8")
+material_override = ExtResource("3_plcum")
 mesh = SubResource("PlaneMesh_6tfno")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1594981417]
-transform = Transform3D(0.6245389, -0.7033081, -0.33957234, 0.7417858, 0.39814827, 0.53965914, -0.24434632, -0.5889278, 0.77036273, 0, 1.1710849, 0)
-light_color = Color(0.82649994, 0.87, 0.2175, 1)
-light_energy = 0.8
+transform = Transform3D(0.6538845, -0.544194, -0.52563095, 0.00035805893, -0.69451004, 0.7194829, -0.75659436, -0.47064686, -0.45393452, 0, 1.1710849, 0)
+light_color = Color(0.988, 1, 0.82, 1)
 light_cull_mask = 4294967294
 shadow_enabled = true
 shadow_opacity = 0.5
@@ -44,35 +261,172 @@ shadow_blur = 0.54
 shadow_caster_mask = 4294967294
 sky_mode = 1
 
-[node name="car" type="Node3D" parent="." unique_id=1201762887]
-transform = Transform3D(-0.21078235, 0, 0.3399571, 0, 0.4, 0, -0.3399571, 0, -0.21078235, 5.382, 0, -15.556)
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="car" unique_id=762592114]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 2.214, 0.8, -17.821)
-layers = 2
-mesh = SubResource("SphereMesh_g88hh")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="car" unique_id=1524003635]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, 3.564, 0.8, -14.82)
-layers = 2
-mesh = SubResource("SphereMesh_x1xg8")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="car" unique_id=1722681467]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -3.482, 0.8, -15.618)
-layers = 2
-mesh = SubResource("SphereMesh_g88hh")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="car" unique_id=1471688113]
-transform = Transform3D(-0.6559931, 0, -0.7547668, 0, 1, 0, 0.7547668, 0, -0.6559931, -2.482, 0.8, -12.707)
-layers = 2
-mesh = SubResource("SphereMesh_g88hh")
-
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="car" unique_id=1137309827]
-transform = Transform3D(0.32565075, 0, -0.9454901, 0, 1, 0, 0.9454901, 0, 0.32565075, -0.04881203, 1.9182389, -15.277895)
-layers = 2
+[node name="workoutspot" type="MeshInstance3D" parent="." unique_id=1607188414]
+transform = Transform3D(-0.9999999, 0, 0.0006632861, 0, 1, 0, -0.0006632861, 0, -0.9999999, -1.5200386, 0.23587728, -24.269228)
+material_override = ExtResource("2_5nbgj")
 mesh = SubResource("BoxMesh_g88hh")
 
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="car" unique_id=1024760461]
-transform = Transform3D(0.16282538, 0, -0.47274506, 0, 1, 0, 0.47274506, 0, 0.16282538, 1.951188, 2.9182389, -16.277895)
+[node name="RoomGuest" parent="workoutspot" unique_id=1684007482 instance=ExtResource("4_plcum")]
+transform = Transform3D(2.8769136e-08, -0.75, 3.3096082e-08, 0.00063430954, -3.307174e-08, -0.74999976, 0.74999976, 2.8796421e-08, 0.00063430954, 1.0109472, 0.47433877, 0.057534218)
+
+[node name="Guest" parent="workoutspot/RoomGuest/alien_guest/Skeleton3D" parent_id_path=PackedInt32Array(1684007482, 155533951, 2104805073) index="0" unique_id=1669150990]
+material_override = SubResource("ShaderMaterial_r0nlr")
+
+[node name="bar" type="MeshInstance3D" parent="workoutspot" unique_id=262199473]
+transform = Transform3D(0.99999994, 0, 0, 0, -0.012827858, 0.9999176, 0, -0.99991757, -0.012827857, -0.74951494, 0.91758394, -0.02021408)
+material_override = ExtResource("2_5nbgj")
+mesh = SubResource("CylinderMesh_x1xg8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="workoutspot/bar" unique_id=1307010660]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 1.3969839e-09, 0, -1.3969839e-09, 0.5, 0, 1.1999016, 0.015393496)
 layers = 2
+material_override = ExtResource("6_vclik")
+mesh = SubResource("SphereMesh_vclik")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="workoutspot/bar" unique_id=811442135]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 1.8626451e-09, 0, -1.8626451e-09, 0.5, 0, -1.1999016, -0.015393496)
+layers = 2
+material_override = ExtResource("6_vclik")
+mesh = SubResource("SphereMesh_vclik")
+
+[node name="workoutspot2" type="MeshInstance3D" parent="." unique_id=1682795855]
+transform = Transform3D(5.234033e-05, 0, -1, 0, 1, 0, 1, 0, 5.234033e-05, 1.3656807, 0.23587728, -25.821201)
+material_override = ExtResource("2_5nbgj")
 mesh = SubResource("BoxMesh_g88hh")
+
+[node name="RoomGuest" parent="workoutspot2" unique_id=887965132 instance=ExtResource("4_plcum")]
+transform = Transform3D(2.8769136e-08, -0.75, 3.3096082e-08, 0.00063430954, -3.307174e-08, -0.74999976, 0.74999976, 2.8796421e-08, 0.00063430954, 1.0109472, 0.47433877, 0.057534218)
+
+[node name="Guest" parent="workoutspot2/RoomGuest/alien_guest/Skeleton3D" parent_id_path=PackedInt32Array(887965132, 155533951, 2104805073) index="0" unique_id=1669150990]
+material_override = SubResource("ShaderMaterial_p6rhi")
+
+[node name="bar" type="MeshInstance3D" parent="workoutspot2" unique_id=1326733179]
+transform = Transform3D(1, 0, 0, 0, -0.012827858, 0.9999176, 0, -0.9999176, -0.012827858, -0.7735138, 0.91758394, -0.020347118)
+material_override = ExtResource("2_5nbgj")
+mesh = SubResource("CylinderMesh_x1xg8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="workoutspot2/bar" unique_id=1248710455]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 1.3969839e-09, 0, -1.3969839e-09, 0.5, 0, 1.1999016, 0.015393496)
+layers = 2
+material_override = ExtResource("6_vclik")
+mesh = SubResource("SphereMesh_vclik")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="workoutspot2/bar" unique_id=836718980]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 1.8626451e-09, 0, -1.8626451e-09, 0.5, 0, -1.1999016, -0.015393496)
+layers = 2
+material_override = ExtResource("6_vclik")
+mesh = SubResource("SphereMesh_vclik")
+
+[node name="workoutspot3" type="MeshInstance3D" parent="." unique_id=2142625454]
+transform = Transform3D(0.9999405, 0, 0.010908014, 0, 1, 0, -0.010908014, 0, 0.9999405, 4.192525, 0.23587728, -24.322744)
+material_override = ExtResource("2_5nbgj")
+mesh = SubResource("BoxMesh_g88hh")
+
+[node name="RoomGuest" parent="workoutspot3" unique_id=841273843 instance=ExtResource("4_plcum")]
+transform = Transform3D(2.8769136e-08, -0.75, 3.3096082e-08, 0.00063430954, -3.307174e-08, -0.74999976, 0.74999976, 2.8796421e-08, 0.00063430954, 1.0109472, 0.47433877, 0.057534218)
+
+[node name="Guest" parent="workoutspot3/RoomGuest/alien_guest/Skeleton3D" parent_id_path=PackedInt32Array(841273843, 155533951, 2104805073) index="0" unique_id=1669150990]
+material_override = SubResource("ShaderMaterial_qmv04")
+
+[node name="bar" type="MeshInstance3D" parent="workoutspot3" unique_id=181056230]
+transform = Transform3D(1, 0, 0, 0, -0.012827858, 0.9999176, 0, -0.9999176, -0.012827859, -0.83389544, 0.91758394, -0.023269653)
+material_override = ExtResource("2_5nbgj")
+mesh = SubResource("CylinderMesh_x1xg8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="workoutspot3/bar" unique_id=1773920254]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 1.3969839e-09, 0, -1.3969839e-09, 0.5, 0, 1.1999016, 0.015393496)
+layers = 2
+material_override = ExtResource("6_vclik")
+mesh = SubResource("SphereMesh_vclik")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="workoutspot3/bar" unique_id=527377565]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 1.8626451e-09, 0, -1.8626451e-09, 0.5, 0, -1.1999016, -0.015393496)
+layers = 2
+material_override = ExtResource("6_vclik")
+mesh = SubResource("SphereMesh_vclik")
+
+[node name="RoomGuest" parent="." unique_id=1368001317 instance=ExtResource("4_plcum")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -9.059588, 0, -15.282581)
+
+[node name="Skeleton3D" parent="RoomGuest/alien_guest" parent_id_path=PackedInt32Array(1368001317, 155533951) index="0" unique_id=2104805073]
+bones/0/position = Vector3(0.006866755, 0.9826125, -0.031971537)
+bones/0/rotation = Quaternion(0.041113, 0.0004598603, 0.011175164, 0.999092)
+bones/1/position = Vector3(-0.0072044777, 1.6001955, 0.01895545)
+bones/1/rotation = Quaternion(0.03894073, 0.0005238178, 0.021788064, 0.9990039)
+bones/2/position = Vector3(-0.032774795, 2.1857731, 0.06471111)
+bones/2/rotation = Quaternion(0.069236405, 0.0013343008, 0.017875265, 0.99743927)
+bones/3/position = Vector3(-0.03940323, 2.3707194, 0.09052838)
+bones/3/rotation = Quaternion(0.07398652, 0.001461936, 0.017251465, 0.99710894)
+bones/4/position = Vector3(-0.047193147, 2.5959604, 0.124161124)
+bones/4/rotation = Quaternion(0.07335077, 0.0014450703, 0.017331548, 0.9971546)
+bones/5/position = Vector3(-0.4261321, 2.0003412, 0.05132603)
+bones/5/rotation = Quaternion(-0.1325143, -0.27874973, 0.87645817, 0.36954)
+bones/6/position = Vector3(-0.6467448, 1.7806575, -0.17415386)
+bones/6/rotation = Quaternion(-0.09891059, 0.07385434, 0.99141526, 0.043107424)
+bones/7/position = Vector3(0.37525076, 2.0352921, 0.051848713)
+bones/7/rotation = Quaternion(0.023206241, -0.17837556, 0.9129435, -0.36630285)
+bones/8/position = Vector3(0.62916666, 1.7785114, -0.07988235)
+bones/8/rotation = Quaternion(-0.035424847, 0.1207532, 0.9916766, -0.027228368)
+bones/9/position = Vector3(0.0068667578, 0.9826124, -0.031971548)
+bones/9/rotation = Quaternion(-0.15258332, -0.16716939, 0.5899207, 0.7750912)
+bones/10/position = Vector3(-0.22263102, 1.0509292, -0.147246)
+bones/10/rotation = Quaternion(0.091942854, 0.38633, 0.91483426, 0.07330721)
+bones/11/position = Vector3(-0.26132697, 0.6272039, 0.2946303)
+bones/11/rotation = Quaternion(0.1332291, -0.08239073, 0.98347366, 0.090782285)
+bones/12/position = Vector3(0.0068667578, 0.9826124, -0.031971548)
+bones/12/rotation = Quaternion(-0.15628436, 0.16371457, -0.572436, 0.7880926)
+bones/13/position = Vector3(0.23301491, 1.0613108, -0.147246)
+bones/13/rotation = Quaternion(-0.061880935, 0.25768614, 0.96023035, -0.08789985)
+bones/14/position = Vector3(0.31696463, 0.53882706, 0.16300276)
+bones/14/rotation = Quaternion(0.060503356, -0.32547554, 0.9433526, 0.022155253)
+bones/17/position = Vector3(-0.05875339, 2.9280627, 0.17310336)
+bones/17/rotation = Quaternion(0.017129611, -3.2316488e-26, -3.8035378e-18, 0.9998534)
+bones/18/position = Vector3(-0.3662524, 0.11950765, 0.22246045)
+bones/19/position = Vector3(-0.70173, 1.2393159, -0.09839307)
+bones/20/position = Vector3(0.2744507, 0.12679902, -0.15704274)
+bones/21/position = Vector3(0.65412956, 1.245976, 0.052749)
+
+[node name="Guest" parent="RoomGuest/alien_guest/Skeleton3D" index="0" unique_id=1669150990]
+material_override = SubResource("ShaderMaterial_n2hrs")
+
+[node name="AnimationPlayer" parent="RoomGuest/alien_guest" parent_id_path=PackedInt32Array(1368001317, 155533951) index="1" unique_id=1157014082]
+speed_scale = 3.291
+
+[node name="bar" type="MeshInstance3D" parent="." unique_id=253338019]
+transform = Transform3D(1, 0, 0, 0, -0.0128278015, 0.9999176, 0, -0.9999176, -0.0128278015, -7.96419, 0.91758394, -15.209194)
+layers = 2
+material_override = ExtResource("2_5nbgj")
+mesh = SubResource("CylinderMesh_x1xg8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="bar" unique_id=1242104209]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 1.3969839e-09, 0, -1.3969839e-09, 0.5, 0, 1.1999016, 0.015393496)
+layers = 2
+material_override = ExtResource("6_vclik")
+mesh = SubResource("SphereMesh_vclik")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="bar" unique_id=733965894]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 1.8626451e-09, 0, -1.8626451e-09, 0.5, 0, -1.1999016, -0.015393496)
+layers = 2
+material_override = ExtResource("6_vclik")
+mesh = SubResource("SphereMesh_vclik")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1396222790 node_paths=PackedStringArray("my_room")]
+libraries/ = SubResource("AnimationLibrary_r0nlr")
+autoplay = &"GymAction"
+script = ExtResource("8_r0nlr")
+my_room = NodePath("..")
+my_animation = &"GymAction"
+play_cooldown = 2
+
+[node name="Node" type="Node" parent="." unique_id=557265551 node_paths=PackedStringArray("animator")]
+script = ExtResource("9_p6rhi")
+animator = NodePath("../RoomGuest/alien_guest/AnimationPlayer")
+
+[editable path="workoutspot/RoomGuest"]
+[editable path="workoutspot/RoomGuest/alien_guest"]
+[editable path="workoutspot2/RoomGuest"]
+[editable path="workoutspot2/RoomGuest/alien_guest"]
+[editable path="workoutspot3/RoomGuest"]
+[editable path="workoutspot3/RoomGuest/alien_guest"]
+[editable path="RoomGuest"]
+[editable path="RoomGuest/alien_guest"]

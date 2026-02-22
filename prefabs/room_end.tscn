@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://1xclhthd5ifb"]
+
+[ext_resource type="Script" uid="uid://dd0en0wyj5nxi" path="res://scenes/Room.gd" id="1_wg8om"]
+[ext_resource type="Material" uid="uid://dpum6i1rmauai" path="res://materials/elevator_mat.tres" id="2_wg8om"]
+[ext_resource type="Material" uid="uid://ccnt2fbcclisv" path="res://materials/doors_mat.tres" id="3_ch8ki"]
+[ext_resource type="PackedScene" uid="uid://dfk076khkyyak" path="res://liftboy.glb" id="4_8hmqd"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6tfno"]
+size = Vector2(20, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ch8ki"]
+size = Vector3(4, 20, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hmqd"]
+diffuse_mode = 1
+albedo_color = Color(0.07058824, 0.50980395, 0.34901962, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8hmqd"]
+size = Vector2(20, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ddqlo"]
+diffuse_mode = 1
+albedo_color = Color(0.6901961, 0.07058824, 0.16078432, 1)
+
+[node name="room_end" type="Node3D" unique_id=1813439493]
+script = ExtResource("1_wg8om")
+metadata/_custom_type_script = "uid://dd0en0wyj5nxi"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1594981417]
+transform = Transform3D(0.95954704, -0.07798042, 0.27053398, -0.280577, -0.18509312, 0.94181585, -0.023369212, -0.97962236, -0.19948508, 1, 17.171085, 0)
+layers = 2
+light_color = Color(1, 0.923, 0.66999996, 1)
+light_cull_mask = 4294967294
+shadow_enabled = true
+shadow_opacity = 0.11
+shadow_caster_mask = 4294967294
+
+[node name="ground" type="MeshInstance3D" parent="." unique_id=629739209]
+transform = Transform3D(-1.3113416e-07, 0, 1, 0, 1, 0, -3, 0, -4.371139e-08, 0, 0, -30.8)
+layers = 2
+material_override = ExtResource("2_wg8om")
+mesh = SubResource("PlaneMesh_6tfno")
+
+[node name="bg" type="MeshInstance3D" parent="." unique_id=1851685625]
+transform = Transform3D(-3.3940037e-08, -4.222196e-08, -1, -2.8977776, 0.25881916, 0, 0.77645755, 0.9659258, -4.371139e-08, 2.9548273, 16, -90.805756)
+layers = 2
+material_override = ExtResource("3_ch8ki")
+mesh = SubResource("PlaneMesh_6tfno")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=471703918]
+transform = Transform3D(0.9997249, 0, -0.023455076, 0, 1, 0, 0.023455076, 0, 0.9997249, -2.0036936, 7, -58.492912)
+layers = 2
+material_override = ExtResource("2_wg8om")
+mesh = SubResource("BoxMesh_ch8ki")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=146142252]
+transform = Transform3D(0.9997249, 0, -0.023455076, 0, 1, 0, 0.023455076, 0, 0.9997249, 2.9980915, 7, -58.00915)
+layers = 2
+material_override = ExtResource("2_wg8om")
+mesh = SubResource("BoxMesh_ch8ki")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=498158184]
+transform = Transform3D(0.94330966, 0, -0.3319142, 0, 1, 0, 0.3319142, 0, 0.94330966, -4.911519, 6.999996, -40.553055)
+layers = 2
+material_override = ExtResource("2_wg8om")
+mesh = SubResource("BoxMesh_ch8ki")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=609542017]
+transform = Transform3D(0.94330966, 0, -0.3319142, 0, 1, 0, 0.3319142, 0, 0.94330966, 8.897298, 6.9999924, -35.97522)
+layers = 2
+material_override = ExtResource("2_wg8om")
+mesh = SubResource("BoxMesh_ch8ki")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=616574560]
+transform = Transform3D(0.94330966, 0, -0.3319142, 0, 1, 0, 0.3319142, 0, 0.94330966, 8.032817, 6.999996, -24.963848)
+layers = 2
+material_override = ExtResource("2_wg8om")
+mesh = SubResource("BoxMesh_ch8ki")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="." unique_id=1053219658]
+transform = Transform3D(0.94330966, 0, -0.3319142, 0, 1, 0, 0.3319142, 0, 0.94330966, -4.6439066, 6.999996, -24.963848)
+layers = 2
+material_override = ExtResource("2_wg8om")
+mesh = SubResource("BoxMesh_ch8ki")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=24140124]
+transform = Transform3D(1.4995874, 0, -0.02345508, 0, 1, 0, 0.035182618, 0, 0.9997249, 8.647197, 7, -57.497936)
+layers = 2
+material_override = ExtResource("2_wg8om")
+mesh = SubResource("BoxMesh_ch8ki")
+
+[node name="liftboy" parent="." unique_id=1709185552 instance=ExtResource("4_8hmqd")]
+transform = Transform3D(0.5951425, 0, 0.45640492, 0, 0.75, 0, -0.45640492, 0, 0.5951425, -0.40956688, 3.8146973e-06, -23.020485)
+
+[node name="liftboy4" parent="." unique_id=689686488 instance=ExtResource("4_8hmqd")]
+transform = Transform3D(-0.0050265193, 0, 0.7499832, 0, 0.75, 0, -0.7499832, 0, -0.0050265193, 2.1307187, 3.8146973e-06, -12.309415)
+
+[node name="liftboy6" parent="." unique_id=1023916514 instance=ExtResource("4_8hmqd")]
+transform = Transform3D(0.7130453, 0, -0.23252204, 0, 0.75, 0, 0.23252204, 0, 0.7130453, -0.4190941, 3.8146973e-06, -9.439013)
+
+[node name="liftboy7" parent="." unique_id=1479283612 instance=ExtResource("4_8hmqd")]
+transform = Transform3D(-0.6295015, 0, 0.40771058, 0, 0.75, 0, -0.40771058, 0, -0.6295015, -0.95861816, 3.8146973e-06, -8.600273)
+
+[node name="liftboy5" parent="." unique_id=569454628 instance=ExtResource("4_8hmqd")]
+transform = Transform3D(0.47803774, 0, -0.57791, 0, 0.75, 0, 0.57791, 0, 0.47803774, 2.9482126, 3.8146973e-06, -12.143668)
+
+[node name="liftboy2" parent="." unique_id=1580720751 instance=ExtResource("4_8hmqd")]
+transform = Transform3D(0.023489708, 0, -0.6495754, 0, 0.65, 0, 0.6495754, 0, 0.023489708, 4.511682, 4.7683716e-06, -25.846748)
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="." unique_id=682709664]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 2.905041, 0.21644843, -53.710186)
+layers = 2
+material_override = SubResource("StandardMaterial3D_8hmqd")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8hmqd")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="." unique_id=1600013664]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 2.905041, 0.757064, -53.710186)
+layers = 2
+material_override = SubResource("StandardMaterial3D_8hmqd")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8hmqd")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="." unique_id=1192402405]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 2.905041, 0.5554906, -53.601307)
+layers = 2
+material_override = SubResource("StandardMaterial3D_ddqlo")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_8hmqd")
